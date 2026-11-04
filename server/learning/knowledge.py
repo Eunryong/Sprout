@@ -46,10 +46,19 @@ class PrincipleNode(BaseModel):
     outcome_tendency: str = "solved"
 
 
+class PersonalityNode(BaseModel):
+    label: str = ""
+    traits: list[str] = Field(default_factory=list)
+    tone_guide: str = ""
+    core_self: str = ""
+    history: list[str] = Field(default_factory=list)
+
+
 class KnowledgeGraph(BaseModel):
     episodes: list[EpisodeNode] = Field(default_factory=list)
     concepts: dict[str, ConceptNode] = Field(default_factory=dict)
     principles: list[PrincipleNode] = Field(default_factory=list)
+    personality: PersonalityNode = Field(default_factory=PersonalityNode)
 
 
 class ConceptObservation(BaseModel):
@@ -62,6 +71,10 @@ class SynthesisResponse(BaseModel):
     synthesized_principle: str | None = None
     source_turns: list[int] = Field(default_factory=list)
     hop_depth: int = 2
+    personality_label: str = Field(default="", description="Short open-ended description of the child's current evolving personality shaped by experiences")
+    personality_traits: list[str] = Field(default_factory=list, description="2-4 dynamic personality traits evolved from experiences")
+    personality_tone: str = Field(default="", description="How the child now speaks, reacts, and feels toward the parent and world")
+    personality_shift: str = Field(default="", description="1-sentence first-person self-reflection on how this experience changed or reinforced my attitude/personality")
 
 
 # ---------------------------------------------------------------------------
@@ -75,150 +88,111 @@ VALENCE_MAP: dict[str, float] = {
     "worse": -1.0,
 }
 
-WARM_CUES = (
-    "안아", "토닥", "공감", "다정", "함께", "도와", "무릎을 꿇고",
-    "알려주", "위로", "칭찬", "쓰다듬", "살펴",
-    "hug", "comfort", "gentle", "together", "help", "warm",
-)
+def _compute_empirical_scores(graph: KnowledgeGraph) -> dict[str, Any]:
+    guided_eps = [ep for ep in graph.episodes if ep.parent_mode in ("show", "say")]
+    solo_eps = [ep for ep in graph.episodes if ep.parent_mode not in ("show", "say")]
 
-SCOLD_CUES = (
-    "혼내", "소리", "화내", "야단", "안 된다며", "다그치", "무섭", "혼나",
-    "scold", "yell", "angry", "shout",
-)
+    guided_count = len(guided_eps)
+    solo_count = len(solo_eps)
+    solved_count = sum(1 for ep in graph.episodes if ep.outcome == "solved")
+    worse_count = sum(1 for ep in graph.episodes if ep.outcome == "worse")
 
-NEGLECT_CUES = (
-    "스마트폰", "혼자 두", "무시", "기다리라고만", "외면", "방치",
-    "혼자 남", "안 들어주",
-    "phone", "ignore", "alone", "neglect",
-)
+    att_raw = sum(VALENCE_MAP.get(ep.outcome, 0.0) * 0.35 for ep in guided_eps) - sum(
+        0.30 for ep in solo_eps if ep.outcome == "worse"
+    )
+    attachment = round(max(-1.0, min(1.0, att_raw)), 2)
 
+    conf_raw = sum(VALENCE_MAP.get(ep.outcome, 0.0) * 0.30 for ep in graph.episodes) + sum(
+        0.15 for ep in solo_eps if ep.outcome in ("solved", "partial")
+    )
+    confidence = round(max(-1.0, min(1.0, conf_raw)), 2)
 
-def compute_personality(graph: KnowledgeGraph, lang: str = "ko") -> dict[str, Any]:
-    """Computes learned personality scores and archetype based on the child's past experiences."""
-    warm_count = 0
-    scold_count = 0
-    ignore_count = 0
-    solved_count = 0
-    partial_count = 0
-    worse_count = 0
-    solo_count = 0
-
-    for ep in graph.episodes:
-        text = f"{ep.action_text} {ep.outcome_text} {ep.takeaway}"
-
-        has_warm_cue = any(c in text for c in WARM_CUES)
-        has_scold_cue = any(c in text for c in SCOLD_CUES)
-        has_neglect_cue = any(c in text for c in NEGLECT_CUES)
-
-        # warm_count: episodes with warm cues or (parent_mode in ("show", "say") and outcome in ("solved", "partial") without scolding/neglect cues)
-        if has_warm_cue or (
-            ep.parent_mode in ("show", "say")
-            and ep.outcome in ("solved", "partial")
-            and not (has_scold_cue or has_neglect_cue)
-        ):
-            warm_count += 1
-
-        # scold_count: episodes with scolding/harsh cues
-        if has_scold_cue:
-            scold_count += 1
-
-        # ignore_count: episodes with neglect/ignoring cues or (parent_mode == "leave" and outcome == "worse")
-        if has_neglect_cue or (ep.parent_mode == "leave" and ep.outcome == "worse"):
-            ignore_count += 1
-
-        if ep.outcome == "solved":
-            solved_count += 1
-        elif ep.outcome == "partial":
-            partial_count += 1
-        elif ep.outcome == "worse":
-            worse_count += 1
-
-        if ep.parent_mode in ("leave", "solo", "try"):
-            solo_count += 1
-
-    attachment = round(max(-1.0, min(1.0, (warm_count * 0.28 - scold_count * 0.35 - ignore_count * 0.30))), 2)
-    confidence = round(max(-1.0, min(1.0, (solved_count * 0.25 + partial_count * 0.10 - worse_count * 0.22 - scold_count * 0.20))), 2)
-    expressiveness = round(max(-1.0, min(1.0, (warm_count * 0.20 + solved_count * 0.15 - scold_count * 0.30 - ignore_count * 0.15))), 2)
-
-    is_ko = lang.startswith("ko")
-
-    if len(graph.episodes) == 0:
-        archetype = "innocent_toddler"
-        label = "순수하고 호기심 어린 꼬마" if is_ko else "Innocent & Curious Toddler"
-        traits = ["순수함", "호기심"] if is_ko else ["innocent", "curious"]
-        tone_guide = (
-            "아직 많은 일을 겪지 않은 해맑고 순수한 아이입니다. 짧고 천진난만한 말투로 대답하세요."
-            if is_ko
-            else "A cheerful and innocent toddler who has not experienced much yet. Respond in a short, pure, childlike tone."
-        )
-    elif (scold_count + ignore_count) >= 1 and warm_count >= 1 and -0.5 <= attachment <= 0.35:
-        archetype = "wary_sensitive"
-        label = "눈치 보지만 다정함에 기대는 아이" if is_ko else "Sensitive & Cautiously Trusting"
-        traits = ["섬세함", "살짝 눈치 봄", "애정 갈구"] if is_ko else ["sensitive", "cautious", "seeks warmth"]
-        tone_guide = (
-            "혼나거나 혼자 남겨져 서운했던 기억 때문에 처음엔 살짝 눈치를 보며 조심스럽게 말하지만, 부모가 다정하게 안아주던 따뜻함도 기억하고 있어 부모에게 기대고 싶어하는 말투로 대답하세요."
-            if is_ko
-            else "Cautious and hesitant at first due to memories of scolding or being left alone, but also remembering the warmth of parental hugs, wanting to lean on parents."
-        )
-    elif scold_count >= 1 and (attachment < 0 or confidence < 0) and scold_count >= ignore_count:
-        archetype = "timid_anxious"
-        label = "눈치 보고 주눅 든 소심이" if is_ko else "Timid & Cautious"
-        traits = ["소심함", "눈치 봄", "주눅 듦"] if is_ko else ["timid", "anxious", "hesitant"]
-        tone_guide = (
-            "혼나거나 실패한 경험 때문에 자신감이 없고 부모의 눈치를 많이 봅니다. 말끝을 흐리거나('...', '그게...'), 혹시 자기가 또 잘못했는지 조심스럽게 묻는 소심한 말투로 대답하세요."
-            if is_ko
-            else "Lacks confidence and watches parents' reactions carefully due to scolding or failures. Hesitant tone, trailing off ('...', 'well...'), asking if they did something wrong."
-        )
-    elif ignore_count >= 1 and attachment < 0:
-        archetype = "lonely_sulky"
-        label = "외롭고 토라진 투정이" if is_ko else "Lonely & Sulky"
-        traits = ["서운함", "투정", "관심 갈구"] if is_ko else ["lonely", "sulky", "wants attention"]
-        tone_guide = (
-            "부모가 관심을 안 주거나 혼자 둔 경험 때문에 서운함과 외로움이 쌓여 있습니다. '흥', '엄마는 맨날 바쁘잖아', '나 심심하단 말이야'처럼 뾰로통하게 투정 부리거나 관심을 달라고 조르는 말투로 대답하세요."
-            if is_ko
-            else "Harbors resentment and loneliness from being neglected or left alone. Sulky or whining tone ('Hmph', 'Mom is always busy', 'I'm bored!'), begging for attention."
-        )
-    elif confidence >= 0.25 and solo_count >= 1 and solved_count >= worse_count:
-        archetype = "bold_explorer"
-        label = "호기심 많고 당당한 탐험가" if is_ko else "Bold & Curious Explorer"
-        traits = ["당당함", "자기주도적", "호기심"] if is_ko else ["bold", "independent", "curious"]
-        tone_guide = (
-            "스스로 해내며 성공한 경험이 많아 자신감이 넘치고 씩씩합니다. '응! 내가 해볼래!', '이거 재밌어!'처럼 당당하고 에너지 넘치는 말투로 대답하세요."
-            if is_ko
-            else "Full of confidence and high energy from solving things independently. Confident and energetic tone ('Yeah! I'll try!', 'This is fun!')."
-        )
-    elif attachment >= 0.15 or warm_count > (scold_count + ignore_count):
-        archetype = "warm_affectionate"
-        label = "다정하고 애교 많은 사랑둥이" if is_ko else "Warm & Affectionate"
-        traits = ["다정함", "애교 많음", "안정된 애착"] if is_ko else ["warm", "affectionate", "secure"]
-        tone_guide = (
-            "부모의 따뜻한 공감과 보살핌을 받아 정서적으로 안정되어 있고 애교가 많습니다. '헤헤', '엄마랑 있는 게 제일 좋아!'처럼 밝고 사랑스러운 말투로 대답하세요."
-            if is_ko
-            else "Emotionally secure and affectionate from warm empathy and care. Bright and loving tone ('Hehe', 'I love being with mommy the most!')."
-        )
-    else:
-        archetype = "innocent_toddler"
-        label = "순수하고 호기심 어린 꼬마" if is_ko else "Innocent & Curious Toddler"
-        traits = ["순수함", "호기심"] if is_ko else ["innocent", "curious"]
-        tone_guide = (
-            "세상을 조금씩 배워가는 순수한 아이입니다. 꾸밈없고 짧은 유아 말투로 대답하세요."
-            if is_ko
-            else "A pure child learning about the world step by step. Respond in an unadorned, short toddler tone."
-        )
+    expressiveness = round(max(-1.0, min(1.0, (attachment + confidence) / 2.0)), 2)
 
     return {
-        "archetype": archetype,
-        "label": label,
-        "traits": traits,
-        "tone_guide": tone_guide,
         "attachment": attachment,
         "confidence": confidence,
         "expressiveness": expressiveness,
-        "warm_count": warm_count,
-        "scold_count": scold_count,
-        "ignore_count": ignore_count,
+        "guided_count": guided_count,
+        "solo_count": solo_count,
         "solved_count": solved_count,
         "worse_count": worse_count,
+    }
+
+
+def _synthesize_empirical_personality(
+    graph: KnowledgeGraph, scores: dict[str, Any], is_ko: bool
+) -> PersonalityNode:
+    if not graph.episodes:
+        return PersonalityNode()
+
+    terms = extract_key_terms(
+        " ".join(f"{ep.takeaway} {ep.outcome_text} {ep.action_text}" for ep in graph.episodes[-4:])
+    )[:4]
+    latest = graph.episodes[-1]
+    core_self = (latest.takeaway or latest.outcome_text or latest.action_text).strip()
+    traits = list(dict.fromkeys([*(graph.personality.traits or []), *terms]))[-4:]
+    trait_summary = ", ".join(traits[:3]) if traits else core_self[:20]
+
+    if is_ko:
+        label = f"{trait_summary} 경험이 스며든 아이 (애착 {scores['attachment']:+.2f} · 자신감 {scores['confidence']:+.2f})"
+        tone_guide = (
+            f"내면화된 태도('{core_self}')와 경험 키워드({trait_summary}), 현재 정서(애착 {scores['attachment']:+.2f}, "
+            f"자신감 {scores['confidence']:+.2f}, 표현력 {scores['expressiveness']:+.2f})가 말투에 자연스럽게 드러나도록 유아 눈높이에서 대답하세요."
+        )
+    else:
+        label = f"Child shaped by {trait_summary} (att {scores['attachment']:+.2f}, conf {scores['confidence']:+.2f})"
+        tone_guide = (
+            f"Respond in a child voice naturally reflecting internalized attitude ('{core_self}'), "
+            f"traits ({trait_summary}), and emotional state (attachment {scores['attachment']:+.2f}, confidence {scores['confidence']:+.2f})."
+        )
+
+    history = list(graph.personality.history)
+    if core_self and (not history or history[-1] != core_self):
+        history.append(core_self)
+        history = history[-6:]
+
+    return PersonalityNode(
+        label=label,
+        traits=traits,
+        tone_guide=tone_guide,
+        core_self=core_self,
+        history=history,
+    )
+
+
+def compute_personality(graph: KnowledgeGraph, lang: str = "ko") -> dict[str, Any]:
+    """Computes empirical continuous personality metrics and merges with graph.personality."""
+    scores = _compute_empirical_scores(graph)
+    is_ko = lang.startswith("ko")
+
+    if graph.personality.label:
+        label = graph.personality.label
+        traits = list(graph.personality.traits)
+        tone_guide = graph.personality.tone_guide
+        core_self = graph.personality.core_self
+        history = list(graph.personality.history)
+    elif graph.episodes:
+        p_node = _synthesize_empirical_personality(graph, scores, is_ko)
+        label = p_node.label
+        traits = list(p_node.traits)
+        tone_guide = p_node.tone_guide
+        core_self = p_node.core_self
+        history = list(p_node.history)
+    else:
+        label = ""
+        traits = []
+        tone_guide = ""
+        core_self = ""
+        history = []
+
+    return {
+        "label": label,
+        "traits": traits,
+        "tone_guide": tone_guide,
+        "core_self": core_self,
+        "history": history,
+        **scores,
     }
 
 
@@ -229,13 +203,14 @@ def cognitive_status(
 ) -> dict[str, Any]:
     """Computes the child's current effective intelligence scale from 1.0 (1B) to 7.0 (7B).
 
-    Because 1B = 1세 기준 and the game starts at 3세 (3년차), the child's starting
-    baseline intelligence at Turn 0 (empty graph) is base_scale_b (default 3.0B).
-    Grows smoothly via episodic accumulation + non-linear synthesis bonus:
-    ep_bonus = min(1.6, n_ep * 0.06)
-    concept_bonus = min(1.0, n_concepts * 0.03)
-    prin_bonus = min(1.0, n_prin * 0.12)
-    depth_bonus = min(0.6, max(0, max_depth - 2) * 0.15)
+    Because 1B = 1세 기준 and 1 year = 12 months (12 scenes = 24 episodes in 2-step mode),
+    intelligence starts at base_scale_b (default 3.0B at age 3) and grows by ~1.0B per 12-month year
+    (~0.083B per scene / month):
+    ep_bonus = min(2.4, n_ep * 0.025)
+    concept_bonus = min(0.8, n_concepts * 0.004)
+    prin_bonus = min(0.8, n_prin * 0.012)
+    effective_depth = min(max_depth, 2 + n_ep // 12)
+    depth_bonus = min(0.2, max(0, effective_depth - 2) * 0.04)
     raw_scale = base_scale_b + ep_bonus + concept_bonus + prin_bonus + depth_bonus
     scale_b = min(7.0, max(base_scale_b, raw_scale))
     """
@@ -244,10 +219,11 @@ def cognitive_status(
     n_prin = len(graph.principles)
     max_depth = max((p.hop_depth for p in graph.principles), default=1)
 
-    ep_bonus = min(1.6, n_ep * 0.06)
-    concept_bonus = min(1.0, n_concepts * 0.03)
-    prin_bonus = min(1.0, n_prin * 0.12)
-    depth_bonus = min(0.6, max(0, max_depth - 2) * 0.15)
+    ep_bonus = min(2.4, n_ep * 0.025)
+    concept_bonus = min(0.8, n_concepts * 0.004)
+    prin_bonus = min(0.8, n_prin * 0.012)
+    effective_depth = min(max_depth, 2 + n_ep // 12)
+    depth_bonus = min(0.2, max(0, effective_depth - 2) * 0.04)
 
     raw_scale = base_scale_b + ep_bonus + concept_bonus + prin_bonus + depth_bonus
     scale_b = min(7.0, max(base_scale_b, raw_scale))
@@ -397,12 +373,45 @@ def principle_to_example(principle_node: PrincipleNode, day: int = 1) -> Example
     )
 
 
+def personality_to_fact(personality: PersonalityNode, outcome: str = "solved") -> Fact:
+    """Converts the child's evolving PersonalityNode into a Fact so TinyLM trains on personality text tokens."""
+    text = f"{personality.label} | {personality.core_self} | {personality.tone_guide}".strip(" |")
+    return Fact(
+        option=OptionView(verb="WAIT", option_text=text),
+        result=outcome if outcome in VALENCE_MAP else "solved",
+        weight=1.0,
+        action_text=personality.core_self or text,
+        outcome_text=personality.tone_guide or text,
+        takeaway=text,
+    )
+
+
+def personality_to_example(personality: PersonalityNode, day: int = 1, outcome: str = "solved") -> Example:
+    """Wraps a dynamic personality Fact into an Example for TinyLM gradient updates."""
+    fact = personality_to_fact(personality, outcome=outcome)
+    tag = "TIRED" if "TAG_TIRED" in TOK else "REQUEST"
+    obs = Observation(
+        tags=[tag] if f"TAG_{tag}" in TOK else [],
+        scene_text=personality.core_self or personality.label,
+        options=[fact.option],
+    )
+    return Example(
+        id=f"pers_day_{day}",
+        day=day,
+        source="personality",
+        obs=obs,
+        chosen=0,
+        weight=fact.weight,
+        facts=[fact],
+    )
+
+
 # ---------------------------------------------------------------------------
 # 3. API Knowledge Expansion & Synthesis
 # ---------------------------------------------------------------------------
 
 SYNTHESIS_SYSTEM = """You are the cognitive synthesizer of a growing child agent.
-Given the child's world premise, current episode, past episodes, and existing principles, extract at most 1 to 2 core child-level concepts (short concrete words/phrases, not adult psychological jargon) per turn, and synthesize higher-order principles that link past and present experiences. Only return a non-null synthesized_principle when there is a clear pattern across 2+ episodes (otherwise null).
+Given the child's world premise, current episode, past episodes, existing principles, and current personality, extract at most 1 to 2 core child-level concepts (short concrete words/phrases, not adult psychological jargon) per turn, synthesize higher-order principles that link past and present experiences (only return a non-null synthesized_principle when there is a clear pattern across 2+ episodes, otherwise null), and synthesize the child's evolving personality: personality_label, personality_traits (2-4 traits), personality_tone, and personality_shift (a 1-sentence first-person self-reflection on how this experience shaped the child's attitude/personality, with zero static archetype names).
 
 Respond strictly in valid JSON matching this schema:
 {
@@ -411,7 +420,11 @@ Respond strictly in valid JSON matching this schema:
   ],
   "synthesized_principle": "<synthesized higher-order insight linking turns, or null if nothing to synthesize>",
   "source_turns": [<turn_numbers_linked>],
-  "hop_depth": <integer >= 2, how many reasoning hops connect this insight>
+  "hop_depth": <integer >= 2, how many reasoning hops connect this insight>,
+  "personality_label": "<short open-ended description of the child's current evolving personality shaped by experiences, with zero static archetype names>",
+  "personality_traits": ["<trait1>", "<trait2>"],
+  "personality_tone": "<how the child now speaks, reacts, and feels toward the parent and world>",
+  "personality_shift": "<1-sentence first-person self-reflection on how this experience shaped or reinforced my attitude/personality>"
 }
 """
 
@@ -422,9 +435,10 @@ def _apply_llm_synthesis(
     client: Any,
     world_premise: str,
     lang: str,
-) -> tuple[list[ConceptObservation], str | None, list[int], int]:
+) -> SynthesisResponse:
     payload = {
         "world_premise": world_premise,
+        "current_personality": graph.personality.model_dump(),
         "current_episode": {
             "turn": episode.turn,
             "scene_text": episode.scene_text,
@@ -465,14 +479,12 @@ def _apply_llm_synthesis(
     )
 
     if isinstance(raw, SynthesisResponse):
-        return raw.concepts, raw.synthesized_principle, raw.source_turns, raw.hop_depth
+        return raw
     if isinstance(raw, dict):
-        parsed = SynthesisResponse.model_validate(raw)
-        return parsed.concepts, parsed.synthesized_principle, parsed.source_turns, parsed.hop_depth
+        return SynthesisResponse.model_validate(raw)
 
     # Try model_validate as fallback
-    parsed = SynthesisResponse.model_validate(raw)
-    return parsed.concepts, parsed.synthesized_principle, parsed.source_turns, parsed.hop_depth
+    return SynthesisResponse.model_validate(raw)
 
 
 def _apply_dynamic_fallback(
@@ -573,15 +585,16 @@ def expand_knowledge(
 
     # 2. Try LLM synthesis if client is provided
     used_llm = False
+    synth_resp: SynthesisResponse | None = None
     if client is not None:
         try:
-            c_list, s_principle, s_turns, depth = _apply_llm_synthesis(
+            synth_resp = _apply_llm_synthesis(
                 graph, episode, client, world_premise, lang
             )
-            concepts_to_apply = c_list
-            synthesized_principle = s_principle
-            source_turns = s_turns
-            hop_depth = depth
+            concepts_to_apply = synth_resp.concepts[:2]
+            synthesized_principle = synth_resp.synthesized_principle
+            source_turns = synth_resp.source_turns
+            hop_depth = synth_resp.hop_depth
             used_llm = True
         except Exception:
             used_llm = False
@@ -593,8 +606,6 @@ def expand_knowledge(
         synthesized_principle = s_principle
         source_turns = s_turns
         hop_depth = depth
-    else:
-        concepts_to_apply = concepts_to_apply[:2]
 
     # 4. Update concepts
     valence = VALENCE_MAP.get(episode.outcome, 0.0)
@@ -630,6 +641,44 @@ def expand_knowledge(
         fact = principle_to_fact(new_principle_node)
         example = principle_to_example(new_principle_node, day=max(1, episode.turn))
 
+    # 6. Update personality
+    if used_llm and synth_resp is not None:
+        if synth_resp.personality_label:
+            graph.personality.label = synth_resp.personality_label.strip()
+        if synth_resp.personality_traits:
+            graph.personality.traits = [t.strip() for t in synth_resp.personality_traits if t.strip()][:5]
+        if synth_resp.personality_tone:
+            graph.personality.tone_guide = synth_resp.personality_tone.strip()
+        if synth_resp.personality_shift:
+            shift = synth_resp.personality_shift.strip()
+            graph.personality.core_self = shift
+            graph.personality.history.append(shift)
+            graph.personality.history = graph.personality.history[-6:]
+
+    if not used_llm or not graph.personality.label or not graph.personality.core_self:
+        empirical = _synthesize_empirical_personality(
+            graph, _compute_empirical_scores(graph), lang.startswith("ko")
+        )
+        if not used_llm:
+            graph.personality = empirical
+        else:
+            if not graph.personality.label:
+                graph.personality.label = empirical.label
+            if not graph.personality.traits:
+                graph.personality.traits = empirical.traits
+            if not graph.personality.tone_guide:
+                graph.personality.tone_guide = empirical.tone_guide
+            if not graph.personality.core_self:
+                graph.personality.core_self = empirical.core_self
+            if not graph.personality.history:
+                graph.personality.history = empirical.history
+
+    personality_example: Example | None = None
+    if graph.personality.core_self or graph.personality.label:
+        personality_example = personality_to_example(
+            graph.personality, day=max(1, episode.turn), outcome=episode.outcome
+        )
+
     status = cognitive_status(graph, lang=lang)
 
     return {
@@ -640,6 +689,7 @@ def expand_knowledge(
         "synthesized_principle": synthesized_principle,
         "fact": fact,
         "example": example,
+        "personality_example": personality_example,
         "cognitive_status": status,
     }
 

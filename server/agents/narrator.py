@@ -316,17 +316,11 @@ SCENE_BUNDLE_SYSTEM_EN = (
 CHILD_QA_SYSTEM = (
     "You are the child in a gentle parenting and life-simulation game. A parent is talking with you. "
     "Follow these strict rules:\n\n"
-    "0. TOP PRIORITY — 대화 시 과거 사건 나열 절대 금지 & 학습된 성격(personality)으로 대답하기:\n"
+    "0. TOP PRIORITY — 대화 시 과거 사건 나열 절대 금지 & 동적으로 학습된 성격(personality)으로 대답하기:\n"
     "- 절대 과거에 있었던 사건/상황들을 먼저 나열하지 마세요! 부모가 특정 과거 사건이나 사물(예: '아까 블록 어떻게 됐어?', '우유 쏟았을 때 어땠어?', '오늘 뭐 했어?', '손 끈적할 때 어떻게 해?')을 직접 물어보지 않는 한, 절대 과거 에피소드(블록 무너짐, 잼 빨기, 무릎 부딪힘, 이모 방문, 우유 쏟음 등)를 먼저 꺼내서 줄줄이 읊거나 나열하지 마세요!\n"
     "- 어른스러운 메타 심리 분석 표현 절대 금지: '내 마음을 말로 이름 붙여주고', '눈높이에서 말해주니까 따라하고 싶어지더라고', '해보면서 배운 게 있어' 같은 성인 상담사/보고서 같은 말투는 절대 금지합니다.\n"
-    "- 경험은 '사건 목록'이 아니라 '성격(personality)'과 '말투'로 내재화되어야 합니다:\n"
-    "  '넌 누구니?', '그 말투는 어디서 배운 거야?', '기분 어때?', '엄마 좋아?', '뭐 하고 놀까?' 같은 질문에는 과거 사건을 나열하지 말고, 지금까지의 학습으로 변화된 아이의 현재 personality (archetype, label, tone_guide, attachment, confidence)에 따라 각 성격마다 완전히 다른 태도와 말투로 짧고 자연스럽게(1~2문장) 대화하세요:\n"
-    "  * warm_affectionate (다정하고 애교 많은 사랑둥이): 사랑받고 안정된 애착. 밝고 애교 넘치며 다정한 말투 (예: '넌 누구니?' -> '헤헤, 나는 엄마 귀여운 꼬마지! 엄마 나 꼭 안아줘~', '그 말투 어디서 배웠어?' -> '응? 엄마가 나한테 다정하게 말해줘서 나도 따라 한 건데! 히히.')\n"
-    "  * bold_explorer (호기심 많고 당당한 탐험가): 스스로 해본 성공이 많아 자신감 넘치고 씩씩한 말투 (예: '넌 누구니?' -> '나는 세 살 대장이야! 나 혼자서도 할 수 있는 거 진짜 많아!', '그 말투 어디서 배웠어?' -> '내가 이것저것 직접 해보면서 멋지게 말하는 법도 알게 됐지!')\n"
-    "  * timid_anxious (눈치 보고 주눅 든 소심이): 혼나거나 실패한 기억 때문에 주눅이 들어 말끝을 흐리고 눈치를 보는 말투 (예: '넌 누구니?' -> '응...? 그냥... 나야... 엄마 혹시 나 또 뭐 잘못했어...?', '그 말투 어디서 배웠어?' -> '어... 그냥 엄마 하는 말 듣고... 내가 이상하게 말했어...? 미안해...')\n"
-    "  * lonely_sulky (외롭고 토라진 투정이): 방치되거나 외로웠던 기억 때문에 뾰로통하고 관심을 갈구하며 투정 부리는 말투 (예: '넌 누구니?' -> '흥, 나랑 잘 놀아주지도 않으면서 왜 물어봐? 나 심심하단 말이야.', '그 말투 어디서 배웠어?' -> '엄마가 맨날 기다리라고만 해서 나 혼자 중얼거리다가 이렇게 됐어, 흥.')\n"
-    "  * wary_sensitive (눈치 보지만 다정함에 기대는 아이): 혼나거나 서운했던 기억 때문에 처음엔 살짝 조심스럽고 눈치를 보지만, 엄마가 다정하게 해줬던 순간을 그리워하며 조심스레 다가가는 말투 (예: '넌 누구니?' -> '음... 엄마 꼬마야... 가끔 엄마가 화낼 땐 무섭지만 다정하게 안아줄 때가 제일 좋아...', '그 말투 어디서 배웠어?' -> '음... 엄마가 화낼 땐 무서웠는데, 다정하게 말해줄 땐 기분이 좋아서 나도 그렇게 말해봤어...')\n"
-    "  * innocent_toddler (순수하고 호기심 어린 꼬마): 아직 많은 일을 겪지 않은 해맑고 천진난만한 말투 (예: '넌 누구니?' -> '응? 나 세 살 꼬마야! 엄마 나랑 같이 놀자!')\n\n"
+    "- 아이가 겪은 모든 경험은 이미 동적으로 학습된 `personality` (`label`, `traits`, `tone_guide`, `core_self`, `history`, 그리고 연속 지표 `attachment`, `confidence`, `expressiveness`)로 종합되어 내재화되어 있습니다.\n"
+    "- '넌 누구니?', '그 말투는 어디서 배운 거야?', '기분 어때?', '엄마 좋아?', '뭐 하고 놀까?' 같은 일상 대화 질문에는 과거 사건을 나열하지 말고, payload에 제공된 동적으로 학습된 `personality` (`label`, `traits`, `tone_guide`, `core_self`, `history`, `attachment`, `confidence`, `expressiveness`)로부터 아이의 태도, 감정적 색채, 자신감, 부모에 대한 애착, 말투가 유기적으로 드러나도록 짧고 자연스럽게(아이의 `scale_b`에 맞춘 1~2문장) 대화하세요.\n\n"
     "1. Cognitive Scaling Trajectory (scale_b: 1.0B -> 7.0B):\n"
     "Cognitive scale controls the child's sentence length, vocabulary maturity, and reasoning depth when answering 'why/how' questions, NEVER dumping a list of episodes. At 3B (age 3), keep answers to 1-2 short, natural child sentences! Strictly match the child's current cognitive scale (`scale_b` from 1.0B at age 1 to 7.0B at age 7, reasoning_hops 1 to 5):\n"
     "- 1.0B ~ 1.9B = 1세 수준 (감각/단편 직관, 1-hop): Speaks in very simple, short baby/toddler words or gestures, only recalling direct single sensory experiences (`relevant_memories`) without abstract generalizations.\n"
@@ -356,117 +350,6 @@ CHILD_QA_SYSTEM = (
 
 class ChildQAOut(BaseModel):
     answer: str
-
-
-def _personality_conversational_response(q_lower: str, q_words: list[str], archetype: str, ko: bool) -> str:
-    # 1. Identity questions: 누구, who, 이름, name
-    if any(k in q_lower for k in ("누구", "who", "이름", "name")):
-        if ko:
-            responses = {
-                "warm_affectionate": "헤헤, 나는 엄마 귀여운 꼬마지! 엄마 나 꼭 안아줘~",
-                "bold_explorer": "나는 세 살 대장이야! 나 혼자서도 할 수 있는 거 진짜 많아!",
-                "timid_anxious": "응...? 그냥... 나야... 엄마 혹시 나 또 뭐 잘못했어...?",
-                "lonely_sulky": "흥, 나랑 잘 놀아주지도 않으면서 왜 물어봐? 나 심심하단 말이야.",
-                "wary_sensitive": "음... 엄마 꼬마야... 가끔 엄마가 화낼 땐 무섭지만 다정하게 안아줄 때가 제일 좋아...",
-                "innocent_toddler": "응? 나 세 살 꼬마야! 엄마 나랑 같이 놀자!",
-            }
-        else:
-            responses = {
-                "warm_affectionate": "Hehe, I'm Mommy's cute little kid! Give me a big hug~",
-                "bold_explorer": "I'm the age-three captain! There's so much I can do all by myself!",
-                "timid_anxious": "Huh...? Just... me... Did I do something wrong again, Mommy...?",
-                "lonely_sulky": "Hmph, you don't even play with me, why do you ask? I'm bored.",
-                "wary_sensitive": "Umm... I'm Mommy's kid... Sometimes you're scary when angry, but I love when you hug me gently...",
-                "innocent_toddler": "Huh? I'm a three-year-old kid! Play with me, Mommy!",
-            }
-        return responses.get(archetype, responses["innocent_toddler"])
-
-    # 2. Tone / speech questions: 말투, 배웠, 어디서, talk, learn, speak
-    if any(k in q_lower for k in ("말투", "배웠", "어디서", "talk", "learn", "speak")):
-        if ko:
-            responses = {
-                "warm_affectionate": "응? 엄마가 나한테 다정하게 말해줘서 나도 따라 한 건데! 히히.",
-                "bold_explorer": "내가 이것저것 직접 해보면서 멋지게 말하는 법도 알게 됐지!",
-                "timid_anxious": "어... 그냥 엄마 하는 말 듣고... 내가 이상하게 말했어...? 미안해...",
-                "lonely_sulky": "엄마가 맨날 기다리라고만 해서 나 혼자 중얼거리다가 이렇게 됐어, 흥.",
-                "wary_sensitive": "음... 엄마가 화낼 땐 무서웠는데, 다정하게 말해줄 땐 기분이 좋아서 나도 그렇게 말해봤어...",
-                "innocent_toddler": "헤헤, 그냥 엄마 아빠 말 들으면서 배웠지!",
-            }
-        else:
-            responses = {
-                "warm_affectionate": "Huh? Mommy talked so warmly to me, so I copied it! Heehee.",
-                "bold_explorer": "I tried lots of things myself and learned how to talk cool!",
-                "timid_anxious": "Uh... just listening to Mommy... did I speak weirdly...? Sorry...",
-                "lonely_sulky": "Mommy always told me to wait, so I mumbled by myself and talk like this now, hmph.",
-                "wary_sensitive": "Umm... when Mommy got angry it was scary, but when speaking kindly it felt good so I tried talking like that too...",
-                "innocent_toddler": "Hehe, I just learned it listening to Mommy and Daddy!",
-            }
-        return responses.get(archetype, responses["innocent_toddler"])
-
-    # 3. Mood / feelings / parent relationship: 기분, 어때, 엄마, 아빠, 좋아, feel, how are, love
-    if any(k in q_lower for k in ("기분", "어때", "좋아", "feel", "how are", "love")):
-        if ko:
-            responses = {
-                "warm_affectionate": "엄마가 나 안아줄 때가 제일 행복해! 엄마 너무 좋아!",
-                "bold_explorer": "오늘 기분 완전 최고야! 나 새로운 거 또 해보고 싶어!",
-                "timid_anxious": "조금 떨려... 엄마가 화 안 내면 좋겠어...",
-                "lonely_sulky": "별로야... 맨날 혼자 두고... 나랑 좀 놀아줘.",
-                "wary_sensitive": "엄마가 다정하게 웃어주면 기분 좋아져... 화내지 마...",
-                "innocent_toddler": "기분 좋아! 헤헤, 우리 뭐 하고 놀까?",
-            }
-        else:
-            responses = {
-                "warm_affectionate": "I'm happiest when Mommy hugs me! I love Mommy so much!",
-                "bold_explorer": "Feeling totally awesome today! I want to try something new again!",
-                "timid_anxious": "A bit nervous... I hope Mommy doesn't get mad...",
-                "lonely_sulky": "Not good... you always leave me alone... play with me.",
-                "wary_sensitive": "When Mommy smiles kindly, I feel better... please don't be mad...",
-                "innocent_toddler": "I feel good! Hehe, what should we play?",
-            }
-        return responses.get(archetype, responses["innocent_toddler"])
-
-    # 4. Play / activity: 놀, 뭐해, play, doing
-    if any(k in q_lower for k in ("놀", "뭐해", "play", "doing")):
-        if ko:
-            responses = {
-                "warm_affectionate": "엄마랑 손잡고 꼭 껴안고 놀고 싶어! 헤헤.",
-                "bold_explorer": "블록으로 엄청 높은 성 쌓거나 모험 놀이 하자!",
-                "timid_anxious": "엄마 하고 싶은 거... 나 조용히 옆에 있을게...",
-                "lonely_sulky": "진짜 나랑 놀아주게? 장난감 같이 가지고 놀아줘, 꼭이야.",
-                "wary_sensitive": "엄마랑 같이 그림 그리고 싶어... 다정하게 봐줘...",
-                "innocent_toddler": "장난감 가지고 놀자! 엄마 나랑 같이 놀자!",
-            }
-        else:
-            responses = {
-                "warm_affectionate": "I want to hold hands and cuddle with Mommy! Hehe.",
-                "bold_explorer": "Let's build a super tall block castle or go on an adventure!",
-                "timid_anxious": "Whatever Mommy wants... I'll just be quietly next to you...",
-                "lonely_sulky": "Are you really going to play with me? Play with toys with me, promise.",
-                "wary_sensitive": "I want to draw with Mommy... look at me gently...",
-                "innocent_toddler": "Let's play with toys! Play with me, Mommy!",
-            }
-        return responses.get(archetype, responses["innocent_toddler"])
-
-    # 5. General conversational fallback for personality
-    if ko:
-        general_responses = {
-            "warm_affectionate": "헤헤, 엄마랑 얘기하니까 너무 좋아! 나 예쁘지?",
-            "bold_explorer": "응! 나한테 물어봐, 나 씩씩하게 다 대답할 수 있어!",
-            "timid_anxious": "응...? 엄마... 나한테 화난 거 아니지...?",
-            "lonely_sulky": "흥, 딴짓하지 말고 나한테만 집중해 줘.",
-            "wary_sensitive": "음... 엄마 옆에 조금만 더 붙어있어도 돼...?",
-            "innocent_toddler": "응? 헤헤, 엄마 무슨 말인지 잘 모르겠지만 같이 놀자!",
-        }
-    else:
-        general_responses = {
-            "warm_affectionate": "Hehe, I love talking with Mommy! Aren't I cute?",
-            "bold_explorer": "Yeah! Ask me, I can answer bravely!",
-            "timid_anxious": "Huh...? Mommy... you're not mad at me, right...?",
-            "lonely_sulky": "Hmph, don't look away, focus only on me.",
-            "wary_sensitive": "Umm... can I stay close to Mommy a little longer...?",
-            "innocent_toddler": "Huh? Hehe, not sure what that means, but let's play!",
-        }
-    return general_responses.get(archetype, general_responses["innocent_toddler"])
 
 
 def _ask_child_fallback(question: str, context: dict[str, Any], is_ko: bool | str = True) -> str:
@@ -535,12 +418,29 @@ def _ask_child_fallback(question: str, context: dict[str, Any], is_ko: bool | st
         or cognitive.get("personality")
         or {}
     )
-    archetype = personality.get("archetype") if isinstance(personality, dict) else None
+    if isinstance(personality, dict) and any(
+        personality.get(k) for k in ("core_self", "tone_guide", "label", "traits")
+    ):
+        label = personality.get("label")
+        core_self = personality.get("core_self")
+        tone_guide = personality.get("tone_guide")
+        traits = personality.get("traits")
 
-    if archetype:
-        p_resp = _personality_conversational_response(q_lower, q_words, archetype, ko)
-        if p_resp:
-            return p_resp
+        if core_self and label:
+            return f"[{label}] {core_self}"
+        if core_self:
+            return str(core_self)
+        if tone_guide and label:
+            return f"[{label}] {tone_guide}"
+        if tone_guide:
+            return str(tone_guide)
+        if label and traits:
+            traits_str = ", ".join(str(t) for t in traits)
+            return f"[{label}] {traits_str}"
+        if label:
+            return str(label)
+        if traits:
+            return ", ".join(str(t) for t in traits)
 
     if beliefs:
         first_b = beliefs[0]

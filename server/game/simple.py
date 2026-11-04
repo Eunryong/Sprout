@@ -800,6 +800,11 @@ class SimpleGame:
             learn_rng = self.s.rng if isinstance(getattr(self.s, "rng", None), random.Random) else (self.s.rng() if callable(getattr(self.s, "rng", None)) else self.s._rng("learn"))
             self.s.learner.learn(prin_ex, self.s.buffer, learn_rng, steps=5)
 
+        pers_ex = exp_res.get("personality_example")
+        if pers_ex is not None:
+            learn_rng = self.s.rng if isinstance(getattr(self.s, "rng", None), random.Random) else (self.s.rng() if callable(getattr(self.s, "rng", None)) else self.s._rng("learn"))
+            self.s.learner.learn(pers_ex, self.s.buffer, learn_rng, steps=3)
+
         if getattr(self.s, "save", None) and getattr(self.s.save, "root", None):
             save_knowledge(self.knowledge, self.s.save.root / "knowledge.json")
 
@@ -1020,6 +1025,11 @@ class SimpleGame:
             prin_ex = principle_to_example(prin_node, day=self.s.state.day)
             learn_rng = self.s.rng if isinstance(getattr(self.s, "rng", None), random.Random) else (self.s.rng() if callable(getattr(self.s, "rng", None)) else self.s._rng("learn"))
             self.s.learner.learn(prin_ex, self.s.buffer, learn_rng, steps=5)
+
+        pers_ex = exp_res.get("personality_example")
+        if pers_ex is not None:
+            learn_rng = self.s.rng if isinstance(getattr(self.s, "rng", None), random.Random) else (self.s.rng() if callable(getattr(self.s, "rng", None)) else self.s._rng("learn"))
+            self.s.learner.learn(pers_ex, self.s.buffer, learn_rng, steps=3)
 
         if getattr(self.s, "save", None) and getattr(self.s.save, "root", None):
             save_knowledge(self.knowledge, self.s.save.root / "knowledge.json")

@@ -358,63 +358,89 @@ def test_ask_child_personality_and_no_episode_listing_prompt():
     from server.agents.narrator import CHILD_QA_SYSTEM, ChildQAOut, NarratorAgent
     from server.game.memory import probe_child_brain
 
-    # 1. CHILD_QA_SYSTEM explicitly forbids listing past episodes unsolicited and defines personality-specific styles
+    # 1. CHILD_QA_SYSTEM forbids unsolicited episode listing and adult meta-analysis
     assert "과거 사건 나열 절대 금지" in CHILD_QA_SYSTEM or "과거 사건" in CHILD_QA_SYSTEM
     assert "절대 과거에 있었던 사건/상황들을 먼저 나열하지 마세요" in CHILD_QA_SYSTEM
-    archetypes = [
+    assert "어른스러운 메타 심리 분석 표현 절대 금지" in CHILD_QA_SYSTEM
+
+    # 2. CHILD_QA_SYSTEM does NOT contain static archetype enums and instead instructs using dynamic personality
+    static_archetypes = [
         "warm_affectionate",
         "bold_explorer",
         "timid_anxious",
         "lonely_sulky",
         "wary_sensitive",
+        "innocent_toddler",
     ]
-    for arch in archetypes:
-        assert arch in CHILD_QA_SYSTEM
+    for arch in static_archetypes:
+        assert arch not in CHILD_QA_SYSTEM
 
-    # 2. NarratorAgent.ask_child() includes personality and traits in the LLM payload
+    dynamic_keys = [
+        "tone_guide",
+        "core_self",
+        "traits",
+        "attachment",
+        "confidence",
+    ]
+    for key in dynamic_keys:
+        assert key in CHILD_QA_SYSTEM
+
+    # 3. NarratorAgent.ask_child() includes personality and traits in the LLM payload
     client = MagicMock()
     client.available.return_value = True
     client.complete_json.return_value = ChildQAOut(answer="헤헤, 나는 엄마 귀여운 꼬마지!")
     n = NarratorAgent(client)
 
-    test_personality = {
-        "archetype": "warm_affectionate",
+    test_personality_a = {
         "label": "다정하고 애교 많은 사랑둥이",
         "traits": ["다정함", "애교"],
+        "core_self": "엄마랑 꼭 안고 이야기하는 걸 좋아하는 아이예요.",
+        "tone_guide": "밝고 다정한 말투",
+        "attachment": 0.8,
+        "confidence": 0.5,
     }
-    ctx = {
-        "cognitive": {"personality": test_personality},
+    ctx_a = {
+        "cognitive": {"personality": test_personality_a},
     }
-    n.ask_child("넌 누구니?", ctx)
+    n.ask_child("넌 누구니?", ctx_a)
     call_args = client.complete_json.call_args[1]
     payload = json.loads(call_args["user"])
-    assert payload["personality"] == test_personality
+    assert payload["personality"] == test_personality_a
     assert payload["traits"] == ["다정함", "애교"]
 
-    # 3. Fallback uses personality instead of blindly dumping beliefs/episodes
+    # 4. Two children with different dynamically learned personality dicts produce different answers without static lookup table
     n_offline = NarratorAgent(None)
     i18n.set_lang("ko")
-    fb_ctx = {
-        "personality": test_personality,
+    fb_ctx_a = {
+        "personality": test_personality_a,
         "brain_state": {
             "model_beliefs": [{"problem": "DIRTY_HANDS", "action": "WASH", "summary": "비누로 손을 씻으면 깨끗해져요"}],
         },
     }
-    fb_ans = n_offline.ask_child("넌 누구니?", fb_ctx)
-    assert "엄마 귀여운 꼬마" in fb_ans
-    assert "비누" not in fb_ans
+    ans_a = n_offline.ask_child("넌 누구니?", fb_ctx_a)
+    assert "비누" not in ans_a
+    assert "사랑둥이" in ans_a or "엄마랑 꼭 안고" in ans_a
 
-    # Different archetype gives different answer
-    sulky_ctx = {
-        "personality": {
-            "archetype": "lonely_sulky",
-            "traits": ["서운함"],
+    test_personality_b = {
+        "label": "호기심 넘치는 씩씩한 모험가",
+        "traits": ["용기", "탐색"],
+        "core_self": "혼자서도 새로운 것을 척척 해내고 싶은 대장이에요.",
+        "tone_guide": "씩씩하고 당당한 말투",
+        "attachment": 0.4,
+        "confidence": 0.9,
+    }
+    fb_ctx_b = {
+        "personality": test_personality_b,
+        "brain_state": {
+            "model_beliefs": [{"problem": "DIRTY_HANDS", "action": "WASH", "summary": "비누로 손을 씻으면 깨끗해져요"}],
         },
     }
-    sulky_ans = n_offline.ask_child("넌 누구니?", sulky_ctx)
-    assert "흥" in sulky_ans or "심심" in sulky_ans
+    ans_b = n_offline.ask_child("넌 누구니?", fb_ctx_b)
+    assert "비누" not in ans_b
+    assert ans_a != ans_b
+    assert "모험가" in ans_b or "혼자서도" in ans_b
 
-    # 4. probe_child_brain returns personality and traits
+    # 5. probe_child_brain returns personality and traits
     fake_session = SimpleNamespace(model=None, model0=None, buffer=[], journal=[])
     brain = probe_child_brain(fake_session, lang="ko")
     assert "personality" in brain
