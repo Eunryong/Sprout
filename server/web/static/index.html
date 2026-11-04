@@ -4,40 +4,52 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sprout — raise a tiny mind</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 28V14' stroke='%232e7d3f' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M16 16C16 10 11 7 5 7c0 6 5 9 11 9z' fill='%232e7d3f'/%3E%3Cpath d='M16 13c0-5 4-8 10-8 0 5-4 8-10 8z' fill='%237cc48a'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#edf1e8">
 <style>
   :root {
-    --bg: #f6f3ee; --card: #fffdf9; --ink: #26231f; --muted: #6f6a62; --line: #e3ddd2; --accent: #2f5d62; --accent-ink: #ffffff;
-    --soft: #efe9de; --focus: #2f6f9f;
-    --c-solved: #2f6f9f; --c-partial: #82b2d6; --c-nothing: #cfd2d8; --c-worse: #8a6bb0;
-    --shadow: 0 1px 2px rgba(40, 30, 10, .06), 0 6px 18px rgba(40, 30, 10, .05);
+    --bg: #edf1e8; --card: #ffffff; --ink: #222b22; --muted: #5e6d5d; --line: #d7e0cf; --accent: #2e7d3f; --accent-ink: #ffffff;
+    --soft: #e1ebda; --focus: #2e7d3f;
+    --c-solved: #2e7d3f; --c-partial: #8fb996; --c-nothing: #ccd2c4; --c-worse: #b0492f;
+    --shadow: 0 1px 2px rgba(35, 50, 35, .07), 0 8px 22px rgba(35, 50, 35, .06);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #191a1c; --card: #222427; --ink: #ecebe7; --muted: #a09c93; --line: #34373b; --accent: #7fb7bd; --accent-ink: #10201f;
-      --soft: #2a2d31; --focus: #8cc0e8;
-      --c-solved: #5fa3d6; --c-partial: #3f6f93; --c-nothing: #565b63; --c-worse: #a98fcf; --shadow: none;
+      --bg: #131714; --card: #1c221c; --ink: #e9ede5; --muted: #9aa79b; --line: #2d352d; --accent: #7cc48a; --accent-ink: #0f1a11;
+      --soft: #232b23; --focus: #7cc48a;
+      --c-solved: #7cc48a; --c-partial: #3f6b4a; --c-nothing: #4a524a; --c-worse: #d08a70; --shadow: none;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #191a1c; --card: #222427; --ink: #ecebe7; --muted: #a09c93; --line: #34373b; --accent: #7fb7bd; --accent-ink: #10201f;
-    --soft: #2a2d31; --focus: #8cc0e8;
-    --c-solved: #5fa3d6; --c-partial: #3f6f93; --c-nothing: #565b63; --c-worse: #a98fcf; --shadow: none;
+    --bg: #131714; --card: #1c221c; --ink: #e9ede5; --muted: #9aa79b; --line: #2d352d; --accent: #7cc48a; --accent-ink: #0f1a11;
+    --soft: #232b23; --focus: #7cc48a;
+    --c-solved: #7cc48a; --c-partial: #3f6b4a; --c-nothing: #4a524a; --c-worse: #d08a70; --shadow: none;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 ui-rounded, "Avenir Next", "Segoe UI", system-ui, sans-serif; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif; }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
-  header { display: flex; align-items: baseline; gap: 12px; padding: 20px 0 12px; flex-wrap: wrap; }
-  header h1 { font-size: 20px; margin: 0; letter-spacing: .02em; }
-  header .scene { color: var(--muted); font-size: 14px; }
-  header .spacer { flex: 1; }
+  header { padding: 20px 0 12px; }
+  .masthead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .masthead h1 { font-size: 22px; margin: 0; letter-spacing: -.01em; font-weight: 800; }
+  .masthead .mark { display: inline-flex; width: 26px; height: 26px; }
+  .masthead .mark svg { width: 100%; height: 100%; }
+  .masthead .mark .stem { stroke: var(--accent); }
+  .masthead .mark .leaf { fill: var(--accent); }
+  .masthead .scene { color: var(--muted); font-size: 14px; }
+  .masthead .spacer { flex: 1; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .chips:not(:has(> :not([hidden]))) { display: none; }
+  .growth { height: 6px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); margin-top: 10px; overflow: hidden; }
+  .growth span { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--accent); transition: width .5s ease; }
   .premise { color: var(--muted); font-size: 14px; margin: 0 0 8px; font-style: italic; }
   button { font: inherit; cursor: pointer; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 8px 14px; }
   button:hover:not(:disabled) { border-color: var(--accent); }
   button:disabled { opacity: .5; cursor: default; }
   button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  button.primary:hover:not(:disabled) { border-color: var(--accent); filter: brightness(.93); }
   button.quiet { border-color: transparent; background: transparent; color: var(--muted); font-size: 14px; padding: 6px 8px; }
-  .story { background: var(--card); border-radius: 16px; padding: 22px 22px; box-shadow: var(--shadow); font-size: 18px; line-height: 1.6; margin-bottom: 18px; border: 1px solid var(--line); }
+  .story { background: var(--card); border-radius: 18px; padding: 24px 24px; box-shadow: var(--shadow); font-family: Georgia, "Noto Serif KR", "Apple SD Gothic Neo", serif; font-size: 20px; line-height: 1.7; margin-bottom: 18px; border: 1px solid var(--line); }
   .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); margin: 0 0 10px; align-items: center; }
   .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
   .opts { display: grid; gap: 12px; margin: 0 0 14px; padding: 0; list-style: none; }
@@ -47,7 +59,8 @@
   .opt.solo-opt button { font-size: 15px; padding: 8px 18px; }
   .opt.thought-opt { border-color: var(--line); background: var(--card); }
   .opt.thought-opt h3 { color: var(--ink); font-weight: 500; font-size: 15px; line-height: 1.5; }
-  .opt.chosen-opt { border-color: var(--accent, #5b8a72); box-shadow: 0 0 0 2px rgba(91,138,114,0.25); }
+  .opt:hover { border-color: var(--accent); }
+  .opt.chosen-opt { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(46,125,63,0.28); }
   .opt .speech { margin: 0 0 6px; font-size: 15px; color: var(--accent); font-weight: 600; }
   .opt h3 { margin: 0 0 8px; font-size: 16px; font-weight: 600; }
   .opt .auto-desc { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
@@ -72,8 +85,7 @@
   }
   .knowledge-expansion {
     background: var(--soft);
-    border: 1px solid var(--accent);
-    border-left: 4px solid var(--accent);
+    border: 1px solid var(--line);
     border-radius: 12px;
     padding: 14px 16px;
     margin: 14px 0 10px;
@@ -126,14 +138,14 @@
   .lean { margin: 0 0 4px; font-size: 14px; color: var(--accent); font-weight: 600; }
   .memory { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
   .hint { font-size: 13px; color: var(--muted); margin: 6px 0 14px; }
-  .result { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
+  .result { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
   .result p { margin: 0 0 10px; }
-  .result .who { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  .result .who { font-size: 13px; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
   .result .world { font-style: italic; }
   .result .surprise { background: var(--soft); border-radius: 10px; padding: 10px 12px; font-size: 15px; }
   .result .learned { font-size: 13px; color: var(--muted); margin: 0; }
   .err { background: var(--soft); border: 1px solid var(--c-worse); color: var(--ink); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; }
-  .stage { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 9px; }
+  .stage { font-size: 12px; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 9px; }
   .banner { background: var(--soft); border-radius: 14px; padding: 14px 18px; margin: 0 0 14px; border: 1px solid var(--line); }
   .banner h2 { margin: 0 0 2px; font-size: 15px; }
   .banner p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -282,8 +294,12 @@
     outline-offset: 1px;
   }
   [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    .growth span, .cognitive-badge, .qa-chip { transition: none; }
+  }
   @media (max-width: 480px) {
-    .story { font-size: 17px; padding: 18px; }
+    .masthead { gap: 8px; }
+    .story { font-size: 18px; padding: 18px; }
     .row button { flex: 1; }
     .custom-action-row, .qa-input-row { flex-direction: column; }
     .qa-msg { max-width: 95%; }
@@ -294,16 +310,22 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>Sprout</h1>
-    <span class="scene" id="sceneNo"></span>
-    <span class="stage" id="stageChip" hidden></span>
-    <span class="step-chip" id="stepChip" hidden></span>
-    <span class="cognitive-badge" id="cognitiveBadge" hidden></span>
-    <span class="spacer"></span>
-    <span class="busy" id="busy" role="status" hidden data-t="thinking"></span>
-    <button class="quiet" id="langBtn" title="English / 한국어">한국어</button>
-    <button class="primary" id="openQaBtn" data-t="openQaBtn">💬 아이와 대화하기 (마무리/질문)</button>
-    <button class="quiet" id="newGame" data-t="newChild" data-title="newChildTitle"></button>
+    <div class="masthead">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path class="stem" d="M16 28V14" stroke-width="3" stroke-linecap="round" fill="none"/><path class="leaf" d="M16 16C16 10 11 7 5 7c0 6 5 9 11 9z"/><path d="M16 13c0-5 4-8 10-8 0 5-4 8-10 8z" fill="#7cc48a"/></svg></span>
+      <h1>Sprout</h1>
+      <span class="scene" id="sceneNo"></span>
+      <span class="spacer"></span>
+      <span class="busy" id="busy" role="status" hidden data-t="thinking"></span>
+      <button class="quiet" id="langBtn" title="English / 한국어">한국어</button>
+      <button class="primary" id="openQaBtn" data-t="openQaBtn">💬 아이와 대화하기 (마무리/질문)</button>
+      <button class="quiet" id="newGame" data-t="newChild" data-title="newChildTitle"></button>
+    </div>
+    <div class="chips">
+      <span class="stage" id="stageChip" hidden></span>
+      <span class="step-chip" id="stepChip" hidden></span>
+      <span class="cognitive-badge" id="cognitiveBadge" hidden></span>
+    </div>
+    <div class="growth" id="growth" role="img" hidden><span id="growthFill"></span></div>
   </header>
   <p class="premise" id="premise" hidden></p>
   <p class="source" id="source" hidden></p>
@@ -817,6 +839,12 @@ async function loadScene(opts = {}) {
       if (sessionStorage.getItem("qaOpen") === "1" && info.qa_history && info.qa_history.length > 0) $("qaCard").hidden = false;
     } catch (_) {}
     $("sceneNo").textContent = sc.ended ? "" : t("scene", sc.age, sc.number);
+    const gr = $("growth"), gf = $("growthFill");
+    if (gr && gf) {  // the growing line: where this child is between birth and seven
+      gr.hidden = false;
+      gf.style.width = sc.ended ? "100%" : Math.round(Math.min(1, Math.max(0, (sc.age_months || 36) / 84)) * 100) + "%";
+      gr.setAttribute("aria-label", sc.age || "");
+    }
     const chip = $("stageChip"); chip.hidden = !sc.stage; if (sc.stage) chip.textContent = sc.stage.name;
     const stepChip = $("stepChip");
     stepChip.hidden = sc.ended || !(sc.step_total && sc.step_total > 1);
