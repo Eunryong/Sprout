@@ -1,0 +1,32 @@
+
+after 6 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  lm_zero_kind                   5.484       0.796       0.168       0.420       0.778           -
+  lm_zero_attrs                  5.141       0.727       0.258       0.300       0.893           -
+  lm_lora_kind                   1.917       0.705       0.432       0.592       0.499           -
+  lm_lora_attrs                  1.689       0.622       0.521       0.633       0.449           -
+  lm_full_kind                   1.737       0.642       0.527       0.630       0.455           -
+  lm_full_attrs                  1.771       0.669       0.485       0.577       0.538           -
+
+after 12 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  lm_zero_kind                   5.484       0.796       0.168       0.420       0.778           -
+  lm_zero_attrs                  5.141       0.727       0.258       0.300       0.893           -
+  lm_lora_kind                   1.517       0.618       0.539       0.738       0.294           -
+  lm_lora_attrs                  1.313       0.560       0.584       0.788       0.245           -
+  lm_full_kind                   1.433       0.599       0.548       0.772       0.260           -
+  lm_full_attrs                  1.469       0.622       0.516       0.750       0.296           -
+
+after 30 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  lm_zero_kind                   5.484       0.796       0.168       0.420       0.778      -0.224
+  lm_zero_attrs                  5.141       0.727       0.258       0.300       0.893      -0.131
+  lm_lora_kind                   1.254       0.445       0.685       0.845       0.168       0.517
+  lm_lora_attrs                  1.147       0.376       0.769       0.878       0.132       0.535
+  lm_full_kind                   1.247       0.486       0.655       0.802       0.238       0.524
+  lm_full_attrs                  1.154       0.383       0.750       0.873       0.142       0.479
+
+after 84 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  lm_zero_kind                   5.484       0.796       0.168       0.420       0.778      -0.142
+  lm_zero_attrs                  5.141       0.727       0.258       0.300       0.893      -0.107
+  lm_lora_kind                   0.947       0.337       0.844       0.935       0.077       0.588
+  lm_lora_attrs                  1.005       0.296       0.869       0.917       0.100       0.600
+  lm_full_kind                   0.943       0.329       0.863       0.953       0.052       0.569
+  lm_full_attrs                  0.999       0.312       0.858       0.972       0.035       0.596

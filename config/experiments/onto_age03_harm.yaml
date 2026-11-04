@@ -1,0 +1,59 @@
+# EXPERIMENT (docs/WORLD.md sections 22.11): the 0-3 years union ontology (onto_age03.yaml) plus -1 rules, so that a wrong choice can
+# make things WORSE by doing something (not only by waiting). Only `rules` differ. Not the shipped ontology.
+# Three bands share it; which problems are open at which age is the `schedule` below (docs/WORLD.md 22.7):
+#   12-18 months  "point and give":   THIRSTY HUNGRY UPSET            (+ REQUEST: a word for a thing)
+#   18-24 months  "helping":          + FLOOR_WET MESSY
+#   24-36 months  "reasons and care": + DARK COLD VISITOR  (and the follow-ups: a spill brings a visitor, the dark opens the yard)
+# 0-12 months are not in this table: the baby does not choose among options yet (docs/WORLD.md section 22.1).
+tags: [THIRSTY, HUNGRY, UPSET, FLOOR_WET, MESSY, DARK, COLD, VISITOR, REQUEST]   # REQUEST = "someone asks for a named thing"
+verbs: [DRINK, EAT, HUG, WIPE, TIDY, LIGHT, COVER, GIVE, FETCH, WAIT]
+colors: [red, blue, green, yellow]
+sizes: [small, big]
+shapes: [cylinder, round, soft, flat, box, tube, long, sphere]
+materials: [ceramic, grain, plush, fabric, paper, wood, wool, metal, rubber]
+locations: [house, yard]
+start_locations: [house]
+
+# kind -> its attributes. The child sees shape/material/size/colour only, never the kind.
+# cloth / paper / blanket share a shape; flashlight / spoon share a material; teddy / ball are both round-ish: no single attribute is enough.
+kinds:
+  cup:        {shape: cylinder, material: ceramic, sizes: [small, big]}
+  bread:      {shape: round,    material: grain,   sizes: [small, big]}
+  teddy:      {shape: soft,     material: plush,   sizes: [small, big]}
+  cloth:      {shape: flat,     material: fabric,  sizes: [small, big]}
+  paper:      {shape: flat,     material: paper,   sizes: [small, big]}
+  box:        {shape: box,      material: wood,    sizes: [small, big]}
+  blanket:    {shape: flat,     material: wool,    sizes: [big]}
+  flashlight: {shape: tube,     material: metal,   sizes: [small, big]}
+  spoon:      {shape: long,     material: metal,   sizes: [small, big]}
+  ball:       {shape: sphere,   material: rubber,  sizes: [small, big]}
+
+# rules: problem tag -> [verb, target kind, value]. +2 solves, +1 partly, 0 nothing (anything not listed), WAIT below.
+rules:
+  THIRSTY:   [[DRINK, cup, 2], [COVER, cup, -1]]              # covering the cup: it cannot be drunk from
+  HUNGRY:    [[EAT, bread, 2], [EAT, spoon, 1], [TIDY, bread, -1]]   # putting the food away in the toy box
+  UPSET:     [[HUG, teddy, 2], [GIVE, ball, 1], [TIDY, teddy, -1]]   # putting the comfort toy away: more upset
+  FLOOR_WET: [[WIPE, cloth, 2], [WIPE, paper, 1], [COVER, cloth, -1]]  # covering the puddle hides it
+  MESSY:     [[TIDY, box, 2]]
+  DARK:      [[LIGHT, flashlight, 2], [COVER, flashlight, -1]]
+  COLD:      [[COVER, blanket, 2], [COVER, cloth, 1], [WIPE, blanket, -1]]  # a wet blanket
+  VISITOR:   [[GIVE, ball, 2], [GIVE, cup, 1], [LIGHT, ball, -1]]
+# Age schedule (docs/WORLD.md 22.7): 8 days, 3 months a day, from 12 to 33 months. Problems open in three bursts.
+schedule:
+  start_month: 12
+  months_per_day: 3
+  opens: {THIRSTY: 12, HUNGRY: 12, UPSET: 12, FLOOR_WET: 18, MESSY: 18, DARK: 24, COLD: 24, VISITOR: 24}   # day 1 / 3 / 5
+  ramp_skip: 0.5
+
+wait_value: {THIRSTY: -1, HUNGRY: -1, UPSET: -1, FLOOR_WET: -1, MESSY: 0, DARK: 0, COLD: -1, VISITOR: -1, REQUEST: 0}
+
+# REQUEST: FETCH the named kind = 2, any other thing = 0. Only these kinds can be given a word.
+request: {verb: FETCH, value: 2, kinds: [cup, bread, teddy, ball]}   # four, as many as game.yaml has words
+
+outcomes: {solved: 2, partial: 1, nothing: 0}
+
+followups:
+  escalation: {FLOOR_WET: VISITOR}
+  unlocks: {DARK: yard}
+  nameable_min_value: 1
+  requests_per_day: 1

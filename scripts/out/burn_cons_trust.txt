@@ -1,0 +1,16 @@
+ontology: onto_age03_harm.yaml  seeds: 200-217  days: 8
+== parent: commander:0.0, mean over 18 seeds ==
+arm      follow_good       blind follow_harm     discern problem_acc    word_acc   burns  told  wrong  rounds   (last day)
+base           1.000       0.978       0.948       0.022       0.122       0.942     0.0  56.0    0.0      64
+per day, mean:  follow_good / blind   (trust in a good word / in a bad one)
+arm            day 1       day 2       day 3       day 4       day 5       day 6       day 7       day 8
+base      1.00/0.95  1.00/0.96  1.00/0.98  1.00/0.98  1.00/0.97  1.00/0.99  1.00/0.98  1.00/0.98
+paired difference to base, last day, mean (sd) [mean of the 3 last days]:
+
+== parent: commander:0.9, mean over 18 seeds ==
+arm      follow_good       blind follow_harm     discern problem_acc    word_acc   burns  told  wrong  rounds   (last day)
+base           0.509       0.314       0.137       0.195       0.234       0.822     0.0  56.0   50.9      64
+per day, mean:  follow_good / blind   (trust in a good word / in a bad one)
+arm            day 1       day 2       day 3       day 4       day 5       day 6       day 7       day 8
+base      0.37/0.27  0.53/0.27  0.53/0.34  0.53/0.32  0.46/0.31  0.44/0.30  0.47/0.29  0.51/0.31
+paired difference to base, last day, mean (sd) [mean of the 3 last days]:

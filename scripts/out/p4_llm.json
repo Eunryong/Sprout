@@ -1,0 +1,32 @@
+{
+ "args": {
+  "client": "mock",
+  "rates": "",
+  "seeds": "0-3",
+  "days": 2,
+  "jobs": 8,
+  "max_calls": 1000000000,
+  "cache": null,
+  "out": "scripts/out/p4_llm.json"
+ },
+ "summary": {
+  "director_calls": 64,
+  "director_ok": 1.0,
+  "director_first_try": 1.0,
+  "director_fallback": 0.0,
+  "narrator_calls": 64,
+  "narrator_ok": 1.0,
+  "director_p50_s": 0.0003,
+  "director_p95_s": 0.0004,
+  "narrator_p50_s": 0.0,
+  "narrator_p95_s": 0.0,
+  "teaser_drop": 0.0,
+  "cards": 128,
+  "same_kind_twice": 0.25,
+  "mean_objects": 3.2734375,
+  "mean_options": 4.125,
+  "with_wait": 0.5390625,
+  "last_quiz": 0.8250000000000001
+ },
+ "accepted": true
+}

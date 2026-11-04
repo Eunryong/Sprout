@@ -1,0 +1,56 @@
+
+after 6 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  f6_sample                      2.337       0.937       0.282       0.354       0.882           -
+  f6_soft                        3.484       1.015       0.254       0.342       0.909           -
+  pre_shifted_frozen             0.843       0.249       0.923       0.891       0.091           -
+  pre_true_frozen                0.733       0.188       0.997       0.998       0.000           -
+  pre_s60_frozen                 0.937       0.286       0.889       0.881       0.110           -
+  pre_s100_frozen                1.012       0.347       0.796       0.791       0.219           -
+  pre_shifted_frozen_soft        0.276       0.123       0.924       0.891       0.090           -
+  pre_llm                        1.859       0.689       0.463       0.647       0.449           -
+  pre_llm_frozen                 1.612       0.401       0.692       0.901       0.099           -
+  pre_llm_frozen_soft            1.559       0.376       0.694       0.924       0.083           -
+  ctrl_loss                      2.234       0.907       0.308       0.384       0.835           -
+  ctrl_early                     2.242       0.904       0.316       0.364       0.862           -
+
+after 12 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  f6_sample                      2.000       0.799       0.407       0.457       0.734           -
+  f6_soft                        2.704       0.753       0.452       0.438       0.770           -
+  pre_shifted_frozen             0.661       0.252       0.947       0.894       0.086           -
+  pre_true_frozen                0.494       0.163       0.997       0.996       0.001           -
+  pre_s60_frozen                 0.717       0.257       0.868       0.889       0.095           -
+  pre_s100_frozen                0.793       0.283       0.882       0.871       0.112           -
+  pre_shifted_frozen_soft        0.308       0.130       0.913       0.906       0.081           -
+  pre_llm                        1.743       0.635       0.534       0.675       0.423           -
+  pre_llm_frozen                 1.543       0.370       0.724       0.907       0.093           -
+  pre_llm_frozen_soft            1.455       0.322       0.667       0.946       0.055           -
+  ctrl_loss                      1.956       0.769       0.433       0.457       0.734           -
+  ctrl_early                     2.027       0.800       0.407       0.466       0.725           -
+
+after 30 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  f6_sample                      1.462       0.460       0.704       0.708       0.375       0.243
+  f6_soft                        1.333       0.329       0.753       0.706       0.378       0.319
+  pre_shifted_frozen             0.564       0.197       0.948       0.926       0.055       0.709
+  pre_true_frozen                0.439       0.147       0.990       1.000       0.000       0.832
+  pre_s60_frozen                 0.606       0.204       0.927       0.934       0.048       0.702
+  pre_s100_frozen                0.681       0.229       0.902       0.894       0.081       0.665
+  pre_shifted_frozen_soft        0.277       0.100       0.955       0.927       0.067       0.770
+  pre_llm                        1.360       0.405       0.748       0.815       0.226       0.354
+  pre_llm_frozen                 1.456       0.327       0.762       0.941       0.056       0.624
+  pre_llm_frozen_soft            1.413       0.288       0.686       0.968       0.027       0.684
+  ctrl_loss                      1.500       0.475       0.694       0.688       0.401       0.208
+  ctrl_early                     1.511       0.460       0.701       0.679       0.415       0.201
+
+after 84 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  f6_sample                      1.299       0.357       0.808       0.872       0.154       0.446
+  f6_soft                        0.862       0.197       0.858       0.886       0.144       0.527
+  pre_shifted_frozen             0.459       0.177       0.952       0.964       0.027       0.757
+  pre_true_frozen                0.420       0.146       0.978       1.000       0.000       0.830
+  pre_s60_frozen                 0.530       0.200       0.933       0.962       0.028       0.737
+  pre_s100_frozen                0.580       0.232       0.910       0.933       0.052       0.694
+  pre_shifted_frozen_soft        0.249       0.090       0.960       0.951       0.049       0.791
+  pre_llm                        1.282       0.348       0.824       0.914       0.095       0.517
+  pre_llm_frozen                 1.315       0.295       0.820       0.989       0.008       0.667
+  pre_llm_frozen_soft            1.527       0.244       0.753       0.987       0.011       0.708
+  ctrl_loss                      1.283       0.340       0.821       0.880       0.138       0.441
+  ctrl_early                     1.207       0.335       0.824       0.864       0.161       0.391

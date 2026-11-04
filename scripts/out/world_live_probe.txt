@@ -1,0 +1,6 @@
+seeds 0-0, mood 'a rainy week at home': 1 calls
+valid on the first try 1, after one repair 0, fell back to the template world 0
+seconds per world: median 24.4, max 24.4
+distinct worlds 1 of 1; relations shared with the template world of the same seed (Jaccard) mean 0.41; harmful relations mean 6.0
+rejected attempts (reasons):
+  seed  0 director:muse-spark-1.3-contributor      attempts 1  24.4s learning 1/0/1  Rain taps the windows while the little house stays soft, warm and unhu

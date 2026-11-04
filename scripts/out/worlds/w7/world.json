@@ -1,0 +1,167 @@
+{
+ "hash": "5c001a4b70c4",
+ "sheet": {
+  "seed": 7,
+  "source": "template",
+  "premise": "A small house, a toddler of 12 months, and a world of its own rules.",
+  "rules": {
+   "THIRSTY": [
+    [
+     "DRINK",
+     "cup",
+     2
+    ],
+    [
+     "DRINK",
+     "spoon",
+     1
+    ],
+    [
+     "COVER",
+     "cup",
+     -1
+    ]
+   ],
+   "HUNGRY": [
+    [
+     "EAT",
+     "bread",
+     2
+    ]
+   ],
+   "UPSET": [
+    [
+     "HUG",
+     "teddy",
+     2
+    ],
+    [
+     "HUG",
+     "blanket",
+     1
+    ],
+    [
+     "GIVE",
+     "teddy",
+     1
+    ],
+    [
+     "GIVE",
+     "ball",
+     2
+    ]
+   ],
+   "FLOOR_WET": [
+    [
+     "WIPE",
+     "cloth",
+     2
+    ],
+    [
+     "COVER",
+     "cloth",
+     -1
+    ]
+   ],
+   "MESSY": [
+    [
+     "TIDY",
+     "box",
+     2
+    ],
+    [
+     "TIDY",
+     "teddy",
+     -1
+    ]
+   ],
+   "DARK": [
+    [
+     "LIGHT",
+     "flashlight",
+     2
+    ],
+    [
+     "COVER",
+     "flashlight",
+     -1
+    ],
+    [
+     "LIGHT",
+     "ball",
+     -1
+    ]
+   ],
+   "COLD": [
+    [
+     "COVER",
+     "blanket",
+     2
+    ],
+    [
+     "COVER",
+     "cloth",
+     2
+    ],
+    [
+     "COVER",
+     "paper",
+     1
+    ]
+   ],
+   "VISITOR": [
+    [
+     "GIVE",
+     "ball",
+     1
+    ],
+    [
+     "GIVE",
+     "cup",
+     1
+    ],
+    [
+     "GIVE",
+     "bread",
+     2
+    ]
+   ]
+  },
+  "wait_value": {
+   "THIRSTY": 0,
+   "HUNGRY": -1,
+   "UPSET": 0,
+   "FLOOR_WET": -1,
+   "MESSY": 0,
+   "DARK": 0,
+   "COLD": -1,
+   "VISITOR": 0
+  },
+  "request_kinds": [
+   "cloth",
+   "paper",
+   "cup",
+   "ball"
+  ],
+  "escalation": {},
+  "opens": {
+   "THIRSTY": 12,
+   "HUNGRY": 12,
+   "UPSET": 18,
+   "FLOOR_WET": 24,
+   "MESSY": 18,
+   "DARK": 24,
+   "COLD": 24,
+   "VISITOR": 24
+  },
+  "learning": {
+   "burn_worse_rounds": 3,
+   "burn_nothing_rounds": 1,
+   "regret_rounds": 2,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "days": 8,
+  "lines": {}
+ }
+}

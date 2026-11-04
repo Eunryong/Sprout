@@ -1,0 +1,52 @@
+
+after 6 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  legacy4                            -       0.846           -       0.367       0.861      -0.063
+  f6_sample                      1.888       0.737       0.469       0.366       0.875      -0.010
+  f6_soft                        2.353       0.659       0.514       0.350       0.886      -0.055
+  valence                            -       0.723           -       0.406       0.806       0.034
+  q_eps                              -       0.734           -       0.403       0.812      -0.021
+  reinforce                          -           -           -       0.434       0.766      -0.035
+  pre_shifted_frozen             0.851       0.273       0.922       0.889       0.097       0.741
+  pre_llm_frozen                 1.631       0.399       0.690       0.867       0.151       0.521
+  pre_s100_frozen                0.869       0.340       0.782       0.758       0.241       0.394
+  counts                             -       0.679           -       0.346       0.896       0.124
+  chance                             -       0.557           -       0.240       1.064      -0.118
+
+after 12 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  legacy4                            -       0.751           -       0.539       0.610      -0.096
+  f6_sample                      1.691       0.622       0.575       0.489       0.691      -0.048
+  f6_soft                        1.685       0.490       0.638       0.494       0.683      -0.043
+  valence                            -       0.608           -       0.523       0.630       0.018
+  q_eps                              -       0.641           -       0.536       0.605       0.131
+  reinforce                          -           -           -       0.512       0.652       0.117
+  pre_shifted_frozen             0.831       0.254       0.944       0.919       0.052       0.677
+  pre_llm_frozen                 1.613       0.360       0.721       0.903       0.104       0.443
+  pre_s100_frozen                0.845       0.298       0.867       0.856       0.132       0.490
+  counts                             -       0.612           -       0.550       0.602       0.052
+  chance                             -       0.557           -       0.240       1.064      -0.073
+
+after 24 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  legacy4                            -       0.683           -       0.705       0.372       0.024
+  f6_sample                      1.503       0.511       0.662       0.653       0.454       0.046
+  f6_soft                        1.549       0.399       0.706       0.656       0.447       0.086
+  valence                            -       0.471           -       0.718       0.347       0.125
+  q_eps                              -       0.490           -       0.736       0.327       0.226
+  reinforce                          -           -           -       0.572       0.578       0.156
+  pre_shifted_frozen             0.541       0.199       0.940       0.937       0.039       0.697
+  pre_llm_frozen                 1.531       0.344       0.726       0.944       0.059       0.500
+  pre_s100_frozen                0.761       0.257       0.897       0.897       0.085       0.539
+  counts                             -       0.549           -       0.797       0.251       0.037
+  chance                             -       0.557           -       0.240       1.064      -0.043
+
+after 48 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  legacy4                            -       0.631           -       0.871       0.157       0.165
+  f6_sample                      1.431       0.445       0.731       0.775       0.285       0.203
+  f6_soft                        1.210       0.273       0.802       0.835       0.204       0.259
+  valence                            -       0.411           -       0.859       0.160       0.297
+  q_eps                              -       0.439           -       0.858       0.166       0.405
+  reinforce                          -           -           -       0.608       0.505       0.243
+  pre_shifted_frozen             0.504       0.191       0.944       0.954       0.027       0.706
+  pre_llm_frozen                 1.322       0.314       0.796       0.954       0.043       0.530
+  pre_s100_frozen                0.601       0.247       0.891       0.917       0.065       0.587
+  counts                             -       0.529           -       0.890       0.111       0.038
+  chance                             -       0.557           -       0.240       1.064      -0.047

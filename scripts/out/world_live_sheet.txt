@@ -1,0 +1,10 @@
+seeds 21-24, mood 'a rainy week at home': 4 calls
+valid on the first try 4, after one repair 0, fell back to the template world 0
+seconds per world: median 31.7, max 38.1
+distinct worlds 4 of 4; relations shared with the template world of the same seed (Jaccard) mean 0.50; harmful relations mean 6.5
+rejected attempts (reasons):
+curiosity per world [0.6, 0.2, 0.2, 0.2]; lines kept per world [22, 24, 16, 19] of rules [31, 33, 24, 27]
+  seed 21 director:muse-spark-1.3-contributor      attempts 1  38.1s learning 1/0/1  Rain drums softly on the roof while the small house glows warm around 
+  seed 22 director:muse-spark-1.3-contributor      attempts 1  36.8s learning 5/2/3  Rain drums softly on the roof while the small house stays warm and clo
+  seed 23 director:muse-spark-1.3-contributor      attempts 1  25.3s learning 1/0/1  Rain taps the windows while the little house hums softly around its sm
+  seed 24 director:muse-spark-1.3-contributor      attempts 1  26.6s learning 3/1/2  Rain drums softly on the roof while the little house glows warm inside

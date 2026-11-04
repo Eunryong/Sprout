@@ -1,0 +1,18 @@
+ontology: onto_age03.yaml  seeds: 200-223  days: 8
+== parent: balanced, mean over 24 seeds (last day) ==
+arm            problem_acc word_acc    blind  discern   forget    speed       ms | lesson known (all days / first 3 days):        own_wrong       own_right         command            show
+base               0.934    0.782    0.109    0.591    0.035    0.772      481 |                                           0.81/0.80     0.78/0.73     0.72/0.76     0.77/0.81
+fading 0.5         0.955    0.841    0.121    0.631    0.036    0.879      871 |                                           0.80/0.82     0.78/0.71     0.67/0.67     0.77/0.76
+fading 0.3         0.931    0.845    0.089    0.585    0.060    0.874      888 |                                           0.71/0.68     0.74/0.74     0.72/0.70     0.75/0.74
+paired difference to base, mean (sd):
+  fading 0.5     problem_acc +0.020(0.050)  word_acc +0.059(0.169)  forget +0.002(0.042)  speed +0.107(0.102)  blind +0.012(0.095)  discern +0.039(0.158)
+  fading 0.3     problem_acc -0.003(0.052)  word_acc +0.062(0.169)  forget +0.025(0.042)  speed +0.102(0.132)  blind -0.020(0.070)  discern -0.006(0.127)
+
+== parent: chooser, mean over 24 seeds (last day) ==
+arm            problem_acc word_acc    blind  discern   forget    speed       ms | lesson known (all days / first 3 days):        own_wrong       own_right         command            show
+base               0.950    0.593    0.179    0.053    0.036    0.861      456 |                                           0.75/0.81     0.80/0.81      nan/nan      nan/nan
+fading 0.5         0.974    0.687    0.172    0.031    0.024    0.965     1258 |                                           0.80/0.83     0.82/0.79      nan/nan      nan/nan
+fading 0.3         0.947    0.666    0.174    0.049    0.049    0.956     1252 |                                           0.76/0.75     0.79/0.73      nan/nan      nan/nan
+paired difference to base, mean (sd):
+  fading 0.5     problem_acc +0.024(0.038)  word_acc +0.094(0.122)  forget -0.012(0.037)  speed +0.103(0.064)  blind -0.008(0.102)  discern -0.021(0.121)
+  fading 0.3     problem_acc -0.003(0.050)  word_acc +0.073(0.187)  forget +0.013(0.044)  speed +0.095(0.057)  blind -0.005(0.083)  discern -0.004(0.118)

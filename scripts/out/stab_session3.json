@@ -1,0 +1,7901 @@
+{
+ "args": {
+  "seeds": "100-119",
+  "days": 10,
+  "cond": "session",
+  "jobs": 16,
+  "grid": [
+   "S B redraw0|lr=0.001,weight_decay=0.05,oversample=1,per_day=8",
+   "S B redraw0.5|lr=0.001,weight_decay=0.05,oversample=1,per_day=8,redraw=0.5",
+   "S B redraw1|lr=0.001,weight_decay=0.05,oversample=1,per_day=8,redraw=1",
+   "S B pd6 redraw1|lr=0.001,weight_decay=0.05,oversample=1,per_day=6,redraw=1",
+   "S B pd10 redraw1|lr=0.001,weight_decay=0.05,oversample=1,per_day=10,redraw=1"
+  ],
+  "curve": true,
+  "out": "scripts/out/stab_session3.json"
+ },
+ "summary": {
+  "S B redraw0": {
+   "d3_g": 0.75,
+   "d3_g_min": 0.4125,
+   "d3_g_sd": 0.17871066000661517,
+   "d3_p": 0.7371955005184645,
+   "d10_g": 0.99875,
+   "d10_g_min": 0.9875,
+   "d10_g_sd": 0.003749999999999987,
+   "drop": 0.0005695245380047731,
+   "dips": 0.005347284993567886,
+   "lat": 0.2849728441450861,
+   "lat_max": 0.43777983309701085,
+   "n_ex_d3": 24
+  },
+  "S B redraw0.5": {
+   "d3_g": 0.969375,
+   "d3_g_min": 0.825,
+   "d3_g_sd": 0.04896985679987231,
+   "d3_p": 0.9603829164417766,
+   "d10_g": 1.0,
+   "d10_g_min": 1.0,
+   "d10_g_sd": 0.0,
+   "drop": 0.00010430812835693915,
+   "dips": 0.0025225515163038005,
+   "lat": 0.2834751561692974,
+   "lat_max": 0.377911709016189,
+   "n_ex_d3": 24
+  },
+  "S B redraw1": {
+   "d3_g": 0.976875,
+   "d3_g_min": 0.825,
+   "d3_g_sd": 0.045289865036230795,
+   "d3_p": 0.9722142753420485,
+   "d10_g": 1.0,
+   "d10_g_min": 1.0,
+   "d10_g_sd": 0.0,
+   "drop": 0.0,
+   "dips": 0.0019781597144901742,
+   "lat": 0.28263076203453236,
+   "lat_max": 0.4038783749565482,
+   "n_ex_d3": 24
+  },
+  "S B pd6 redraw1": {
+   "d3_g": 0.93625,
+   "d3_g_min": 0.825,
+   "d3_g_sd": 0.06045401144671874,
+   "d3_p": 0.9247685461608125,
+   "d10_g": 0.998125,
+   "d10_g_min": 0.975,
+   "d10_g_sd": 0.00596212000885591,
+   "drop": 0.00047710610320790824,
+   "dips": 0.009208307028056872,
+   "lat": 0.2734862405713648,
+   "lat_max": 0.40622512495610863,
+   "n_ex_d3": 18
+  },
+  "S B pd10 redraw1": {
+   "d3_g": 0.996875,
+   "d3_g_min": 0.9625,
+   "d3_g_sd": 0.00872765002735558,
+   "d3_p": 0.9935226392705954,
+   "d10_g": 1.0,
+   "d10_g_min": 1.0,
+   "d10_g_sd": 0.0,
+   "drop": 0.0,
+   "dips": 0.0002609414421021916,
+   "lat": 0.28109125659090933,
+   "lat_max": 0.3765982920303941,
+   "n_ex_d3": 30
+  }
+ },
+ "runs": {
+  "S B redraw0": [
+   {
+    "seed": 100,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3375,
+      "p_correct": 0.3360773744992912,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.6,
+      "p_correct": 0.5825748095601739,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9,
+      "p_correct": 0.8956342554214644,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9375,
+      "p_correct": 0.9312038128729909,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9964414328336716,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9986819885671139,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9990648634731769,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9993040107190609,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994603537023068,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996078580617904,
+      "random": 0.2968749999999999
+     }
+    ],
+    "mean_latency": 0.2854994000081206,
+    "max_latency": 0.3703902499983087
+   },
+   {
+    "seed": 101,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.325,
+      "p_correct": 0.31006911633885464,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.4875,
+      "p_correct": 0.49104243951696847,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.7375,
+      "p_correct": 0.7277811593154183,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9125,
+      "p_correct": 0.8949037351761945,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9125,
+      "p_correct": 0.9245547260157764,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9625,
+      "p_correct": 0.9555036086589098,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9980342395603656,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9990227520465851,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9993113711476326,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9994733899831771,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.2861703281480004,
+    "max_latency": 0.41588037495967
+   },
+   {
+    "seed": 102,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3125,
+      "p_correct": 0.30815859453286976,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.35,
+      "p_correct": 0.34083845274726626,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.4125,
+      "p_correct": 0.38574738590687047,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.45,
+      "p_correct": 0.45901508053721046,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.55,
+      "p_correct": 0.5493024770541524,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.8375,
+      "p_correct": 0.8055519118002848,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.8,
+      "p_correct": 0.8042490435436775,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 0.95,
+      "p_correct": 0.9352317712036893,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 0.9625,
+      "p_correct": 0.9609815694391728,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9955415584146976,
+      "random": 0.2916666666666666
+     }
+    ],
+    "mean_latency": 0.2855234776099678,
+    "max_latency": 0.38169279193971306
+   },
+   {
+    "seed": 103,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.425,
+      "p_correct": 0.40220366962457776,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.6875,
+      "p_correct": 0.6841677693293604,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.975,
+      "p_correct": 0.9638517558516468,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9977407202124595,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988056585192681,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991489194333554,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993571050465107,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995087891817093,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999626912176609,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997160837054253,
+      "random": 0.2979166666666665
+     }
+    ],
+    "mean_latency": 0.2867491312194034,
+    "max_latency": 0.43777983309701085
+   },
+   {
+    "seed": 104,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3125,
+      "p_correct": 0.3138707797086681,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.4375,
+      "p_correct": 0.4489942707630689,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9125,
+      "p_correct": 0.8808524193416816,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9875,
+      "p_correct": 0.9857511278241873,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9971779242157937,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9951488889753819,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.9875,
+      "p_correct": 0.9904719199985266,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 0.9875,
+      "p_correct": 0.9881512415595353,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 0.9875,
+      "p_correct": 0.9873811469879001,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 0.9875,
+      "p_correct": 0.9872109760297463,
+      "random": 0.2833333333333332
+     }
+    ],
+    "mean_latency": 0.2868637593841413,
+    "max_latency": 0.40903637500014156
+   },
+   {
+    "seed": 105,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3625,
+      "p_correct": 0.34501895856956255,
+      "random": 0.2875
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.825,
+      "p_correct": 0.8105259105679579,
+      "random": 0.2875
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.8625,
+      "p_correct": 0.8574813711260504,
+      "random": 0.2875
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.8125,
+      "p_correct": 0.8050703031432931,
+      "random": 0.2875
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9,
+      "p_correct": 0.9005339312599971,
+      "random": 0.2875
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9865488437470049,
+      "random": 0.2875
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.999089515209198,
+      "random": 0.2875
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9993098050355911,
+      "random": 0.2875
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994555108249188,
+      "random": 0.2875
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999554917216301,
+      "random": 0.2875
+     }
+    ],
+    "mean_latency": 0.28647141248220576,
+    "max_latency": 0.402262624935247
+   },
+   {
+    "seed": 106,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.475,
+      "p_correct": 0.43472035569648143,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.725,
+      "p_correct": 0.7060317319806927,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9625,
+      "p_correct": 0.963968899595784,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.975,
+      "p_correct": 0.9753110993893642,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9566879473626614,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9984694555401802,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991722099483014,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994320690631866,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995787486433982,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996743127703667,
+      "random": 0.2833333333333333
+     }
+    ],
+    "mean_latency": 0.2845184520279872,
+    "max_latency": 0.3943922909675166
+   },
+   {
+    "seed": 107,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.25,
+      "p_correct": 0.25669271192746235,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.325,
+      "p_correct": 0.30977269038703525,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.5375,
+      "p_correct": 0.5047613455135433,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.5,
+      "p_correct": 0.49285688569907504,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.7875,
+      "p_correct": 0.790186034974613,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.8625,
+      "p_correct": 0.8538409004268033,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.975,
+      "p_correct": 0.9621650392771699,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9988217018544674,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9992346510291099,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9994537435472012,
+      "random": 0.2906249999999999
+     }
+    ],
+    "mean_latency": 0.28577295263385166,
+    "max_latency": 0.400964375003241
+   },
+   {
+    "seed": 108,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3,
+      "p_correct": 0.2892954404698685,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.475,
+      "p_correct": 0.4598038869407901,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.625,
+      "p_correct": 0.5720999476063298,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.7375,
+      "p_correct": 0.7085982493357733,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.8375,
+      "p_correct": 0.8282450560567668,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9625,
+      "p_correct": 0.9345785359037109,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.9875,
+      "p_correct": 0.9860954058123752,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.992757449299097,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9984743937849998,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9992963522672653,
+      "random": 0.2999999999999998
+     }
+    ],
+    "mean_latency": 0.2844954285756103,
+    "max_latency": 0.4015021249651909
+   },
+   {
+    "seed": 109,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.35,
+      "p_correct": 0.3410269027663162,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.6875,
+      "p_correct": 0.661040050705924,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.8875,
+      "p_correct": 0.878208600542348,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9375,
+      "p_correct": 0.9335158795494862,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9625,
+      "p_correct": 0.9632104416945367,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9864432784728706,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.9875,
+      "p_correct": 0.9866505798767321,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 0.9875,
+      "p_correct": 0.9873403090052306,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9992002591490745,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996947959065438,
+      "random": 0.29166666666666663
+     }
+    ],
+    "mean_latency": 0.2850986526638735,
+    "max_latency": 0.38868475006893277
+   },
+   {
+    "seed": 110,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3375,
+      "p_correct": 0.327878440781933,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.625,
+      "p_correct": 0.604266602928692,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.825,
+      "p_correct": 0.802107621676987,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9375,
+      "p_correct": 0.9308334046334494,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.975,
+      "p_correct": 0.9605889042461058,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9820966822459013,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.9875,
+      "p_correct": 0.9840426431932429,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9984917394816876,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9992393605411053,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9994659885764122,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2850429307654849,
+    "max_latency": 0.3811960000311956
+   },
+   {
+    "seed": 111,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.35,
+      "p_correct": 0.3320670314773452,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.3,
+      "p_correct": 0.309888024724205,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.4625,
+      "p_correct": 0.45878775754245,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.675,
+      "p_correct": 0.6583658240226213,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.7875,
+      "p_correct": 0.7278212438213814,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9928461588919163,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9950758174061776,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9959823712706566,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9939507186412812,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9990771546959877,
+      "random": 0.28645833333333326
+     }
+    ],
+    "mean_latency": 0.2862808885882259,
+    "max_latency": 0.3922122080111876
+   },
+   {
+    "seed": 112,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.275,
+      "p_correct": 0.28172098321956585,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.3625,
+      "p_correct": 0.3666496969242871,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.4875,
+      "p_correct": 0.4795316315274249,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.4875,
+      "p_correct": 0.49329345238147654,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.925,
+      "p_correct": 0.9214228801836726,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9125,
+      "p_correct": 0.9144433545065113,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.9625,
+      "p_correct": 0.9531840114854276,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 0.9875,
+      "p_correct": 0.9795208081603051,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 0.9875,
+      "p_correct": 0.9815924312919379,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 0.9875,
+      "p_correct": 0.9801688887178898,
+      "random": 0.29999999999999993
+     }
+    ],
+    "mean_latency": 0.2852396703514387,
+    "max_latency": 0.3922923329519108
+   },
+   {
+    "seed": 113,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.325,
+      "p_correct": 0.3288425933773397,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.4875,
+      "p_correct": 0.49556733054632784,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9,
+      "p_correct": 0.881780347725362,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9625,
+      "p_correct": 0.9652668978917063,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9757454991340637,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9958958640694618,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9935933813452721,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9968803316354752,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9989563703536988,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9993769377470016,
+      "random": 0.28541666666666654
+     }
+    ],
+    "mean_latency": 0.28468131718109363,
+    "max_latency": 0.4261708330595866
+   },
+   {
+    "seed": 114,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.2375,
+      "p_correct": 0.255412111710757,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.475,
+      "p_correct": 0.480570112287387,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.7125,
+      "p_correct": 0.7257651392894331,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.8625,
+      "p_correct": 0.8620917392152478,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9783194852992892,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9986185893416405,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991280049085617,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994582936167717,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995747171342373,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996308736503124,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.2846529005561024,
+    "max_latency": 0.41066458402201533
+   },
+   {
+    "seed": 115,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3625,
+      "p_correct": 0.349604324925167,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.475,
+      "p_correct": 0.47208735651365713,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.6625,
+      "p_correct": 0.6853437297661003,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9625,
+      "p_correct": 0.9274320818542037,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9851321049500257,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9972476430237294,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9988685972988606,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9992311909794808,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994183108210564,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9995500341057777,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2867737666616449,
+    "max_latency": 0.42382366594392806
+   },
+   {
+    "seed": 116,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.4125,
+      "p_correct": 0.40776479587657377,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.5875,
+      "p_correct": 0.5790082046689349,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.85,
+      "p_correct": 0.8159418526585795,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.8875,
+      "p_correct": 0.8753460860909399,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9625,
+      "p_correct": 0.9484653284307569,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9958639644086361,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9987221658229828,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9991793535649777,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9993697375059127,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9995292939245701,
+      "random": 0.2874999999999999
+     }
+    ],
+    "mean_latency": 0.2803002630491392,
+    "max_latency": 0.34588308294769377
+   },
+   {
+    "seed": 117,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.4,
+      "p_correct": 0.351988706762495,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.4125,
+      "p_correct": 0.3889545932994224,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.6,
+      "p_correct": 0.6025007267275214,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.8625,
+      "p_correct": 0.8499800342702656,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9625,
+      "p_correct": 0.9508720932761208,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.975,
+      "p_correct": 0.9652820722956676,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 0.9875,
+      "p_correct": 0.9787338219583035,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9930246248841286,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9983504846692085,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9990794010460377,
+      "random": 0.29374999999999984
+     }
+    ],
+    "mean_latency": 0.2834712504671188,
+    "max_latency": 0.347433082992211
+   },
+   {
+    "seed": 118,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3,
+      "p_correct": 0.2961526333237998,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.4875,
+      "p_correct": 0.4510289526093402,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.6875,
+      "p_correct": 0.6671330819975992,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.825,
+      "p_correct": 0.8057620920590125,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9625,
+      "p_correct": 0.9585058561526238,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9936850041151046,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9980363465845585,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9988181374967098,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9992183297872543,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9994282454252243,
+      "random": 0.2895833333333333
+     }
+    ],
+    "mean_latency": 0.2832825567835243,
+    "max_latency": 0.36191400000825524
+   },
+   {
+    "seed": 119,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3,
+      "p_correct": 0.3094581361234304,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.7875,
+      "p_correct": 0.7601814904279308,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9946309812366962,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9982020251452923,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988852068781853,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992474965751171,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9994428522884846,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995846144855023,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996807120740414,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997546836733818,
+      "random": 0.29479166666666656
+     }
+    ],
+    "mean_latency": 0.28256834374478784,
+    "max_latency": 0.3574946670560166
+   }
+  ],
+  "S B redraw0.5": [
+   {
+    "seed": 100,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.5625,
+      "p_correct": 0.5436938366183313,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.95,
+      "p_correct": 0.9371372304856778,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9969834700226784,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9976538226008416,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9985344588756562,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992341443896293,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9994368486106395,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995736166834831,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996872469782829,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997650302946568,
+      "random": 0.2968749999999999
+     }
+    ],
+    "mean_latency": 0.28746744732779916,
+    "max_latency": 0.349685583030805
+   },
+   {
+    "seed": 101,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.7,
+      "p_correct": 0.5867140534799546,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 1.0,
+      "p_correct": 0.99503518268466,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9975554659962654,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9984841644763947,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989617370069027,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992725871503353,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9994815081357956,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996277242898941,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9997311547398567,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999805823713541,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.28767107252642743,
+    "max_latency": 0.377911709016189
+   },
+   {
+    "seed": 102,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.325,
+      "p_correct": 0.313919325202005,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.625,
+      "p_correct": 0.5737998188298661,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9375,
+      "p_correct": 0.9119949330866802,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9625,
+      "p_correct": 0.9704737703315913,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.991643625497818,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9961815975606442,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991307906806469,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9993583090603352,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995118737220764,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996222972869873,
+      "random": 0.2916666666666666
+     }
+    ],
+    "mean_latency": 0.2871482171962271,
+    "max_latency": 0.34770629194099456
+   },
+   {
+    "seed": 103,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.45,
+      "p_correct": 0.3826132226677146,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9875,
+      "p_correct": 0.9654838221147657,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9963869035243988,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.998315966129303,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988672316074372,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991809792816639,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993932090699673,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995440028607845,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996616616845131,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997492536902428,
+      "random": 0.2979166666666665
+     }
+    ],
+    "mean_latency": 0.28573924688244007,
+    "max_latency": 0.3598566669970751
+   },
+   {
+    "seed": 104,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.5875,
+      "p_correct": 0.5329859205114189,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.925,
+      "p_correct": 0.905100272555137,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.996546333283186,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9981758624315262,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9987638868391514,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990983851253986,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993254505097866,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9989446185529232,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9993724822998047,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9995528817176819,
+      "random": 0.2833333333333332
+     }
+    ],
+    "mean_latency": 0.2875353693510988,
+    "max_latency": 0.35447920905426145
+   },
+   {
+    "seed": 105,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3625,
+      "p_correct": 0.35786315391305834,
+      "random": 0.2875
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.975,
+      "p_correct": 0.9439524129033089,
+      "random": 0.2875
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.975,
+      "p_correct": 0.9698465574532747,
+      "random": 0.2875
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9875,
+      "p_correct": 0.9864494211971759,
+      "random": 0.2875
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9987280450761318,
+      "random": 0.2875
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990111611783504,
+      "random": 0.2875
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993554830551148,
+      "random": 0.2875
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994994096457959,
+      "random": 0.2875
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999613007903099,
+      "random": 0.2875
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997083969414234,
+      "random": 0.2875
+     }
+    ],
+    "mean_latency": 0.2868473937778617,
+    "max_latency": 0.3744912090478465
+   },
+   {
+    "seed": 106,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.5625,
+      "p_correct": 0.5046743011000216,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8875,
+      "p_correct": 0.8842386204123613,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9969855263829231,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9983997233211994,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989219978451729,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992381982505322,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9994455628097058,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995944418013096,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999700627475977,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997783720493316,
+      "random": 0.2833333333333333
+     }
+    ],
+    "mean_latency": 0.287939784808259,
+    "max_latency": 0.34654725005384535
+   },
+   {
+    "seed": 107,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3,
+      "p_correct": 0.3030611730355304,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 1.0,
+      "p_correct": 0.9939161129295826,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9974934063851834,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9984175398945808,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988768808543682,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991676948964596,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993853218853473,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995478831231595,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999667263776064,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997554250061512,
+      "random": 0.2906249999999999
+     }
+    ],
+    "mean_latency": 0.28622458069294227,
+    "max_latency": 0.3581983749754727
+   },
+   {
+    "seed": 108,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.375,
+      "p_correct": 0.3318903530249372,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8,
+      "p_correct": 0.7785466744971927,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.85,
+      "p_correct": 0.8466015438178147,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9375,
+      "p_correct": 0.9116379516664892,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9587162610143423,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9878773879259825,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9987906023859978,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9992601037025451,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994307681918144,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9990110754966736,
+      "random": 0.2999999999999998
+     }
+    ],
+    "mean_latency": 0.2872693593613803,
+    "max_latency": 0.363948457990773
+   },
+   {
+    "seed": 109,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3875,
+      "p_correct": 0.3569837765884586,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.875,
+      "p_correct": 0.8626247795502422,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9949610613286495,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9976401321589947,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9983770862221718,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9984619349241257,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9983710885047913,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.999137269705534,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9993961803615093,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9995506227016449,
+      "random": 0.29166666666666663
+     }
+    ],
+    "mean_latency": 0.2859054880173062,
+    "max_latency": 0.34687000000849366
+   },
+   {
+    "seed": 110,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.7125,
+      "p_correct": 0.7298815909729456,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.975,
+      "p_correct": 0.9607951519079506,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9625,
+      "p_correct": 0.9498308155569248,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9985206954181194,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9991181664168834,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9993863992393017,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.999558262526989,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996744349598885,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9997612468898296,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998247347772121,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.28663132610236064,
+    "max_latency": 0.3526057080598548
+   },
+   {
+    "seed": 111,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3875,
+      "p_correct": 0.35248048248467967,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 1.0,
+      "p_correct": 0.9848134636878967,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9957150004804134,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.997530709207058,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9984264716506004,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9989094287157059,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9992147050797939,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994115404784679,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995643958449364,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996775947511196,
+      "random": 0.28645833333333326
+     }
+    ],
+    "mean_latency": 0.2867484004498692,
+    "max_latency": 0.37128691701218486
+   },
+   {
+    "seed": 112,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.225,
+      "p_correct": 0.24602406626217999,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.5375,
+      "p_correct": 0.484039213572396,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.825,
+      "p_correct": 0.7924875111144501,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9375,
+      "p_correct": 0.9351046901661902,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9965222753584385,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9987719237804413,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991064175963402,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9992414668202401,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9993844211101532,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9977179512381553,
+      "random": 0.29999999999999993
+     }
+    ],
+    "mean_latency": 0.2783801957994001,
+    "max_latency": 0.3487878750311211
+   },
+   {
+    "seed": 113,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.575,
+      "p_correct": 0.5581403304153355,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8375,
+      "p_correct": 0.8251593833920197,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9954117603600026,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9977368146181107,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9983952187001706,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9988383859395981,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991285741329193,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.999337637424469,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995020613074302,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996215753257275,
+      "random": 0.28541666666666654
+     }
+    ],
+    "mean_latency": 0.2775255639891839,
+    "max_latency": 0.36245545896235853
+   },
+   {
+    "seed": 114,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.475,
+      "p_correct": 0.5157588269095867,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9,
+      "p_correct": 0.9027379593957449,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.95,
+      "p_correct": 0.9265610302914865,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9625,
+      "p_correct": 0.9610140120013966,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9889444086700678,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9868136858567595,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991407930850983,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994328111410141,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999569971114397,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999658115953207,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.27799501981353386,
+    "max_latency": 0.36350520804990083
+   },
+   {
+    "seed": 115,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.6625,
+      "p_correct": 0.5365114645741415,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.85,
+      "p_correct": 0.8476476483920123,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9965866498649121,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9982661418616772,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988356165587902,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991613581776619,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993853151798249,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995468765497207,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996629066765308,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999752550572157,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2795553218718851,
+    "max_latency": 0.36208350001834333
+   },
+   {
+    "seed": 116,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.35,
+      "p_correct": 0.33664125379000326,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8,
+      "p_correct": 0.7882105118951586,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9933118276298046,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9968921490013599,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9979458235204219,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9975482486188412,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9988648049533367,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9992170207202434,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994074977934361,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999567349255085,
+      "random": 0.2874999999999999
+     }
+    ],
+    "mean_latency": 0.2795995594075066,
+    "max_latency": 0.3433323330245912
+   },
+   {
+    "seed": 117,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.4,
+      "p_correct": 0.3924458824272733,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.75,
+      "p_correct": 0.72757544813212,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.975,
+      "p_correct": 0.9592637957073749,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.975,
+      "p_correct": 0.9734590968117118,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9985967554152012,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990739554166794,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993250332772732,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994998253881932,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996218964457512,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997166141867637,
+      "random": 0.29374999999999984
+     }
+    ],
+    "mean_latency": 0.2780251103802584,
+    "max_latency": 0.36255820805672556
+   },
+   {
+    "seed": 118,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.5375,
+      "p_correct": 0.4757527121400926,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.95,
+      "p_correct": 0.9323283886784338,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.975,
+      "p_correct": 0.9587333132745698,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 0.9125,
+      "p_correct": 0.9133684216067195,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9975469134747982,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9984976388514042,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9990333922207355,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.999268464744091,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994877375662327,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996192418038845,
+      "random": 0.2895833333333333
+     }
+    ],
+    "mean_latency": 0.2766558426941629,
+    "max_latency": 0.3522095000371337
+   },
+   {
+    "seed": 119,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.55,
+      "p_correct": 0.5437190123368054,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9125,
+      "p_correct": 0.9069307896425016,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9375,
+      "p_correct": 0.9344014232745395,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9978606127202511,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988348051905632,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991878241300582,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993983931839466,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995414040982723,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996731206774712,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997327007353306,
+      "random": 0.29479166666666656
+     }
+    ],
+    "mean_latency": 0.27863882293604547,
+    "max_latency": 0.35084395797457546
+   }
+  ],
+  "S B redraw1": [
+   {
+    "seed": 100,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.425,
+      "p_correct": 0.4543569249653956,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.975,
+      "p_correct": 0.9637099962506909,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9959065221250057,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9984359502792358,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990142300724983,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992868512868881,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9994673311710358,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995987139642238,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9997045516967773,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997795447707176,
+      "random": 0.2968749999999999
+     }
+    ],
+    "mean_latency": 0.2816715895125526,
+    "max_latency": 0.35440425004344434
+   },
+   {
+    "seed": 101,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.6,
+      "p_correct": 0.5456665052101016,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 1.0,
+      "p_correct": 0.9920256480574607,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9976004548370838,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9985445454716683,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990026086568833,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9993018314242363,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9995087735354901,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996546939015388,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9997571013867855,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999828577786684,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.2814534761113464,
+    "max_latency": 0.37203370896168053
+   },
+   {
+    "seed": 102,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.4375,
+      "p_correct": 0.45098819974809884,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.75,
+      "p_correct": 0.7495099441497587,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9375,
+      "p_correct": 0.9338726807851344,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.994683587551117,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9983866684138775,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9988554835319519,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991396322846413,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9993357367813587,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994873516261578,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996078528463841,
+      "random": 0.2916666666666666
+     }
+    ],
+    "mean_latency": 0.28199247709708286,
+    "max_latency": 0.3348015840165317
+   },
+   {
+    "seed": 103,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.7875,
+      "p_correct": 0.7353801620716695,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9875,
+      "p_correct": 0.984802540205419,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9973114766180515,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9985867321491242,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990179039537906,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992740593850613,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.999453442543745,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995875969529152,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996893763542175,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997635386884213,
+      "random": 0.2979166666666665
+     }
+    ],
+    "mean_latency": 0.28387281352770516,
+    "max_latency": 0.3474151659756899
+   },
+   {
+    "seed": 104,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.4875,
+      "p_correct": 0.4641742991865613,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9375,
+      "p_correct": 0.9127027931885096,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9966750696301461,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.99813282340765,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9987211860716343,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990703143179417,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993234008550644,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995168328285218,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996365293860435,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997234262526036,
+      "random": 0.2833333333333332
+     }
+    ],
+    "mean_latency": 0.28366893288039136,
+    "max_latency": 0.3693502499954775
+   },
+   {
+    "seed": 105,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.7,
+      "p_correct": 0.6379025015106891,
+      "random": 0.2875
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 1.0,
+      "p_correct": 0.9955011948943138,
+      "random": 0.2875
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9978220716118813,
+      "random": 0.2875
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9986220143735409,
+      "random": 0.2875
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990630157291889,
+      "random": 0.2875
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9993445120751858,
+      "random": 0.2875
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9995474219322205,
+      "random": 0.2875
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996888279914856,
+      "random": 0.2875
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9997842594981193,
+      "random": 0.2875
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998534031212329,
+      "random": 0.2875
+     }
+    ],
+    "mean_latency": 0.28245574729226064,
+    "max_latency": 0.3696461250074208
+   },
+   {
+    "seed": 106,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.475,
+      "p_correct": 0.4142513656333904,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.7375,
+      "p_correct": 0.7182185189936717,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9375,
+      "p_correct": 0.939823267608881,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9970210887491703,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9983924433588982,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990036390721798,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9992705501616002,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994459569454193,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995806157588959,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996784031391144,
+      "random": 0.2833333333333333
+     }
+    ],
+    "mean_latency": 0.2823273880392662,
+    "max_latency": 0.35171904193703085
+   },
+   {
+    "seed": 107,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.925,
+      "p_correct": 0.9087455884553493,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 1.0,
+      "p_correct": 0.9914058417081832,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9944797307252884,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9942809417843819,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9957140870392323,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9966489784419537,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9995449796319008,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996763415634632,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999767454713583,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998382560908794,
+      "random": 0.2906249999999999
+     }
+    ],
+    "mean_latency": 0.28346186974813464,
+    "max_latency": 0.34624316706322134
+   },
+   {
+    "seed": 108,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3375,
+      "p_correct": 0.3495806230610469,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.7625,
+      "p_correct": 0.752923749740512,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.825,
+      "p_correct": 0.8064910204571788,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9977442197501659,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9985426731407643,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9989685133099556,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.999282357096672,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994663082063198,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996154047548771,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997118771076202,
+      "random": 0.2999999999999998
+     }
+    ],
+    "mean_latency": 0.28222336720500607,
+    "max_latency": 0.34261320799123496
+   },
+   {
+    "seed": 109,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.3875,
+      "p_correct": 0.3320364666171372,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8875,
+      "p_correct": 0.8625977117364527,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9965693950653076,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9981447868049145,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988113425672054,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991625264286995,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993840031325817,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.999552646279335,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996712617576122,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997580774128437,
+      "random": 0.29166666666666663
+     }
+    ],
+    "mean_latency": 0.2832068389892811,
+    "max_latency": 0.37563037499785423
+   },
+   {
+    "seed": 110,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.825,
+      "p_correct": 0.83173026527802,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9375,
+      "p_correct": 0.9231443772587227,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.925,
+      "p_correct": 0.9192835298948921,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.998439372330904,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989660054445266,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.999264995008707,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9994606636464596,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996029876172543,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999707718193531,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997871100902558,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2821635135129327,
+    "max_latency": 0.3953108750283718
+   },
+   {
+    "seed": 111,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.275,
+      "p_correct": 0.30334435825934636,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9875,
+      "p_correct": 0.9530961452051997,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9936081193387508,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9962542355060577,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9980844400823117,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9988038025796413,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9991281047463417,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9993314422667027,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9994875006377697,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996047720313073,
+      "random": 0.28645833333333326
+     }
+    ],
+    "mean_latency": 0.2837109483822132,
+    "max_latency": 0.3836873749969527
+   },
+   {
+    "seed": 112,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.275,
+      "p_correct": 0.2585906500637066,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.7125,
+      "p_correct": 0.7017979911717702,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9926305472850799,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9981030337512493,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9987071841955185,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990389950573444,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9992829717695713,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994602501392365,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996039874851703,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997100926935673,
+      "random": 0.29999999999999993
+     }
+    ],
+    "mean_latency": 0.2832625651179114,
+    "max_latency": 0.39723237499129027
+   },
+   {
+    "seed": 113,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.6,
+      "p_correct": 0.5916282936523203,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8375,
+      "p_correct": 0.8272988084805547,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9964155718684197,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.99793711155653,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9985310167074204,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9989235080778599,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9992033109068871,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994249813258648,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995821423828601,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996944591403008,
+      "random": 0.28541666666666654
+     }
+    ],
+    "mean_latency": 0.2826098568039015,
+    "max_latency": 0.3848294159397483
+   },
+   {
+    "seed": 114,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.825,
+      "p_correct": 0.7919839902257081,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.8875,
+      "p_correct": 0.8929000642499887,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9974280968308449,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9988039560616017,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9992100536823273,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.999424935132265,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9995768211781979,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9996859349310399,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9997641816735268,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998230017721653,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.2813842645977275,
+    "max_latency": 0.39889537496492267
+   },
+   {
+    "seed": 115,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.625,
+      "p_correct": 0.6350990035556606,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.85,
+      "p_correct": 0.8495070781049435,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9971574530005455,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9983119338750839,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988758347928524,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992009103298187,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9989121235907078,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9993639118969441,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995394758880138,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996535256505013,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2832693239703076,
+    "max_latency": 0.3517610839335248
+   },
+   {
+    "seed": 116,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.6,
+      "p_correct": 0.5027674754179315,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.9,
+      "p_correct": 0.8888119138915499,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9970417872071267,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.998367040604353,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9988631576299667,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991564907133579,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9993624724447727,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9995199561119079,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999637670069933,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997337557375431,
+      "random": 0.2874999999999999
+     }
+    ],
+    "mean_latency": 0.2819971281569451,
+    "max_latency": 0.39318883302621543
+   },
+   {
+    "seed": 117,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.5,
+      "p_correct": 0.4634342415549327,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.825,
+      "p_correct": 0.8055561694549397,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 0.9125,
+      "p_correct": 0.9048424472421175,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9930080235004425,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9922779552638531,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 0.9625,
+      "p_correct": 0.9539324048906564,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9990961365401745,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.9994118183851242,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9995459474623203,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996417976915837,
+      "random": 0.29374999999999984
+     }
+    ],
+    "mean_latency": 0.2829962537012761,
+    "max_latency": 0.4038783749565482
+   },
+   {
+    "seed": 118,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.35,
+      "p_correct": 0.3392517665633932,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.925,
+      "p_correct": 0.8831235979378107,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.994307728856802,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.99626659527421,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9981041632592678,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9987589389085769,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9990969799458981,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.999324218928814,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.999498362839222,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996210470795631,
+      "random": 0.2895833333333333
+     }
+    ],
+    "mean_latency": 0.281720420838974,
+    "max_latency": 0.3732518330216408
+   },
+   {
+    "seed": 119,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 8,
+      "greedy": 0.575,
+      "p_correct": 0.5659372033958789,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 2,
+      "n_examples": 16,
+      "greedy": 0.975,
+      "p_correct": 0.936180529743433,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 3,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9950185358524323,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 4,
+      "n_examples": 32,
+      "greedy": 1.0,
+      "p_correct": 0.9969123765826226,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 5,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9980905696749687,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 6,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.998867004364729,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 7,
+      "n_examples": 56,
+      "greedy": 1.0,
+      "p_correct": 0.9992415890097618,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 8,
+      "n_examples": 64,
+      "greedy": 1.0,
+      "p_correct": 0.999497639387846,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 9,
+      "n_examples": 72,
+      "greedy": 1.0,
+      "p_correct": 0.9996604509651661,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 10,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997448146343231,
+      "random": 0.29479166666666656
+     }
+    ],
+    "mean_latency": 0.28316646520543143,
+    "max_latency": 0.3958763330010697
+   }
+  ],
+  "S B pd6 redraw1": [
+   {
+    "seed": 100,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.325,
+      "p_correct": 0.3472721626632847,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.7125,
+      "p_correct": 0.6692532784174545,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9875,
+      "p_correct": 0.9719560010868008,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9975296400487423,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.998376515507698,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9988158941268921,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9991029858589172,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9993029132485389,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9994539052248002,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995658949017525,
+      "random": 0.2968749999999999
+     }
+    ],
+    "mean_latency": 0.2766179860433719,
+    "max_latency": 0.40622512495610863
+   },
+   {
+    "seed": 101,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.4,
+      "p_correct": 0.379784235911211,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.7875,
+      "p_correct": 0.7533174653770403,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.8625,
+      "p_correct": 0.8592337188485544,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9973224267363549,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9983281590044498,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9988135248422623,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9990994721651077,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9993070922791958,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9994587823748589,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995767377316952,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.27652827495282206,
+    "max_latency": 0.3784198750508949
+   },
+   {
+    "seed": 102,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.4875,
+      "p_correct": 0.4195647168438882,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.65,
+      "p_correct": 0.6029083142115269,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.8625,
+      "p_correct": 0.8271804351825267,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.85,
+      "p_correct": 0.866989552101586,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 0.925,
+      "p_correct": 0.9253125060349703,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 0.925,
+      "p_correct": 0.9354426390491426,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 0.9625,
+      "p_correct": 0.9090126775205135,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9968179717659951,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9984584040939808,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9989428773522377,
+      "random": 0.2916666666666666
+     }
+    ],
+    "mean_latency": 0.2782333304678711,
+    "max_latency": 0.3797119170194492
+   },
+   {
+    "seed": 103,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.525,
+      "p_correct": 0.414389365594252,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.95,
+      "p_correct": 0.9395661686896346,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 1.0,
+      "p_correct": 0.9917902037501335,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9978320851922036,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9984735079109669,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9988211333751679,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9990687385201454,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992579020559788,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9994059219956398,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995229296386242,
+      "random": 0.2979166666666665
+     }
+    ],
+    "mean_latency": 0.2783754312627328,
+    "max_latency": 0.38786416698712856
+   },
+   {
+    "seed": 104,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.4625,
+      "p_correct": 0.43629546159645544,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.8375,
+      "p_correct": 0.7676867576257791,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9125,
+      "p_correct": 0.9105594624736113,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.9625,
+      "p_correct": 0.9520242351776688,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.991548914462328,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 0.9875,
+      "p_correct": 0.9882988898083568,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 0.9875,
+      "p_correct": 0.9870147131383419,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9869472800754011,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 0.9875,
+      "p_correct": 0.9874854534864426,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 0.9875,
+      "p_correct": 0.987720561074093,
+      "random": 0.2833333333333332
+     }
+    ],
+    "mean_latency": 0.2744488493015524,
+    "max_latency": 0.3268080831039697
+   },
+   {
+    "seed": 105,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.5125,
+      "p_correct": 0.46448208229849114,
+      "random": 0.2875
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.7375,
+      "p_correct": 0.7361794233791443,
+      "random": 0.2875
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9375,
+      "p_correct": 0.8882790659903549,
+      "random": 0.2875
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9935760825872422,
+      "random": 0.2875
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9966151893138886,
+      "random": 0.2875
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9978069603443146,
+      "random": 0.2875
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9984629660844803,
+      "random": 0.2875
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9989341199398041,
+      "random": 0.2875
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.985353410989046,
+      "random": 0.2875
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9984697476029396,
+      "random": 0.2875
+     }
+    ],
+    "mean_latency": 0.2733163493355581,
+    "max_latency": 0.32432374998461455
+   },
+   {
+    "seed": 106,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.275,
+      "p_correct": 0.29477624599821867,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.7,
+      "p_correct": 0.660445559117943,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.825,
+      "p_correct": 0.8190946595786954,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.95,
+      "p_correct": 0.8895378574728966,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9939928479492665,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9972826845943927,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9981868840754032,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9987619362771512,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9990460872650146,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9992263168096542,
+      "random": 0.2833333333333333
+     }
+    ],
+    "mean_latency": 0.2741855145820106,
+    "max_latency": 0.3267489999998361
+   },
+   {
+    "seed": 107,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.6875,
+      "p_correct": 0.6688611832738388,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.9875,
+      "p_correct": 0.9768269946798682,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 1.0,
+      "p_correct": 0.9966232120990753,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9979222357273102,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9985691986978054,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9989626981317997,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.999226801097393,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9994159810245037,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9995568357408047,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9996592991054059,
+      "random": 0.2906249999999999
+     }
+    ],
+    "mean_latency": 0.2731548171878482,
+    "max_latency": 0.32156991597730666
+   },
+   {
+    "seed": 108,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.3625,
+      "p_correct": 0.3465107170748524,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.675,
+      "p_correct": 0.6732359765392175,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 1.0,
+      "p_correct": 0.9810014128684997,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9920897252857686,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9963311716914177,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 0.9625,
+      "p_correct": 0.9605618969653733,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9985666647553444,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9989352785050869,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9991381280124187,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9992969006299972,
+      "random": 0.2999999999999998
+     }
+    ],
+    "mean_latency": 0.2719950590263276,
+    "max_latency": 0.31883466604631394
+   },
+   {
+    "seed": 109,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.1875,
+      "p_correct": 0.261234926112229,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.95,
+      "p_correct": 0.916583334596362,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9875,
+      "p_correct": 0.982891829754226,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.9875,
+      "p_correct": 0.9854353051166982,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 0.9875,
+      "p_correct": 0.9871450850740076,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 0.9875,
+      "p_correct": 0.9895629160106182,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9915610309690237,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.995697645097971,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9972986303269863,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.998289342224598,
+      "random": 0.29166666666666663
+     }
+    ],
+    "mean_latency": 0.2729236326471437,
+    "max_latency": 0.32068204204551876
+   },
+   {
+    "seed": 110,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.7,
+      "p_correct": 0.6518788486544509,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.875,
+      "p_correct": 0.8780866414133925,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9875,
+      "p_correct": 0.9782400737283752,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.9875,
+      "p_correct": 0.9200070179998875,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9983065776526928,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9988101601600647,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9990913175046444,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992799378931523,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9994209565222263,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995379410684109,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2723622090066783,
+    "max_latency": 0.3267240000423044
+   },
+   {
+    "seed": 111,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.3,
+      "p_correct": 0.2890972111490555,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.6,
+      "p_correct": 0.5427144761779346,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9875,
+      "p_correct": 0.9771052456460894,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.9875,
+      "p_correct": 0.9824854725506157,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 0.9875,
+      "p_correct": 0.984636118914932,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9982292175292968,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9987865664064884,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9990771844983101,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9992637060582638,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9994092643260956,
+      "random": 0.28645833333333326
+     }
+    ],
+    "mean_latency": 0.27329631529476806,
+    "max_latency": 0.3292573329526931
+   },
+   {
+    "seed": 112,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.275,
+      "p_correct": 0.2877303927205503,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.4625,
+      "p_correct": 0.4513426206409349,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9375,
+      "p_correct": 0.920608279822045,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.975,
+      "p_correct": 0.9730081863701343,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 0.9875,
+      "p_correct": 0.9809882687404752,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 0.9875,
+      "p_correct": 0.9829069038853049,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 0.9875,
+      "p_correct": 0.9792533069849014,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 0.9875,
+      "p_correct": 0.9841492164880037,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 0.9875,
+      "p_correct": 0.9840407155454158,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 0.975,
+      "p_correct": 0.9792914867401123,
+      "random": 0.29999999999999993
+     }
+    ],
+    "mean_latency": 0.27273926529063225,
+    "max_latency": 0.31891016697045416
+   },
+   {
+    "seed": 113,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.6,
+      "p_correct": 0.5187182327150367,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.65,
+      "p_correct": 0.6447078423458151,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9125,
+      "p_correct": 0.9117573616909794,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9954389624297619,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9964495025575161,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9969474114477634,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9982454851269722,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9984718829393386,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9981281846761704,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9980802163481712,
+      "random": 0.28541666666666654
+     }
+    ],
+    "mean_latency": 0.27242944444102857,
+    "max_latency": 0.32483416702598333
+   },
+   {
+    "seed": 114,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.8,
+      "p_correct": 0.7462402961837749,
+      "random": 0.3055555555555555
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.925,
+      "p_correct": 0.905797118585906,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.925,
+      "p_correct": 0.9146027559050708,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9972115322947502,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9987125568091869,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9990531109273434,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9992910407483577,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9994461677968502,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.999564991146326,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9996549814939499,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.2702001291695827,
+    "max_latency": 0.32471762492787093
+   },
+   {
+    "seed": 115,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.525,
+      "p_correct": 0.5007689501799177,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.725,
+      "p_correct": 0.7209964110596048,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 1.0,
+      "p_correct": 0.9964629240334034,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9978358991444111,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.998440008610487,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9987792015075684,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9989994496107102,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9992571778595447,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9993918657302856,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995217606425285,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.27217739924866086,
+    "max_latency": 0.31795099994633347
+   },
+   {
+    "seed": 116,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.425,
+      "p_correct": 0.3407594472635537,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.8875,
+      "p_correct": 0.8473368893901352,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.85,
+      "p_correct": 0.8494870694208657,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9965776972472667,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9980703264474868,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9986088469624519,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.998915784060955,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.999127808213234,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9992963664233685,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9994261525571346,
+      "random": 0.2874999999999999
+     }
+    ],
+    "mean_latency": 0.2714458777530429,
+    "max_latency": 0.31812487496063113
+   },
+   {
+    "seed": 117,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.45,
+      "p_correct": 0.3560610336251557,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.625,
+      "p_correct": 0.6155924725120713,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 1.0,
+      "p_correct": 0.9866840951144695,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9969172783195972,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9980786979198456,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9985930293798446,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9983867347240448,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9986603170633316,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9991792209446431,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993694737553597,
+      "random": 0.29374999999999984
+     }
+    ],
+    "mean_latency": 0.27160509236855435,
+    "max_latency": 0.3228001670213416
+   },
+   {
+    "seed": 118,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.275,
+      "p_correct": 0.2799887457164004,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.65,
+      "p_correct": 0.6136763016867917,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.9125,
+      "p_correct": 0.8910060630536464,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 0.975,
+      "p_correct": 0.9631228079037101,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 0.9375,
+      "p_correct": 0.9298505588551051,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 0.9625,
+      "p_correct": 0.958751331626263,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 0.9625,
+      "p_correct": 0.9601193512746249,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 0.9625,
+      "p_correct": 0.9600063101184787,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 0.9625,
+      "p_correct": 0.9569493829782004,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9981919154524803,
+      "random": 0.2895833333333333
+     }
+    ],
+    "mean_latency": 0.2718309993273579,
+    "max_latency": 0.3575693330494687
+   },
+   {
+    "seed": 119,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 6,
+      "greedy": 0.4125,
+      "p_correct": 0.4194413943478139,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 2,
+      "n_examples": 12,
+      "greedy": 0.8125,
+      "p_correct": 0.8071107095456682,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 3,
+      "n_examples": 18,
+      "greedy": 0.8375,
+      "p_correct": 0.8408070531688281,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 4,
+      "n_examples": 24,
+      "greedy": 1.0,
+      "p_correct": 0.9962051101028919,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 5,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.997788454592228,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 6,
+      "n_examples": 36,
+      "greedy": 1.0,
+      "p_correct": 0.9985028088092804,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 7,
+      "n_examples": 42,
+      "greedy": 1.0,
+      "p_correct": 0.9989165157079697,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 8,
+      "n_examples": 48,
+      "greedy": 1.0,
+      "p_correct": 0.9991824515163898,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 9,
+      "n_examples": 54,
+      "greedy": 1.0,
+      "p_correct": 0.9993753530085087,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 10,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.999512643367052,
+      "random": 0.29479166666666656
+     }
+    ],
+    "mean_latency": 0.27185883471975103,
+    "max_latency": 0.32674866600427777
+   }
+  ],
+  "S B pd10 redraw1": [
+   {
+    "seed": 100,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.5875,
+      "p_correct": 0.5786006165755679,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9907803617417812,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9983735106885433,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989902332425118,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9993211984634399,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995336681604385,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9996726408600807,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997762069106102,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998465314507484,
+      "random": 0.2968749999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998955599963665,
+      "random": 0.2968749999999999
+     }
+    ],
+    "mean_latency": 0.29461563252145423,
+    "max_latency": 0.35294458304997534
+   },
+   {
+    "seed": 101,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 1.0,
+      "p_correct": 0.9512812204658985,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9967528492212295,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.998240627348423,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989407494664192,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.999341906607151,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995836742222309,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9997313193976879,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998234502971173,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998852454125882,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9999255307018757,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.29505590288783423,
+    "max_latency": 0.3670390829211101
+   },
+   {
+    "seed": 102,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.5625,
+      "p_correct": 0.48570577266509646,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.95,
+      "p_correct": 0.9277551250386751,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9966428123414517,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9983909301459789,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.998931261152029,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9992440864443779,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9994544275105,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996126115322113,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9997229129076004,
+      "random": 0.2916666666666666
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998067617416382,
+      "random": 0.2916666666666666
+     }
+    ],
+    "mean_latency": 0.2954965900478419,
+    "max_latency": 0.37486799992620945
+   },
+   {
+    "seed": 103,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.9,
+      "p_correct": 0.8794207789702341,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9970855623483658,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9984159976243973,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989771686494351,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9993179492652416,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995332650840283,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.999677038192749,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997770421206951,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998476400971412,
+      "random": 0.2979166666666665
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998958960175515,
+      "random": 0.2979166666666665
+     }
+    ],
+    "mean_latency": 0.2959339641232509,
+    "max_latency": 0.3463160829851404
+   },
+   {
+    "seed": 104,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.7125,
+      "p_correct": 0.6350380554926233,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9923344768583775,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.997790090739727,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9987314350903034,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9992037668824196,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9977952383458615,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9993361853063106,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9995787985622883,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9996950298547744,
+      "random": 0.2833333333333332
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9997750915586948,
+      "random": 0.2833333333333332
+     }
+    ],
+    "mean_latency": 0.29963291210355236,
+    "max_latency": 0.3765982920303941
+   },
+   {
+    "seed": 105,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.8375,
+      "p_correct": 0.757570457435213,
+      "random": 0.2875
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9964391410350799,
+      "random": 0.2875
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9983585983514786,
+      "random": 0.2875
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.99898382127285,
+      "random": 0.2875
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9993521414697171,
+      "random": 0.2875
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.999574226886034,
+      "random": 0.2875
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9997302651405334,
+      "random": 0.2875
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999830448627472,
+      "random": 0.2875
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998960554599762,
+      "random": 0.2875
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.999935758113861,
+      "random": 0.2875
+     }
+    ],
+    "mean_latency": 0.2988600546226371,
+    "max_latency": 0.3537602499127388
+   },
+   {
+    "seed": 106,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.625,
+      "p_correct": 0.5738734504477179,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.8,
+      "p_correct": 0.7911529587421683,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 0.9625,
+      "p_correct": 0.9399652458625496,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9936453953385354,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9951280191540718,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 0.9875,
+      "p_correct": 0.9913177188485861,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9935814268887043,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9989630788564682,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9993483111262321,
+      "random": 0.2833333333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9996419951319695,
+      "random": 0.2833333333333333
+     }
+    ],
+    "mean_latency": 0.2989616879459936,
+    "max_latency": 0.36459241702686995
+   },
+   {
+    "seed": 107,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.975,
+      "p_correct": 0.9650507364422083,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.975,
+      "p_correct": 0.9788023359607905,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 0.9875,
+      "p_correct": 0.9858304224908352,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990142814815044,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9993711613118649,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995959743857383,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9997365415096283,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998291797935963,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998881757259369,
+      "random": 0.2906249999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9999288737773895,
+      "random": 0.2906249999999999
+     }
+    ],
+    "mean_latency": 0.29791772288270296,
+    "max_latency": 0.35732829198241234
+   },
+   {
+    "seed": 108,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.5375,
+      "p_correct": 0.5085022541548824,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9788864985108375,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9970612064003944,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.998548386245966,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9990468427538872,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993337124586106,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995222732424736,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996616311371327,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9997661098837852,
+      "random": 0.2999999999999998
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.999836890399456,
+      "random": 0.2999999999999998
+     }
+    ],
+    "mean_latency": 0.29970699751400387,
+    "max_latency": 0.35083845793269575
+   },
+   {
+    "seed": 109,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.55,
+      "p_correct": 0.5314801228494617,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.9875,
+      "p_correct": 0.9854716494679451,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 0.9875,
+      "p_correct": 0.9858949139015749,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 0.9875,
+      "p_correct": 0.9863609371968778,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9978355966508389,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993393816053867,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995641395449638,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996948577463627,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9997852988541126,
+      "random": 0.29166666666666663
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998482093214989,
+      "random": 0.29166666666666663
+     }
+    ],
+    "mean_latency": 0.29973894539871254,
+    "max_latency": 0.36027125001419336
+   },
+   {
+    "seed": 110,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.9375,
+      "p_correct": 0.899688402620086,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.9375,
+      "p_correct": 0.9340544556718668,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9978175736963749,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990260668098927,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.99939548894763,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9996061936020851,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.999743715673685,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998342871665955,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998934619128704,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9999302387237549,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.3003260491939727,
+    "max_latency": 0.3622868750244379
+   },
+   {
+    "seed": 111,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.3625,
+      "p_correct": 0.3416558758064639,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9873122878372669,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9972541578114033,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9983873412013053,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.998970951884985,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993220709264279,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995323076844216,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996810987591743,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9997799560427666,
+      "random": 0.28645833333333326
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998497158288956,
+      "random": 0.28645833333333326
+     }
+    ],
+    "mean_latency": 0.2997305766586214,
+    "max_latency": 0.3740532079245895
+   },
+   {
+    "seed": 112,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.3,
+      "p_correct": 0.27238739238091514,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.975,
+      "p_correct": 0.963568430673331,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9979751884937287,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9989533059298992,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9992464192211628,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9994500696659088,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9996054552495479,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997226350009442,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998070530593395,
+      "random": 0.29999999999999993
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998693242669106,
+      "random": 0.29999999999999993
+     }
+    ],
+    "mean_latency": 0.2998293837881647,
+    "max_latency": 0.35999904200434685
+   },
+   {
+    "seed": 113,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.6,
+      "p_correct": 0.5955579186760588,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.9625,
+      "p_correct": 0.9352180575951934,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9976283788681031,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9986226692795753,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9990580528974533,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993369996547699,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.999550037831068,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996964789927005,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998020313680172,
+      "random": 0.28541666666666654
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998672626912594,
+      "random": 0.28541666666666654
+     }
+    ],
+    "mean_latency": 0.29974288457422515,
+    "max_latency": 0.3705514590255916
+   },
+   {
+    "seed": 114,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.9625,
+      "p_correct": 0.9417661372572184,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9956593193113804,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9986174836754799,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9991821825504303,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9994597978889942,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9996358416974545,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.999752676486969,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9998306535184384,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998835787177086,
+      "random": 0.30208333333333315
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9999217346310616,
+      "random": 0.30208333333333315
+     }
+    ],
+    "mean_latency": 0.2984752821060829,
+    "max_latency": 0.3549585840664804
+   },
+   {
+    "seed": 115,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.7375,
+      "p_correct": 0.7515893524170678,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.9375,
+      "p_correct": 0.9204136173182633,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9979120545089245,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9990075387060642,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9993142679333686,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9995111234486103,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9996509596705436,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.999754474312067,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998249910771847,
+      "random": 0.28958333333333325
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998802840709686,
+      "random": 0.28958333333333325
+     }
+    ],
+    "mean_latency": 0.2999797629157547,
+    "max_latency": 0.3552762499311939
+   },
+   {
+    "seed": 116,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.6375,
+      "p_correct": 0.605762634635903,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.85,
+      "p_correct": 0.846381278329136,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9967916518449783,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9984977163374424,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9990620441734791,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993878066539764,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995744749903679,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997102186083794,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998031444847584,
+      "random": 0.2874999999999999
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998692937195301,
+      "random": 0.2874999999999999
+     }
+    ],
+    "mean_latency": 0.2124937087658327,
+    "max_latency": 0.3571345830569044
+   },
+   {
+    "seed": 117,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.675,
+      "p_correct": 0.626407935237512,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.9875,
+      "p_correct": 0.978047925978899,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9942346341907978,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.9981972135603427,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9990108199417591,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993439167737961,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995291464030742,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996597349643708,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9997568883001804,
+      "random": 0.29374999999999984
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.999825207144022,
+      "random": 0.29374999999999984
+     }
+    ],
+    "mean_latency": 0.21226816792972386,
+    "max_latency": 0.37482749996706843
+   },
+   {
+    "seed": 118,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.425,
+      "p_correct": 0.3854847648588475,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 1.0,
+      "p_correct": 0.9936098620295525,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9978233627974987,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.998679780960083,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9990859128534794,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993385769426822,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995277732610702,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9996684499084949,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9997686982154846,
+      "random": 0.2895833333333333
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998417913913726,
+      "random": 0.2895833333333333
+     }
+    ],
+    "mean_latency": 0.21198186712223105,
+    "max_latency": 0.3455999590223655
+   },
+   {
+    "seed": 119,
+    "cond": "session",
+    "rows": [
+     {
+      "day": 1,
+      "n_examples": 10,
+      "greedy": 0.8,
+      "p_correct": 0.7396050442941486,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 2,
+      "n_examples": 20,
+      "greedy": 0.9875,
+      "p_correct": 0.9651252184063196,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 3,
+      "n_examples": 30,
+      "greedy": 1.0,
+      "p_correct": 0.9978248737752438,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 4,
+      "n_examples": 40,
+      "greedy": 1.0,
+      "p_correct": 0.998773030936718,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 5,
+      "n_examples": 50,
+      "greedy": 1.0,
+      "p_correct": 0.9991565734148026,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 6,
+      "n_examples": 60,
+      "greedy": 1.0,
+      "p_correct": 0.9993942752480507,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 7,
+      "n_examples": 70,
+      "greedy": 1.0,
+      "p_correct": 0.9995827220380307,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 8,
+      "n_examples": 80,
+      "greedy": 1.0,
+      "p_correct": 0.9997304230928421,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 9,
+      "n_examples": 90,
+      "greedy": 1.0,
+      "p_correct": 0.9998129643499851,
+      "random": 0.29479166666666656
+     },
+     {
+      "day": 10,
+      "n_examples": 100,
+      "greedy": 1.0,
+      "p_correct": 0.9998748734593391,
+      "random": 0.29479166666666656
+     }
+    ],
+    "mean_latency": 0.21107703871559352,
+    "max_latency": 0.3582558330381289
+   }
+  ]
+ }
+}

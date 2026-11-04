@@ -1,0 +1,38 @@
+# EXPERIMENT (docs/WORLD.md section 16): a wider world for the learnability gate. Not the shipped ontology.
+# +3 problems, +3 kinds, +3 verbs, same-verb/same-kind rules that differ by problem, more near-miss (+1) rules.
+tags: [THIRSTY, FLOOR_WET, DARK, COLD, VISITOR, HUNGRY, HOT, RAIN, REQUEST]
+verbs: [DRINK, WIPE, LIGHT, COVER, GIVE, FETCH, EAT, FAN, SHELTER, WAIT]
+colors: [red, blue, green, yellow]
+sizes: [small, big]
+shapes: [cylinder, flat, tube, long, sphere, round, blade]
+materials: [ceramic, fabric, paper, wool, metal, rubber, grain, plastic]
+locations: [house, yard]
+start_locations: [house]
+kinds:
+  cup:        {shape: cylinder, material: ceramic, sizes: [small, big]}
+  cloth:      {shape: flat,     material: fabric,  sizes: [small, big]}
+  paper:      {shape: flat,     material: paper,   sizes: [small, big]}
+  blanket:    {shape: flat,     material: wool,    sizes: [big]}
+  flashlight: {shape: tube,     material: metal,   sizes: [small, big]}
+  spoon:      {shape: long,     material: metal,   sizes: [small, big]}
+  ball:       {shape: sphere,   material: rubber,  sizes: [small, big]}
+  bread:      {shape: round,    material: grain,   sizes: [small, big]}
+  fan:        {shape: blade,    material: plastic, sizes: [small, big]}
+  umbrella:   {shape: long,     material: fabric,  sizes: [big]}
+rules:
+  THIRSTY:   [[DRINK, cup, 2]]
+  FLOOR_WET: [[WIPE, cloth, 2], [WIPE, paper, 1], [WIPE, blanket, 1]]
+  DARK:      [[LIGHT, flashlight, 2]]
+  COLD:      [[COVER, blanket, 2], [COVER, cloth, 1]]
+  VISITOR:   [[GIVE, ball, 2], [GIVE, cup, 1], [GIVE, bread, 1]]
+  HUNGRY:    [[EAT, bread, 2], [GIVE, bread, 1]]
+  HOT:       [[FAN, fan, 2], [FAN, paper, 1]]
+  RAIN:      [[SHELTER, umbrella, 2], [COVER, blanket, 1], [COVER, cloth, 1]]
+wait_value: {THIRSTY: -1, FLOOR_WET: -1, DARK: 0, COLD: -1, VISITOR: -1, HUNGRY: -1, HOT: 0, RAIN: -1, REQUEST: 0}
+request: {verb: FETCH, value: 2, kinds: [cup, cloth, paper, ball]}
+outcomes: {solved: 2, partial: 1, nothing: 0}
+followups:
+  escalation: {FLOOR_WET: VISITOR}
+  unlocks: {DARK: yard}
+  nameable_min_value: 1
+  requests_per_day: 1

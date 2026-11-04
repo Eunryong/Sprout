@@ -1,0 +1,15 @@
+client=live seeds=2 days=2
+Director  calls=  32  usable=90.6%  first-try=53.1%  repaired=37.5%  fallback=9.4%  latency p50/p95=22.05/44.51s
+Narrator  calls=  96  usable=100.0%  fallback=0.0%  latency p50/p95=3.88/6.02s
+teasers dropped by the guard: 0.0% of cards
+   director rejected x5: ProposalError: bad object kind='blanket' color='green' shape='flat' si
+   director rejected x5: ProposalError: bad object kind='blanket' color='blue' shape='flat' siz
+   director rejected x5: ProposalError: no option solves the situation
+   director rejected x3: ProposalError: bad object kind='blanket' color='red' shape='flat' size
+cards=64  topics={'DARK': 16, 'FLOOR_WET': 12, 'THIRSTY': 9, 'REQUEST': 9, 'COLD': 9, 'VISITOR': 9}
+   objects/card=3.9  options/card=3.9  same kind twice=48%  WAIT offered=95%  colours used=4/4  kinds={'cup': 59, 'ball': 44, 'spoon': 37, 'cloth': 37, 'paper': 31, 'flashlight': 23, 'blanket': 20}
+distinct day themes: 27
+child's evening quiz on the last day played: mean 0.50 (min 0.40)
+HTTP requests=133  tokens in/out=94103/145214  (per day: 33.2 requests)
+acceptance (proposed): PASS Director usable >= 90%; FAIL Director first-try >= 60%; PASS Director fallback <= 10%; PASS Narrator usable >= 85%; FAIL Director p95 <= 8s; FAIL Narrator p95 <= 4s; PASS teaser drop <= 15%
+wall=1201s

@@ -1,0 +1,32 @@
+{
+ "args": {
+  "client": "sloppy",
+  "rates": "no_solver=.25,unknown_tag=.1,one_card=.05,twin_topics=.05,leaky_teaser=.15,raise=.05,names_kind=.15,contradicts=.1,empty=.05,internal_token=.05",
+  "seeds": "0-9",
+  "days": 3,
+  "jobs": 8,
+  "max_calls": 1000000000,
+  "cache": null,
+  "out": "scripts/out/p4_sloppy.json"
+ },
+ "summary": {
+  "director_calls": 240,
+  "director_ok": 0.9375,
+  "director_first_try": 0.55,
+  "director_fallback": 0.0625,
+  "narrator_calls": 720,
+  "narrator_ok": 0.7041666666666667,
+  "director_p50_s": 0.0004,
+  "director_p95_s": 0.0006,
+  "narrator_p50_s": 0.0,
+  "narrator_p95_s": 0.0001,
+  "teaser_drop": 0.075,
+  "cards": 480,
+  "same_kind_twice": 0.25833333333333336,
+  "mean_objects": 3.316666666666667,
+  "mean_options": 4.160416666666666,
+  "with_wait": 0.5208333333333334,
+  "last_quiz": 0.85
+ },
+ "accepted": false
+}

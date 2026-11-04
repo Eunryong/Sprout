@@ -1,0 +1,23 @@
+
+== pd8 ==  n=40 seeds, params=109360, learn latency mean 0.67s max 1.32s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d10 mean/min | untrained@d3 chance@d3 | by day
+problems  0.92/0.75/0.06     38/40   0.97   | 0.99/0.92      | 0.30          0.31      | 0.46 0.78 0.92 0.95 0.97 0.97 0.98 0.98 0.98 0.99
+requests  0.41/0.08/0.13      0/40   0.55   | 0.75/0.36      | 0.26          0.27      | 0.53 0.47 0.41 0.46 0.47 0.55 0.61 0.65 0.71 0.75
+situations picked per run 80: word requests 9.6, two-problem 0.0, follow-up cards offered 0.0, words known 3.0, open issues at end 0.0, yard unlocked 40/40
+reads the tag: intact 0.99 -> swapped 0.39
+
+== pd10 ==  n=40 seeds, params=109360, learn latency mean 0.73s max 1.38s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d10 mean/min | untrained@d3 chance@d3 | by day
+problems  0.95/0.78/0.05     39/40   0.97   | 0.98/0.85      | 0.30          0.31      | 0.58 0.87 0.95 0.97 0.98 0.97 0.98 0.99 0.99 0.98
+requests  0.42/0.22/0.13      0/40   0.55   | 0.74/0.39      | 0.25          0.27      | 0.51 0.44 0.42 0.45 0.45 0.55 0.57 0.63 0.73 0.74
+situations picked per run 100: word requests 9.6, two-problem 0.0, follow-up cards offered 0.0, words known 3.0, open issues at end 0.0, yard unlocked 40/40
+reads the tag: intact 0.98 -> swapped 0.38
+
+== pd8 mistakes10% ==  n=40 seeds, params=109360, learn latency mean 0.66s max 1.35s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d10 mean/min | untrained@d3 chance@d3 | by day
+problems  0.86/0.65/0.08     29/40   0.95   | 0.97/0.85      | 0.30          0.31      | 0.44 0.74 0.86 0.92 0.94 0.95 0.96 0.97 0.97 0.97
+requests  0.41/0.17/0.12      0/39   0.50   | 0.66/0.29      | 0.27          0.27      | 0.53 0.45 0.41 0.42 0.45 0.50 0.54 0.57 0.63 0.66
+combos    0.67/0.67/0.00      0/1    0.67   | 0.83/0.75      | 0.50          0.41      | 0.58 0.83 0.67 0.46 0.71 0.67 0.54 0.71 0.67 0.83
+situations picked per run 80: word requests 8.9, two-problem 0.1, follow-up cards offered 8.3, words known 3.1, open issues at end 0.4, yard unlocked 40/40
+reads the tag: intact 0.97 -> swapped 0.32
+seeds=200..239 wall=494s

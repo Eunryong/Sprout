@@ -1,0 +1,35 @@
+{
+ "args": {
+  "seeds": "200-219",
+  "days": 10,
+  "cond": "none",
+  "jobs": 16,
+  "grid": [
+   "control|per_day=8"
+  ],
+  "out": "scripts/out/p2_control.json"
+ },
+ "summary": {
+  "control": {
+   "problems": {
+    "d3": 0.2875,
+    "d3_min": 0.2,
+    "d3_ok": 0,
+    "n": 20,
+    "dN": 0.2875,
+    "curve": [
+     0.28375,
+     0.2875,
+     0.2875,
+     0.2875,
+     0.2875,
+     0.2875,
+     0.2875,
+     0.2875,
+     0.2875,
+     0.2875
+    ]
+   }
+  }
+ }
+}

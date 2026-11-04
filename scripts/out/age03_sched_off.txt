@@ -1,0 +1,18 @@
+
+== sched learning-off ==  n=24 seeds, params=111421, learn latency mean 0.00s max 0.00s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d8 mean/min | untrained@d3 chance@d3 | by day
+problems  0.28/0.18/0.06      0/24   0.29   | 0.29/0.19      | 0.28          0.30      | 0.27 0.27 0.28 0.28 0.28 0.29 0.29 0.29
+situations picked per run 64: word requests 0.0, two-problem 0.0, follow-up cards offered 0.0, words known 0.0, open issues at end 0.0, yard unlocked 0/24
+reads the tag: intact 0.29 -> swapped 0.29
+
+== sched learning-off: accuracy by days since the problem opened (k=0 is the end of its first day), last day D=8 ==
+problem    opens       k=0     k=1     k=2     k=3    day 8   peak  met
+THIRSTY    day 1      0.25    0.25    0.25    0.25     0.25   0.25   24
+HUNGRY     day 1      0.30    0.30    0.30    0.30     0.30   0.30   24
+UPSET      day 1      0.25    0.25    0.25    0.25     0.25   0.25   24
+FLOOR_WET  day 3      0.29    0.28    0.28    0.28     0.28   0.28   24
+MESSY      day 3      0.30    0.30    0.30    0.30     0.30   0.30   24
+DARK       day 5      0.27    0.29    0.29    0.29     0.29   0.29   24
+COLD       day 5      0.32    0.32    0.32    0.32     0.32   0.32   24
+VISITOR    day 5      0.31    0.32    0.32    0.32     0.32   0.32   24
+seeds=200..223 wall=7s

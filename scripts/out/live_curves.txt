@@ -1,0 +1,35 @@
+12 worlds made by the real Director x seeds 200-202; hand-written world x seeds 200-211
+
+calibration (smoothing 0.15, 20 steps)         conf          acc          ece          sat  problem_acc        blind  conf-acc
+  after  1 scenes hand                          0.831        0.635        0.240        0.000        0.403        0.405     0.196
+  after  1 scenes live (mean of worlds)         0.833        0.571        0.318        0.000        0.109        0.889     0.262
+  after  3 scenes hand                          0.847        0.636        0.237        0.000        0.384        0.296     0.211
+  after  3 scenes live (mean of worlds)         0.859        0.625        0.268        0.000        0.432        0.679     0.233
+  after 10 scenes hand                          0.839        0.659        0.192        0.000        0.489        0.375     0.180
+  after 10 scenes live (mean of worlds)         0.823        0.768        0.135        0.000        0.890        0.350     0.056
+  after 30 scenes hand                          0.863        0.776        0.120        0.000        0.818        0.311     0.088
+  after 30 scenes live (mean of worlds)         0.861        0.780        0.107        0.000        0.842        0.437     0.081
+  after 64 scenes hand                          0.865        0.891        0.064        0.000        0.965        0.212    -0.026
+  after 64 scenes live (mean of worlds)         0.861        0.837        0.057        0.000        0.897        0.363     0.024
+
+per world, after 64 scenes:   conf-acc    ece   problem_acc   blind
+  d0                       0.053    0.065      0.812    0.339
+  d1                       0.034    0.079      0.878    0.270
+  d2                       0.044    0.050      0.920    0.406
+  d3                       0.013    0.029      0.903    0.300
+  d4                       0.044    0.057      0.924    0.325
+  d5                       0.018    0.044      0.910    0.399
+  d6                       0.001    0.039      0.920    0.358
+  d7                      -0.000    0.036      0.944    0.324
+  d8                      -0.004    0.052      0.927    0.290
+  d9                       0.035    0.070      0.847    0.482
+  d10                      0.050    0.084      0.934    0.347
+  d11                     -0.004    0.083      0.847    0.521
+
+exploration, alone, 40 scenes        kinds     new_late  solved_late        worse  problem_acc
+  beta 0.0  hand                         20.333        0.263        0.629        0.029        0.867
+  beta 0.0  live (mean of worlds)        23.722        0.581        0.378        0.027        0.635
+  beta 0.4  hand                         22.583        0.362        0.575        0.029        0.881
+  beta 0.4  live (mean of worlds)        25.722        0.621        0.376        0.025        0.661
+  beta 0.8  hand                         24.750        0.433        0.463        0.027        0.864
+  beta 0.8  live (mean of worlds)        27.806        0.675        0.350        0.031        0.635

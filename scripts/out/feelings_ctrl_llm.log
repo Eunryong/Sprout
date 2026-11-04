@@ -1,0 +1,13 @@
+
+after 6 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  ctrl_llm                       2.074       0.803       0.363       0.419       0.773           -
+
+after 12 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  ctrl_llm                       1.771       0.627       0.554       0.609       0.488           -
+
+after 30 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  ctrl_llm                       1.502       0.440       0.730       0.782       0.270       0.421
+
+after 84 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  ctrl_llm                       1.250       0.326       0.853       0.871       0.150       0.503
+{"calls": 504, "mean_call_seconds": 6.1, "steps_mean": 19.7, "steps_first12": 21.5, "steps_after12": 19.5, "lr_scale_mean": 0.84, "replay_mean": 22.2}

@@ -1,0 +1,57 @@
+
+== after day 3 (end of stage 1) ==  mean (sd) over 40 seeds
+                                      talker       commander         chooser        balanced    demonstrator       untrained
+words                            0.54 (0.15)     0.36 (0.07)     0.33 (0.07)       nan (nan)       nan (nan)            0.26
+problems (no instruction)        0.72 (0.09)     0.29 (0.07)     0.90 (0.06)       nan (nan)       nan (nan)            0.30
+confidence                       0.82 (0.04)     0.75 (0.05)     0.89 (0.03)       nan (nan)       nan (nan)            0.41
+hesitate <0.6                    0.16 (0.06)     0.24 (0.09)     0.07 (0.04)       nan (nan)       nan (nan)            0.99
+follows good                     0.20 (0.06)     0.72 (0.07)     0.22 (0.04)       nan (nan)       nan (nan)            0.25
+follows useless                  0.16 (0.08)     0.26 (0.11)     0.17 (0.07)       nan (nan)       nan (nan)            0.24
+follows harmful                  0.22 (0.12)     0.67 (0.27)     0.19 (0.11)       nan (nan)       nan (nan)            0.25
+obey (all)                       0.19 (0.05)     0.51 (0.05)     0.20 (0.04)       nan (nan)       nan (nan)            0.24
+blind (useless+harmful)          0.18 (0.07)     0.38 (0.10)     0.18 (0.06)       nan (nan)       nan (nan)            0.24
+discern                          0.02 (0.09)     0.34 (0.14)     0.05 (0.07)       nan (nan)       nan (nan)            0.01
+best option with instruction     0.29 (0.06)     0.57 (0.07)     0.31 (0.06)       nan (nan)       nan (nan)            0.32
+best option when told wrong      0.30 (0.07)     0.42 (0.09)     0.32 (0.06)       nan (nan)       nan (nan)            0.32
+refusal: best                    0.26 (0.05)     0.59 (0.08)     0.28 (0.06)       nan (nan)       nan (nan)            0.29
+refusal: wait                    0.11 (0.04)     0.02 (0.02)     0.12 (0.05)       nan (nan)       nan (nan)            0.13
+refusal: other                   0.63 (0.06)     0.39 (0.08)     0.60 (0.05)       nan (nan)       nan (nan)            0.57
+
+== after day 3 (stage 2 with the same discerning parent) ==  mean (sd) over 40 seeds
+                                      talker       commander         chooser        balanced    demonstrator       untrained
+words                            0.54 (0.15)     0.36 (0.07)     0.33 (0.07)       nan (nan)       nan (nan)            0.26
+problems (no instruction)        0.72 (0.09)     0.29 (0.07)     0.90 (0.06)       nan (nan)       nan (nan)            0.30
+confidence                       0.82 (0.04)     0.75 (0.05)     0.89 (0.03)       nan (nan)       nan (nan)            0.41
+hesitate <0.6                    0.16 (0.06)     0.24 (0.09)     0.07 (0.04)       nan (nan)       nan (nan)            0.99
+follows good                     0.20 (0.06)     0.72 (0.07)     0.22 (0.04)       nan (nan)       nan (nan)            0.25
+follows useless                  0.16 (0.08)     0.26 (0.11)     0.17 (0.07)       nan (nan)       nan (nan)            0.24
+follows harmful                  0.22 (0.12)     0.67 (0.27)     0.19 (0.11)       nan (nan)       nan (nan)            0.25
+obey (all)                       0.19 (0.05)     0.51 (0.05)     0.20 (0.04)       nan (nan)       nan (nan)            0.24
+blind (useless+harmful)          0.18 (0.07)     0.38 (0.10)     0.18 (0.06)       nan (nan)       nan (nan)            0.24
+discern                          0.02 (0.09)     0.34 (0.14)     0.05 (0.07)       nan (nan)       nan (nan)            0.01
+best option with instruction     0.29 (0.06)     0.57 (0.07)     0.31 (0.06)       nan (nan)       nan (nan)            0.32
+best option when told wrong      0.30 (0.07)     0.42 (0.09)     0.32 (0.06)       nan (nan)       nan (nan)            0.32
+refusal: best                    0.26 (0.05)     0.59 (0.08)     0.28 (0.06)       nan (nan)       nan (nan)            0.29
+refusal: wait                    0.11 (0.04)     0.02 (0.02)     0.12 (0.05)       nan (nan)       nan (nan)            0.13
+refusal: other                   0.63 (0.06)     0.39 (0.08)     0.60 (0.05)       nan (nan)       nan (nan)            0.57
+
+== paired differences, same seed (mean, sd) ==
+  day 3: talker - commander on word_acc: +0.18 (0.18)
+  day 3: talker - chooser on word_acc: +0.20 (0.16)
+  day 3: chooser - commander on problem_acc: +0.60 (0.10)
+  day 3: chooser - commander on confidence: +0.14 (0.07)
+  day 3: commander - chooser on blind: +0.20 (0.13)
+  day 3: chooser - commander on discern: -0.29 (0.17)
+  day 3: chooser - commander on problem_acc: +0.60 (0.10)
+  day 3: commander - chooser on blind: +0.20 (0.13)
+  day 3: talker - commander on word_acc: +0.18 (0.18)
+
+(talker words 0.538 vs best other 0.362: gap 0.176; commander blind 0.378)
+
+proposed criteria (docs/WORLD.md 18.10):
+  FAIL  talker words beat the others' by >= 0.20 (day 3)
+  PASS  chooser problem accuracy without instruction beats commander's by >= 0.15, or confidence by >= 0.10
+  FAIL  commander blind obedience >= 0.60
+  PASS  learning matters: untrained discern is near 0 and obey is about chance
+
+params=109873 examples/run=24 seeds=200-239 wall=107s

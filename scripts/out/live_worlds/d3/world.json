@@ -1,0 +1,199 @@
+{
+ "hash": "7b5665c6c015",
+ "sheet": {
+  "seed": 4,
+  "source": "director:muse-spark-1.3-contributor",
+  "premise": "Rain taps the windows while the small house glows warm through a quiet week together.",
+  "rules": {
+   "THIRSTY": [
+    [
+     "DRINK",
+     "cup",
+     2
+    ],
+    [
+     "DRINK",
+     "spoon",
+     1
+    ],
+    [
+     "GIVE",
+     "cup",
+     1
+    ]
+   ],
+   "HUNGRY": [
+    [
+     "EAT",
+     "bread",
+     2
+    ],
+    [
+     "EAT",
+     "spoon",
+     1
+    ],
+    [
+     "GIVE",
+     "bread",
+     1
+    ]
+   ],
+   "UPSET": [
+    [
+     "HUG",
+     "teddy",
+     2
+    ],
+    [
+     "GIVE",
+     "ball",
+     2
+    ],
+    [
+     "GIVE",
+     "teddy",
+     1
+    ],
+    [
+     "LIGHT",
+     "flashlight",
+     -1
+    ]
+   ],
+   "FLOOR_WET": [
+    [
+     "WIPE",
+     "cloth",
+     2
+    ],
+    [
+     "WIPE",
+     "paper",
+     1
+    ],
+    [
+     "WIPE",
+     "blanket",
+     -1
+    ]
+   ],
+   "MESSY": [
+    [
+     "TIDY",
+     "box",
+     2
+    ],
+    [
+     "TIDY",
+     "ball",
+     1
+    ],
+    [
+     "TIDY",
+     "teddy",
+     1
+    ],
+    [
+     "TIDY",
+     "bread",
+     -1
+    ]
+   ],
+   "DARK": [
+    [
+     "LIGHT",
+     "flashlight",
+     2
+    ],
+    [
+     "GIVE",
+     "flashlight",
+     1
+    ],
+    [
+     "LIGHT",
+     "ball",
+     -1
+    ]
+   ],
+   "COLD": [
+    [
+     "COVER",
+     "blanket",
+     2
+    ],
+    [
+     "COVER",
+     "cloth",
+     1
+    ],
+    [
+     "HUG",
+     "teddy",
+     1
+    ]
+   ],
+   "VISITOR": [
+    [
+     "GIVE",
+     "bread",
+     2
+    ],
+    [
+     "GIVE",
+     "ball",
+     1
+    ],
+    [
+     "GIVE",
+     "cup",
+     1
+    ],
+    [
+     "HUG",
+     "teddy",
+     1
+    ]
+   ]
+  },
+  "wait_value": {
+   "THIRSTY": 0,
+   "HUNGRY": 0,
+   "UPSET": -1,
+   "FLOOR_WET": 0,
+   "MESSY": 0,
+   "DARK": -1,
+   "COLD": 0,
+   "VISITOR": 0
+  },
+  "request_kinds": [
+   "cup",
+   "bread",
+   "ball",
+   "cloth"
+  ],
+  "escalation": {
+   "FLOOR_WET": "VISITOR"
+  },
+  "opens": {
+   "THIRSTY": 12,
+   "HUNGRY": 12,
+   "UPSET": 12,
+   "FLOOR_WET": 18,
+   "MESSY": 18,
+   "DARK": 24,
+   "COLD": 18,
+   "VISITOR": 24
+  },
+  "learning": {
+   "burn_worse_rounds": 1,
+   "burn_nothing_rounds": 0,
+   "regret_rounds": 1,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "days": 8,
+  "lines": {}
+ }
+}

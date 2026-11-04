@@ -1,0 +1,55 @@
+{
+ "args": {
+  "seeds": "100-119",
+  "days": 10,
+  "cond": "online",
+  "jobs": 16,
+  "grid": [
+   "grouped base|per_day=10,topics=grouped",
+   "all L3 lr2e-3|per_day=10,layers=3,lr=0.002",
+   "grouped L3 lr2e-3|per_day=10,layers=3,lr=0.002,topics=grouped",
+   "grouped L3 lr2e-3 pd8|per_day=8,layers=3,lr=0.002,topics=grouped",
+   "grouped L3 lr2e-3 pd6|per_day=6,layers=3,lr=0.002,topics=grouped"
+  ],
+  "curve": true,
+  "topics_detail": 3,
+  "out": "scripts/out/w2_sweep3.json"
+ },
+ "summary": {
+  "grouped base": {
+   "d3": 0.6606481481481481,
+   "d3_min": 0.5833333333333334,
+   "d3_ok": 0.0,
+   "d6": 0.7592592592592593,
+   "d10": 0.8333333333333334
+  },
+  "all L3 lr2e-3": {
+   "d3": 0.7305555555555555,
+   "d3_min": 0.5925925925925926,
+   "d3_ok": 0.25,
+   "d6": 0.9157407407407407,
+   "d10": 0.9555555555555556
+  },
+  "grouped L3 lr2e-3": {
+   "d3": 0.6856481481481481,
+   "d3_min": 0.6018518518518519,
+   "d3_ok": 0.0,
+   "d6": 0.7902777777777777,
+   "d10": 0.8898148148148148
+  },
+  "grouped L3 lr2e-3 pd8": {
+   "d3": 0.665625,
+   "d3_min": 0.5185185185185185,
+   "d3_ok": 0.0,
+   "d6": 0.7569444444444444,
+   "d10": 0.8416666666666667
+  },
+  "grouped L3 lr2e-3 pd6": {
+   "d3": 0.6723131613756613,
+   "d3_min": 0.5208333333333334,
+   "d3_ok": 0.05,
+   "d6": 0.7203703703703703,
+   "d10": 0.7902777777777777
+  }
+ }
+}

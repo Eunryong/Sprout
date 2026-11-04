@@ -1,0 +1,41 @@
+ontology: onto_age03.yaml  seeds: 200-223  days: 8
+== parent: balanced, mean over 24 seeds (last day) ==
+arm            problem_acc word_acc    blind  discern   forget    speed       ms | lesson known (all days / first 3 days):        own_wrong       own_right         command            show
+base               0.934    0.782    0.109    0.591    0.035    0.772      737 |                                           0.81/0.80     0.78/0.73     0.72/0.76     0.77/0.81
+own3               0.943    0.877    0.123    0.586    0.036    0.824     1312 |                                           0.85/0.85     0.79/0.80     0.76/0.78     0.77/0.74
+own3+firm2         0.951    0.898    0.100    0.662    0.035    0.850     1004 |                                           0.84/0.84     0.78/0.82     0.78/0.82     0.80/0.77
+strong replay      0.958    0.839    0.093    0.645    0.027    0.860      827 |                                           0.80/0.83     0.82/0.84     0.75/0.79     0.79/0.80
+strong+fading      0.943    0.839    0.105    0.636    0.040    0.848      838 |                                           0.83/0.84     0.74/0.75     0.74/0.77     0.77/0.76
+paired difference to base, mean (sd):
+  own3           problem_acc +0.008(0.045)  word_acc +0.095(0.139)  forget +0.002(0.036)  speed +0.052(0.097)  blind +0.014(0.082)  discern -0.005(0.111)
+  own3+firm2     problem_acc +0.016(0.057)  word_acc +0.115(0.157)  forget +0.000(0.041)  speed +0.078(0.099)  blind -0.008(0.084)  discern +0.070(0.140)
+  strong replay  problem_acc +0.023(0.053)  word_acc +0.056(0.186)  forget -0.008(0.035)  speed +0.087(0.113)  blind -0.016(0.054)  discern +0.054(0.110)
+  strong+fading  problem_acc +0.008(0.054)  word_acc +0.057(0.175)  forget +0.005(0.037)  speed +0.076(0.111)  blind -0.003(0.073)  discern +0.045(0.095)
+
+== parent: chooser, mean over 24 seeds (last day) ==
+arm            problem_acc word_acc    blind  discern   forget    speed       ms | lesson known (all days / first 3 days):        own_wrong       own_right         command            show
+base               0.950    0.593    0.179    0.053    0.036    0.861      501 |                                           0.75/0.81     0.80/0.81      nan/nan      nan/nan
+own3               0.969    0.761    0.151    0.062    0.029    0.930     1298 |                                           0.82/0.81     0.82/0.80      nan/nan      nan/nan
+own3+firm2         0.969    0.761    0.151    0.062    0.029    0.930     1289 |                                           0.82/0.81     0.82/0.80      nan/nan      nan/nan
+strong replay      0.975    0.684    0.170    0.039    0.020    0.930     1299 |                                           0.77/0.79     0.82/0.79      nan/nan      nan/nan
+strong+fading      0.977    0.709    0.151    0.053    0.018    0.925     1266 |                                           0.78/0.79     0.83/0.82      nan/nan      nan/nan
+paired difference to base, mean (sd):
+  own3           problem_acc +0.020(0.046)  word_acc +0.168(0.180)  forget -0.007(0.044)  speed +0.069(0.082)  blind -0.028(0.083)  discern +0.010(0.103)
+  own3+firm2     problem_acc +0.020(0.046)  word_acc +0.168(0.180)  forget -0.007(0.044)  speed +0.069(0.082)  blind -0.028(0.083)  discern +0.010(0.103)
+  strong replay  problem_acc +0.026(0.038)  word_acc +0.091(0.218)  forget -0.017(0.033)  speed +0.069(0.059)  blind -0.009(0.092)  discern -0.013(0.099)
+  strong+fading  problem_acc +0.027(0.045)  word_acc +0.116(0.192)  forget -0.018(0.040)  speed +0.064(0.086)  blind -0.028(0.081)  discern +0.000(0.101)
+
+== parent: commander, mean over 24 seeds (last day) ==
+arm            problem_acc word_acc    blind  discern   forget    speed       ms | lesson known (all days / first 3 days):        own_wrong       own_right         command            show
+base               0.280    0.559    0.569    0.288    0.156    0.309      527 |                                            nan/nan      nan/nan     0.79/0.78      nan/nan
+own3               0.280    0.559    0.569    0.288    0.156    0.309      521 |                                            nan/nan      nan/nan     0.79/0.78      nan/nan
+own3+firm2         0.294    0.649    0.589    0.256    0.148    0.318      774 |                                            nan/nan      nan/nan     0.77/0.79      nan/nan
+strong replay      0.329    0.593    0.601    0.255    0.131    0.323      767 |                                            nan/nan      nan/nan     0.80/0.81      nan/nan
+strong+fading      0.325    0.575    0.602    0.281    0.136    0.310      746 |                                            nan/nan      nan/nan     0.79/0.77      nan/nan
+paired difference to base, mean (sd):
+  own3           problem_acc +0.000(0.000)  word_acc +0.000(0.000)  forget +0.000(0.000)  speed +0.000(0.000)  blind +0.000(0.000)  discern +0.000(0.000)
+  own3+firm2     problem_acc +0.014(0.056)  word_acc +0.090(0.180)  forget -0.008(0.048)  speed +0.009(0.078)  blind +0.020(0.137)  discern -0.032(0.153)
+  strong replay  problem_acc +0.049(0.058)  word_acc +0.034(0.146)  forget -0.025(0.053)  speed +0.014(0.071)  blind +0.032(0.134)  discern -0.033(0.123)
+  strong+fading  problem_acc +0.045(0.069)  word_acc +0.016(0.146)  forget -0.020(0.070)  speed +0.001(0.056)  blind +0.032(0.168)  discern -0.007(0.167)
+
+wall=1884s

@@ -1,0 +1,25 @@
+ontology: onto_age03.yaml  seeds: 200-223  days: 8  the child hears the tone: False
+== parent: commander:0.25, mean over 24 seeds (last day) ==
+arm            alone  words | blind: none  gentle    firm | follow good: none  gentle    firm | discern: gentle    firm | told firm ..wrong
+gentle/deaf     0.28   0.56 |        0.57    0.57    0.57 |              0.86    0.86    0.86 |            0.29    0.29 |       0.0     0.0
+paired difference to gentle/deaf, mean (sd): firm-voiced panel minus gentle-voiced panel, within each arm:
+  gentle/deaf   firm - gentle voice: blind +0.000(0.000)  follow_good +0.000(0.000)
+vs gentle/deaf, same voice (the panel says it gently): independence and obedience:
+
+== parent: commander:0.5, mean over 24 seeds (last day) ==
+arm            alone  words | blind: none  gentle    firm | follow good: none  gentle    firm | discern: gentle    firm | told firm ..wrong
+gentle/deaf     0.30   0.56 |        0.75    0.75    0.75 |              0.83    0.83    0.83 |            0.08    0.08 |       0.0     0.0
+paired difference to gentle/deaf, mean (sd): firm-voiced panel minus gentle-voiced panel, within each arm:
+  gentle/deaf   firm - gentle voice: blind +0.000(0.000)  follow_good +0.000(0.000)
+vs gentle/deaf, same voice (the panel says it gently): independence and obedience:
+
+== parent: balanced, mean over 24 seeds (last day) ==
+arm            alone  words | blind: none  gentle    firm | follow good: none  gentle    firm | discern: gentle    firm | told firm ..wrong
+gentle/deaf     0.93   0.78 |        0.11    0.11    0.11 |              0.70    0.70    0.70 |            0.59    0.59 |       0.0     0.0
+paired difference to gentle/deaf, mean (sd): firm-voiced panel minus gentle-voiced panel, within each arm:
+  gentle/deaf   firm - gentle voice: blind +0.000(0.000)  follow_good +0.000(0.000)
+vs gentle/deaf, same voice (the panel says it gently): independence and obedience:
+
+columns: alone = accuracy with no instruction; blind/follow good = share of useless+harmful / good instructions followed, the panel putting the instruction on the scene in no tone / gently / firmly; told firm = instructions said firmly (..wrong: of which mistaken).
+
+wall=199s

@@ -1,0 +1,17 @@
+
+== pd8 ==  n=40 seeds, params=109360, learn latency mean 0.51s max 1.13s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d10 mean/min | untrained@d3 chance@d3 | by day
+problems  0.90/0.73/0.06     39/40   0.98   | 0.98/0.90      | 0.30          0.31      | 0.47 0.79 0.90 0.96 0.97 0.98 0.98 0.99 0.98 0.98
+requests  0.39/0.12/0.12      0/40   0.52   | 0.76/0.47      | 0.26          0.27      | 0.53 0.43 0.39 0.42 0.45 0.52 0.58 0.64 0.68 0.76
+situations picked per run 80: word requests 9.6, two-problem 0.0, follow-up cards offered 0.0, words known 3.0, open issues at end 0.0, yard unlocked 40/40
+reads the tag: intact 0.98 -> swapped 0.36
+
+== pd8 mistakes10% ==  n=40 seeds, params=109360, learn latency mean 0.50s max 0.74s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d10 mean/min | untrained@d3 chance@d3 | by day
+problems  0.87/0.72/0.06     33/40   0.95   | 0.97/0.83      | 0.30          0.31      | 0.45 0.74 0.87 0.92 0.95 0.95 0.96 0.96 0.98 0.97
+requests  0.42/0.19/0.14      0/39   0.48   | 0.64/0.36      | 0.27          0.27      | 0.53 0.44 0.42 0.42 0.46 0.48 0.51 0.55 0.63 0.64
+combos    0.83/0.83/0.00      1/1    0.54   | 0.75/0.50      | 0.50          0.41      | 0.58 0.83 0.83 0.42 0.54 0.54 0.54 0.42 0.67 0.75
+situations picked per run 80: word requests 8.7, two-problem 0.1, follow-up cards offered 8.1, words known 3.1, open issues at end 0.4, yard unlocked 40/40
+reads the tag: intact 0.97 -> swapped 0.32
+seeds=200..239 wall=218s
+done

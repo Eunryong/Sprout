@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "growing-web-mock",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "python", "-m", "server.web", "--seed", "1", "--save", "saves/web/check", "--port", "8000"],
+      "port": 8000,
+      "env": {"GROWING_LLM": "mock"}
+    }
+  ]
+}

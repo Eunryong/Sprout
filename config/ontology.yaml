@@ -1,0 +1,56 @@
+# World ontology and rules table (docs/WORLD.md sections 2-3). The ONLY source of which option is good.
+# The Director composes situations inside these lists; it cannot add to them. The child sees attributes only.
+# Adding a tag/verb/kind is a data change here (the child's vocabulary has spare room, see server/learning/codec.py).
+
+tags: [THIRSTY, FLOOR_WET, DARK, COLD, VISITOR, REQUEST]   # REQUEST = "Grandma asks for a named thing"
+verbs: [DRINK, WIPE, LIGHT, COVER, GIVE, FETCH, WAIT]
+colors: [red, blue, green, yellow]
+sizes: [small, big]
+shapes: [cylinder, flat, tube, long, sphere]
+materials: [ceramic, fabric, paper, wool, metal, rubber]
+locations: [house, yard]
+start_locations: [house]
+
+# kind -> its attributes. `kind` is engine/player knowledge only; the child sees shape/material/size/colour.
+# cloth / paper / blanket share a shape; flashlight / spoon share a material: no single attribute is enough.
+kinds:
+  cup:        {shape: cylinder, material: ceramic, sizes: [small, big]}
+  cloth:      {shape: flat,     material: fabric,  sizes: [small, big]}
+  paper:      {shape: flat,     material: paper,   sizes: [small, big]}
+  blanket:    {shape: flat,     material: wool,    sizes: [big]}
+  flashlight: {shape: tube,     material: metal,   sizes: [small, big]}
+  spoon:      {shape: long,     material: metal,   sizes: [small, big]}
+  ball:       {shape: sphere,   material: rubber,  sizes: [small, big]}
+
+# rules: problem tag -> [verb, target kind, value]. +2 solves, +1 partly, 0 nothing (anything not listed), WAIT below.
+rules:
+  THIRSTY:   [[DRINK, cup, 2], [GIVE, cup, 1]]
+  FLOOR_WET: [[WIPE, cloth, 2], [WIPE, paper, 1]]
+  DARK:      [[LIGHT, flashlight, 2]]
+  COLD:      [[COVER, blanket, 2], [COVER, cloth, 1]]
+  VISITOR:   [[GIVE, ball, 2], [GIVE, cup, 1]]
+wait_value: {THIRSTY: -1, FLOOR_WET: -1, DARK: 0, COLD: -1, VISITOR: -1, REQUEST: 0}
+
+plausible:
+  THIRSTY:   [[DRINK, cup], [GIVE, cup]]
+  FLOOR_WET: [[WIPE, cloth], [WIPE, paper], [COVER, blanket]]
+  DARK:      [[LIGHT, flashlight], [COVER, blanket]]
+  COLD:      [[COVER, blanket], [COVER, cloth]]
+  VISITOR:   [[GIVE, ball], [GIVE, cup]]
+
+# REQUEST: FETCH the named kind = 2, any other thing = 0. Only these kinds can be given a word.
+request: {verb: FETCH, value: 2, kinds: [cup, cloth, paper, ball]}
+
+# value -> outcome label recorded in events (2 solved, 1 partial, 0 nothing, below 0 worse)
+outcomes: {solved: 2, partial: 1, nothing: 0}
+
+# World memory (docs/WORLD.md section 6). The engine decides these; the Director only uses them.
+followups:
+  # an open problem may come back in a later situation (links_to). If it got WORSE, the extra tag may join it.
+  escalation: {FLOOR_WET: VISITOR}
+  # solving a problem opens a place (cards at that place become valid)
+  unlocks: {DARK: yard}
+  # words are introduced sparsely, as a follow-up of using a thing: a kind becomes nameable once a chosen
+  # option used it with value >= nameable_min_value; at most `requests_per_day` REQUEST situations a day.
+  nameable_min_value: 1
+  requests_per_day: 1

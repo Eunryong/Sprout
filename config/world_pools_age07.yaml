@@ -1,0 +1,167 @@
+# Plausible relations a randomly made 0-7 years world may pick from (the same idea as world_pools.yaml, for config/ontology_age07.yaml).
+# Every household is its own world: which of the plausible things really warms, soothes or helps is picked at random, so no two children
+# have to learn the same rules. The alphabet (tags, verbs, kinds and their attributes, affordances, stages) comes from `base`.
+# [verb, kind, allowed values]: 2 solves, 1 helps a little, 0 nothing, -1 makes it worse. Every pair must be possible under the base
+# affordances (tests/test_worldgen07.py checks it). A pair a world does not pick counts 0.
+base: ontology_age07.yaml
+premise: "A house of its own: warm or not, the things in it work the way they work here."
+
+problems:
+  BABY_HUNGRY:
+    rules:
+      - [FEED, bottle, [1, 2]]
+      - [FEED, spoon, [0, 1, 2]]
+      - [FEED, bread, [-1, 0]]       # too early for bread
+      - [GIVE, bottle, [0, 1]]
+    wait: [-1]
+    opens: [0]
+  UPSET:
+    rules:
+      - [HUG, teddy, [1, 2]]
+      - [HUG, blanket, [0, 1, 2]]
+      - [FEED, bottle, [0, 1, 2]]    # some babies settle on milk
+      - [GIVE, ball, [0, 1]]         # a distraction
+      - [READ, book, [0, 1]]
+      - [LIGHT, flashlight, [-1, 0]]  # a light in the eyes
+    wait: [-1, 0]
+    opens: [0]
+  COLD:
+    rules:
+      - [COVER, blanket, [1, 2]]
+      - [COVER, cloth, [0, 1, 2]]
+      - [HUG, blanket, [0, 1, 2]]
+      - [HUG, teddy, [0, 1]]
+      - [FEED, bottle, [0, 1]]       # something warm to drink
+      - [COVER, bandage, [-1, 0]]
+    wait: [-1]
+    opens: [0]
+  THIRSTY:
+    rules:
+      - [DRINK, cup, [1, 2]]
+      - [DRINK, bottle, [0, 1, 2]]
+      - [GIVE, cup, [0, 1]]
+      - [FEED, spoon, [0, 1]]
+      - [GIVE, spoon, [-1, 0]]       # the wrong end of the spoon
+    wait: [-1, 0]
+    opens: [12]
+  HUNGRY:
+    rules:
+      - [EAT, bread, [1, 2]]
+      - [FEED, bread, [0, 1, 2]]
+      - [EAT, spoon, [0, 1]]
+      - [GIVE, bread, [0, 1]]
+    wait: [-1, 0]
+    opens: [12, 18]
+  FLOOR_WET:
+    rules:
+      - [WIPE, cloth, [2]]
+      - [WIPE, paper, [0, 1]]
+      - [COVER, cloth, [-1, 0]]
+      - [COVER, blanket, [-1, 0]]
+    wait: [-1, 0]
+    opens: [18, 24]
+  MESSY:
+    rules:
+      - [TIDY, box, [1, 2]]          # toys back into the box
+      - [TIDY, backpack, [0, 1, 2]]
+      - [GIVE, box, [0, 1]]
+      - [GIVE, ball, [-1, 0]]        # more things on the floor
+    wait: [-1, 0]
+    opens: [18, 24]
+  DARK:
+    rules:
+      - [LIGHT, flashlight, [2]]
+      - [HUG, teddy, [0, 1]]
+      - [GIVE, flashlight, [0, 1]]
+      - [GIVE, ball, [-1, 0]]        # something to trip on in the dark
+    wait: [-1, 0]
+    opens: [24]
+  VISITOR:
+    rules:
+      - [GIVE, ball, [0, 1, 2]]
+      - [GIVE, cup, [0, 1, 2]]
+      - [GIVE, bread, [0, 1, 2]]
+      - [GIVE, book, [0, 1]]
+      - [HUG, teddy, [0, 1]]
+    wait: [-1, 0]
+    opens: [24, 30]
+  DIRTY_HANDS:
+    rules:
+      - [WASH, soap, [1, 2]]
+      - [WASH, cloth, [0, 1, 2]]
+      - [WIPE, cloth, [0, 1]]
+      - [WIPE, paper, [-1, 0]]
+    wait: [0]
+    opens: [36]
+  HURT:
+    rules:
+      - [COVER, bandage, [1, 2]]
+      - [HUG, teddy, [0, 1, 2]]
+      - [HUG, blanket, [0, 1]]
+      - [COVER, cloth, [0, 1]]
+    wait: [-1]
+    opens: [36]
+  BORED:
+    rules:
+      - [DRAW, crayon, [1, 2]]
+      - [READ, book, [1, 2]]
+      - [GIVE, ball, [0, 1, 2]]
+      - [READ, paper, [0, 1]]
+    wait: [0]
+    opens: [42]
+  RAIN:
+    rules:
+      - [SHELTER, umbrella, [2]]
+      - [SHELTER, cloth, [0, 1]]
+      - [SHELTER, blanket, [0, 1]]
+      - [WEAR, backpack, [-1, 0]]
+    wait: [-1, 0]
+    opens: [48]
+  SCHOOL_MORNING:
+    rules:
+      - [WEAR, backpack, [2]]
+      - [FETCH, backpack, [0, 1]]
+      - [TIDY, backpack, [0, 1]]
+    wait: [-1]
+    opens: [60]
+  FRIEND_SAD:
+    rules:
+      - [GIVE, teddy, [1, 2]]
+      - [GIVE, paper, [0, 1, 2]]
+      - [GIVE, book, [0, 1]]
+      - [HUG, teddy, [0, 1]]
+    wait: [-1]
+    opens: [66]
+
+request:
+  verb: FETCH
+  kinds: [cup, bread, teddy, ball]   # the base world names these four; a world names n_words of them
+  n_words: 4
+
+followups:
+  escalation: [[FLOOR_WET, VISITOR]]
+  unlocks: {DARK: yard}
+  lingers: []                          # a need left alone is not brought back by force
+  nameable_min_value: 1
+  requests_per_day: 1
+
+schedule:
+  start_month: 0
+  months_per_day: 6
+  ramp_skip: 0.5
+  days: 14
+  closes: {BABY_HUNGRY: 12}
+
+# What a world teaches from a choice stays what the hand-written 0-7 years world uses (nothing extra is replayed after a bad result).
+learning:
+  burn_worse_rounds: [0, 0]
+  burn_nothing_rounds: [0, 0]
+  regret_rounds: [0, 0]
+  own_burn_worse_rounds: [0, 0]
+  own_burn_nothing_rounds: [0, 0]
+temperaments:
+  usual: [0, 0, 0]
+
+curiosity: [0.0, 1.0]
+
+max_traps_per_world: 8

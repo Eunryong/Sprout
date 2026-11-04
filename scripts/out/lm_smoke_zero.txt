@@ -1,0 +1,38 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+W1101 14:47:10.333000 42470 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/272 [00:00<?, ?it/s]Loading weights:  87%|████████▋ | 237/272 [00:00<00:00, 2365.22it/s]Loading weights: 100%|██████████| 272/272 [00:00<00:00, 2413.98it/s]
+{
+ "6": {
+  "val_mae": 0.7960438218378322,
+  "kl": 5.48372213415871,
+  "top_in_set": 0.16774193548387098,
+  "best_pick": 0.42,
+  "regret": 0.7783333333333334,
+  "own_reward": NaN
+ },
+ "12": {
+  "val_mae": 0.7960438218378322,
+  "kl": 5.48372213415871,
+  "top_in_set": 0.16774193548387098,
+  "best_pick": 0.42,
+  "regret": 0.7783333333333334,
+  "own_reward": NaN
+ },
+ "30": {
+  "val_mae": 0.7960438218378322,
+  "kl": 5.48372213415871,
+  "top_in_set": 0.16774193548387098,
+  "best_pick": 0.42,
+  "regret": 0.7783333333333334,
+  "own_reward": -0.3916666666666667
+ },
+ "84": {
+  "val_mae": 0.7960438218378322,
+  "kl": 5.48372213415871,
+  "top_in_set": 0.16774193548387098,
+  "best_pick": 0.42,
+  "regret": 0.7783333333333334,
+  "own_reward": -0.1888888888888889
+ },
+ "seconds": 165.01966786384583
+}

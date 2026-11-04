@@ -1,0 +1,21 @@
+client=sloppy seeds=10 days=3
+Director  calls= 240  usable=93.8%  first-try=55.0%  repaired=38.7%  fallback=6.2%  latency p50/p95=0.00/0.00s
+Narrator  calls= 720  usable=70.4%  fallback=29.6%  latency p50/p95=0.00/0.00s
+teasers dropped by the guard: 7.5% of cards
+   director rejected x54: ProposalError: no option solves the situation
+   director rejected x25: ProposalError: unknown tag in ['DRAGON']
+   director rejected x17: ClientError: sloppy: simulated timeout
+   director rejected x15: ProposalError: need exactly # cards
+   director rejected x12: ProposalError: the two cards are identical
+   narrator rejected x88: ValueError: names ['flashlight', 'spoon']
+   narrator rejected x38: ClientError: sloppy: simulated timeout
+   narrator rejected x30: ValueError: empty
+   narrator rejected x28: ValueError: leaks an internal token
+   narrator rejected x17: ValueError: contradicts the outcome (worse)
+   narrator rejected x8: ValueError: names ['spoon']
+injected faults: {'no_solver': 65, 'contradicts': 54, 'internal_token': 28, 'leaky_teaser': 36, 'raise': 55, 'names_kind': 96, 'empty': 30, 'unknown_tag': 25, 'twin_topics': 12, 'one_card': 15}
+cards=480  topics={'THIRSTY': 89, 'VISITOR': 85, 'COLD': 84, 'FLOOR_WET': 84, 'DARK': 83, 'REQUEST': 55}
+   objects/card=3.3  options/card=4.2  same kind twice=26%  WAIT offered=52%  colours used=4/4  kinds={'cup': 265, 'cloth': 254, 'blanket': 246, 'flashlight': 246, 'ball': 235, 'paper': 188, 'spoon': 158}
+distinct day themes: 5
+child's evening quiz on the last day played: mean 0.85 (min 0.70)
+acceptance (proposed): PASS Director usable >= 90%; FAIL Director first-try >= 60%; PASS Director fallback <= 10%; FAIL Narrator usable >= 85%; PASS Director p95 <= 8s; PASS Narrator p95 <= 4s; PASS teaser drop <= 15%

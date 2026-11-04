@@ -1,0 +1,16 @@
+
+after 6 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  rand_frozen                    1.433       0.692       0.458       0.329       0.916      -0.079
+  rand_frozen_soft               1.382       0.696       0.473       0.328       0.919      -0.060
+
+after 12 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  rand_frozen                    1.440       0.626       0.541       0.374       0.846      -0.080
+  rand_frozen_soft               1.218       0.624       0.540       0.362       0.869      -0.034
+
+after 24 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  rand_frozen                    1.259       0.552       0.592       0.458       0.713      -0.125
+  rand_frozen_soft               0.996       0.548       0.558       0.440       0.738      -0.087
+
+after 48 scenes                   kl     val_mae  top_in_set   best_pick      regret  own_reward
+  rand_frozen                    1.115       0.532       0.598       0.557       0.557      -0.070
+  rand_frozen_soft               0.891       0.519       0.575       0.553       0.567      -0.032

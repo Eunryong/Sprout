@@ -1,0 +1,167 @@
+{
+ "hash": "6236b33feef6",
+ "sheet": {
+  "seed": 19,
+  "source": "template",
+  "premise": "A small house, a toddler of 12 months, and a world of its own rules.",
+  "rules": {
+   "THIRSTY": [
+    [
+     "DRINK",
+     "cup",
+     2
+    ],
+    [
+     "GIVE",
+     "cup",
+     1
+    ]
+   ],
+   "HUNGRY": [
+    [
+     "EAT",
+     "bread",
+     2
+    ]
+   ],
+   "UPSET": [
+    [
+     "HUG",
+     "teddy",
+     2
+    ],
+    [
+     "HUG",
+     "blanket",
+     1
+    ],
+    [
+     "GIVE",
+     "teddy",
+     2
+    ],
+    [
+     "GIVE",
+     "ball",
+     2
+    ],
+    [
+     "LIGHT",
+     "flashlight",
+     -1
+    ]
+   ],
+   "FLOOR_WET": [
+    [
+     "WIPE",
+     "cloth",
+     2
+    ],
+    [
+     "WIPE",
+     "paper",
+     1
+    ]
+   ],
+   "MESSY": [
+    [
+     "TIDY",
+     "box",
+     2
+    ],
+    [
+     "TIDY",
+     "ball",
+     1
+    ],
+    [
+     "TIDY",
+     "teddy",
+     -1
+    ]
+   ],
+   "DARK": [
+    [
+     "LIGHT",
+     "flashlight",
+     2
+    ],
+    [
+     "GIVE",
+     "flashlight",
+     1
+    ],
+    [
+     "LIGHT",
+     "ball",
+     -1
+    ]
+   ],
+   "COLD": [
+    [
+     "COVER",
+     "blanket",
+     2
+    ],
+    [
+     "COVER",
+     "cloth",
+     1
+    ],
+    [
+     "HUG",
+     "teddy",
+     1
+    ]
+   ],
+   "VISITOR": [
+    [
+     "GIVE",
+     "ball",
+     2
+    ],
+    [
+     "GIVE",
+     "bread",
+     1
+    ]
+   ]
+  },
+  "wait_value": {
+   "THIRSTY": -1,
+   "HUNGRY": 0,
+   "UPSET": -1,
+   "FLOOR_WET": 0,
+   "MESSY": 0,
+   "DARK": -1,
+   "COLD": 0,
+   "VISITOR": -1
+  },
+  "request_kinds": [
+   "paper",
+   "bread",
+   "ball",
+   "teddy"
+  ],
+  "escalation": {},
+  "opens": {
+   "THIRSTY": 12,
+   "HUNGRY": 12,
+   "UPSET": 12,
+   "FLOOR_WET": 18,
+   "MESSY": 18,
+   "DARK": 24,
+   "COLD": 18,
+   "VISITOR": 24
+  },
+  "learning": {
+   "burn_worse_rounds": 3,
+   "burn_nothing_rounds": 1,
+   "regret_rounds": 2,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "days": 8,
+  "lines": {}
+ }
+}

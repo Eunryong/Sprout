@@ -1,0 +1,1070 @@
+[
+ {
+  "seed": 21,
+  "source": "director:muse-spark-1.3-contributor",
+  "attempts": 1,
+  "ok": true,
+  "seconds": 38.1,
+  "attempt_errors": [],
+  "error": null,
+  "valid": true,
+  "hash": "55a3dce3303f",
+  "traps": 7,
+  "same_relations_as_template": 0.5,
+  "curiosity": 0.6,
+  "n_rules": 31,
+  "n_lines": 22,
+  "learning": {
+   "burn_worse_rounds": 1,
+   "burn_nothing_rounds": 0,
+   "regret_rounds": 1,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "premise": "Rain drums softly on the roof while the small house glows warm around its family.",
+  "sheet": {
+   "seed": 21,
+   "source": "director:muse-spark-1.3-contributor",
+   "premise": "Rain drums softly on the roof while the small house glows warm around its family.",
+   "rules": {
+    "THIRSTY": [
+     [
+      "DRINK",
+      "cup",
+      2
+     ],
+     [
+      "DRINK",
+      "spoon",
+      1
+     ],
+     [
+      "COVER",
+      "cup",
+      -1
+     ]
+    ],
+    "HUNGRY": [
+     [
+      "EAT",
+      "bread",
+      2
+     ],
+     [
+      "EAT",
+      "spoon",
+      1
+     ],
+     [
+      "GIVE",
+      "bread",
+      1
+     ],
+     [
+      "EAT",
+      "ball",
+      -1
+     ]
+    ],
+    "UPSET": [
+     [
+      "HUG",
+      "teddy",
+      2
+     ],
+     [
+      "HUG",
+      "blanket",
+      1
+     ],
+     [
+      "GIVE",
+      "teddy",
+      1
+     ],
+     [
+      "GIVE",
+      "ball",
+      2
+     ],
+     [
+      "LIGHT",
+      "flashlight",
+      -1
+     ]
+    ],
+    "FLOOR_WET": [
+     [
+      "WIPE",
+      "cloth",
+      2
+     ],
+     [
+      "WIPE",
+      "paper",
+      1
+     ],
+     [
+      "WIPE",
+      "blanket",
+      -1
+     ],
+     [
+      "COVER",
+      "cloth",
+      -1
+     ]
+    ],
+    "MESSY": [
+     [
+      "TIDY",
+      "box",
+      2
+     ],
+     [
+      "TIDY",
+      "ball",
+      1
+     ],
+     [
+      "TIDY",
+      "teddy",
+      1
+     ],
+     [
+      "TIDY",
+      "bread",
+      -1
+     ]
+    ],
+    "DARK": [
+     [
+      "LIGHT",
+      "flashlight",
+      2
+     ],
+     [
+      "GIVE",
+      "flashlight",
+      1
+     ],
+     [
+      "COVER",
+      "flashlight",
+      -1
+     ]
+    ],
+    "COLD": [
+     [
+      "COVER",
+      "blanket",
+      2
+     ],
+     [
+      "COVER",
+      "cloth",
+      1
+     ],
+     [
+      "COVER",
+      "paper",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ],
+    "VISITOR": [
+     [
+      "GIVE",
+      "ball",
+      2
+     ],
+     [
+      "GIVE",
+      "bread",
+      1
+     ],
+     [
+      "GIVE",
+      "cup",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ]
+   },
+   "wait_value": {
+    "THIRSTY": -1,
+    "HUNGRY": -1,
+    "UPSET": -1,
+    "FLOOR_WET": -1,
+    "MESSY": -1,
+    "DARK": -1,
+    "COLD": -1,
+    "VISITOR": -1
+   },
+   "request_kinds": [
+    "cup",
+    "bread",
+    "teddy",
+    "ball"
+   ],
+   "escalation": {
+    "FLOOR_WET": "VISITOR"
+   },
+   "opens": {
+    "THIRSTY": 12,
+    "HUNGRY": 12,
+    "UPSET": 18,
+    "FLOOR_WET": 18,
+    "MESSY": 18,
+    "DARK": 24,
+    "COLD": 24,
+    "VISITOR": 24
+   },
+   "learning": {
+    "burn_worse_rounds": 1,
+    "burn_nothing_rounds": 0,
+    "regret_rounds": 1,
+    "own_burn_worse_rounds": 0,
+    "own_burn_nothing_rounds": 0
+   },
+   "days": 8,
+   "curiosity": 0.6,
+   "lines": {
+    "THIRSTY": {
+     "DRINK spoon": "A spoon holds only a few drops at a time.",
+     "COVER cup": "A covered cup keeps its contents hidden away."
+    },
+    "HUNGRY": {
+     "EAT spoon": "A spoon is hard and has no flavour of its own.",
+     "GIVE bread": "Bread shared away leaves the pantry emptier.",
+     "EAT ball": "A rubber ball bounces and cannot be chewed."
+    },
+    "UPSET": {
+     "HUG blanket": "A blanket is soft but stays limp in arms.",
+     "GIVE teddy": "Teddy given away sits far from arms.",
+     "LIGHT flashlight": "A bright flashlight flickers in crying eyes."
+    },
+    "FLOOR_WET": {
+     "WIPE paper": "Paper tears and soaks through quickly.",
+     "WIPE blanket": "A blanket spreads water around as it drags.",
+     "COVER cloth": "Cloth draped over spills hides the puddle."
+    },
+    "MESSY": {
+     "TIDY ball": "A ball rolls and drops its load.",
+     "TIDY teddy": "Teddy is soft and lumpy to stack upon.",
+     "TIDY bread": "Bread crumbles when pressed under weight."
+    },
+    "DARK": {
+     "GIVE flashlight": "A flashlight passed along glows elsewhere.",
+     "COVER flashlight": "A flashlight covered up gives no light."
+    },
+    "COLD": {
+     "COVER cloth": "Cloth is thin and lets the chill through.",
+     "COVER paper": "Paper rustles and tears in the draught.",
+     "HUG teddy": "Teddy is small and gives little warmth."
+    },
+    "VISITOR": {
+     "GIVE bread": "Bread breaks into small pieces for sharing.",
+     "GIVE cup": "A cup is plain to play with.",
+     "HUG teddy": "Teddy stays close in familiar arms."
+    }
+   }
+  }
+ },
+ {
+  "seed": 22,
+  "source": "director:muse-spark-1.3-contributor",
+  "attempts": 1,
+  "ok": true,
+  "seconds": 36.8,
+  "attempt_errors": [],
+  "error": null,
+  "valid": true,
+  "hash": "57fd06f7dab0",
+  "traps": 8,
+  "same_relations_as_template": 0.66,
+  "curiosity": 0.2,
+  "n_rules": 33,
+  "n_lines": 24,
+  "learning": {
+   "burn_worse_rounds": 5,
+   "burn_nothing_rounds": 2,
+   "regret_rounds": 3,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "premise": "Rain drums softly on the roof while the small house stays warm and close around its family.",
+  "sheet": {
+   "seed": 22,
+   "source": "director:muse-spark-1.3-contributor",
+   "premise": "Rain drums softly on the roof while the small house stays warm and close around its family.",
+   "rules": {
+    "THIRSTY": [
+     [
+      "DRINK",
+      "cup",
+      2
+     ],
+     [
+      "DRINK",
+      "spoon",
+      1
+     ],
+     [
+      "GIVE",
+      "cup",
+      1
+     ],
+     [
+      "COVER",
+      "cup",
+      -1
+     ]
+    ],
+    "HUNGRY": [
+     [
+      "EAT",
+      "bread",
+      2
+     ],
+     [
+      "EAT",
+      "spoon",
+      1
+     ],
+     [
+      "GIVE",
+      "bread",
+      1
+     ],
+     [
+      "EAT",
+      "ball",
+      -1
+     ]
+    ],
+    "UPSET": [
+     [
+      "HUG",
+      "teddy",
+      2
+     ],
+     [
+      "HUG",
+      "blanket",
+      1
+     ],
+     [
+      "GIVE",
+      "teddy",
+      1
+     ],
+     [
+      "GIVE",
+      "ball",
+      1
+     ],
+     [
+      "LIGHT",
+      "flashlight",
+      -1
+     ]
+    ],
+    "FLOOR_WET": [
+     [
+      "WIPE",
+      "cloth",
+      2
+     ],
+     [
+      "WIPE",
+      "paper",
+      1
+     ],
+     [
+      "WIPE",
+      "blanket",
+      -1
+     ],
+     [
+      "COVER",
+      "cloth",
+      -1
+     ]
+    ],
+    "MESSY": [
+     [
+      "TIDY",
+      "box",
+      2
+     ],
+     [
+      "TIDY",
+      "ball",
+      1
+     ],
+     [
+      "TIDY",
+      "teddy",
+      1
+     ],
+     [
+      "TIDY",
+      "bread",
+      -1
+     ]
+    ],
+    "DARK": [
+     [
+      "LIGHT",
+      "flashlight",
+      2
+     ],
+     [
+      "GIVE",
+      "flashlight",
+      1
+     ],
+     [
+      "COVER",
+      "flashlight",
+      -1
+     ],
+     [
+      "LIGHT",
+      "ball",
+      -1
+     ]
+    ],
+    "COLD": [
+     [
+      "COVER",
+      "blanket",
+      2
+     ],
+     [
+      "COVER",
+      "cloth",
+      1
+     ],
+     [
+      "COVER",
+      "paper",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ],
+    "VISITOR": [
+     [
+      "GIVE",
+      "ball",
+      2
+     ],
+     [
+      "GIVE",
+      "bread",
+      2
+     ],
+     [
+      "GIVE",
+      "cup",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ]
+   },
+   "wait_value": {
+    "THIRSTY": -1,
+    "HUNGRY": -1,
+    "UPSET": -1,
+    "FLOOR_WET": -1,
+    "MESSY": -1,
+    "DARK": -1,
+    "COLD": -1,
+    "VISITOR": -1
+   },
+   "request_kinds": [
+    "cup",
+    "bread",
+    "ball",
+    "cloth"
+   ],
+   "escalation": {
+    "FLOOR_WET": "VISITOR"
+   },
+   "opens": {
+    "THIRSTY": 12,
+    "HUNGRY": 12,
+    "UPSET": 12,
+    "FLOOR_WET": 18,
+    "MESSY": 18,
+    "DARK": 24,
+    "COLD": 18,
+    "VISITOR": 24
+   },
+   "learning": {
+    "burn_worse_rounds": 5,
+    "burn_nothing_rounds": 2,
+    "regret_rounds": 3,
+    "own_burn_worse_rounds": 0,
+    "own_burn_nothing_rounds": 0
+   },
+   "days": 8,
+   "curiosity": 0.2,
+   "lines": {
+    "THIRSTY": {
+     "DRINK spoon": "A spoon holds only a tiny sip at a time.",
+     "GIVE cup": "A cup passed along still quenches a little thirst.",
+     "COVER cup": "A covered cup keeps its water out of reach."
+    },
+    "HUNGRY": {
+     "EAT spoon": "A spoon carries only a crumb of soft food.",
+     "GIVE bread": "Shared bread leaves only a small piece behind.",
+     "EAT ball": "A ball is rubbery and cannot be chewed."
+    },
+    "UPSET": {
+     "HUG blanket": "A blanket is warm but not soft like fur.",
+     "GIVE teddy": "A teddy given away is far to hug.",
+     "GIVE ball": "A ball bounces and distracts for a moment.",
+     "LIGHT flashlight": "A bright flashlight beam stings wet eyes."
+    },
+    "FLOOR_WET": {
+     "WIPE paper": "Paper tears quickly when it soaks.",
+     "WIPE blanket": "A blanket just pushes water around.",
+     "COVER cloth": "Cloth laid flat hides the puddle underneath."
+    },
+    "MESSY": {
+     "TIDY ball": "A ball can hold only a few small toys.",
+     "TIDY teddy": "A teddy arms hold very little.",
+     "TIDY bread": "Bread crumbles when toys are piled on it."
+    },
+    "DARK": {
+     "GIVE flashlight": "A flashlight handed away shines elsewhere.",
+     "COVER flashlight": "A covered flashlight keeps all its light inside.",
+     "LIGHT ball": "A ball clicks but gives no light."
+    },
+    "COLD": {
+     "COVER cloth": "Thin cloth lets the chill through.",
+     "COVER paper": "Paper rustles and slips off easily.",
+     "HUG teddy": "Hugging a teddy warms hands a little."
+    },
+    "VISITOR": {
+     "GIVE cup": "A cup offers a drink but nothing to play with.",
+     "HUG teddy": "Hugging a teddy leaves arms full."
+    }
+   }
+  }
+ },
+ {
+  "seed": 23,
+  "source": "director:muse-spark-1.3-contributor",
+  "attempts": 1,
+  "ok": true,
+  "seconds": 25.3,
+  "attempt_errors": [],
+  "error": null,
+  "valid": true,
+  "hash": "a0f64952d36c",
+  "traps": 5,
+  "same_relations_as_template": 0.47,
+  "curiosity": 0.2,
+  "n_rules": 24,
+  "n_lines": 16,
+  "learning": {
+   "burn_worse_rounds": 1,
+   "burn_nothing_rounds": 0,
+   "regret_rounds": 1,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "premise": "Rain taps the windows while the little house hums softly around its small family.",
+  "sheet": {
+   "seed": 23,
+   "source": "director:muse-spark-1.3-contributor",
+   "premise": "Rain taps the windows while the little house hums softly around its small family.",
+   "rules": {
+    "THIRSTY": [
+     [
+      "DRINK",
+      "cup",
+      2
+     ],
+     [
+      "DRINK",
+      "spoon",
+      1
+     ]
+    ],
+    "HUNGRY": [
+     [
+      "EAT",
+      "bread",
+      2
+     ],
+     [
+      "EAT",
+      "spoon",
+      1
+     ],
+     [
+      "EAT",
+      "ball",
+      -1
+     ]
+    ],
+    "UPSET": [
+     [
+      "HUG",
+      "teddy",
+      2
+     ],
+     [
+      "HUG",
+      "blanket",
+      1
+     ],
+     [
+      "LIGHT",
+      "flashlight",
+      -1
+     ]
+    ],
+    "FLOOR_WET": [
+     [
+      "WIPE",
+      "cloth",
+      2
+     ],
+     [
+      "WIPE",
+      "paper",
+      1
+     ],
+     [
+      "WIPE",
+      "blanket",
+      -1
+     ]
+    ],
+    "MESSY": [
+     [
+      "TIDY",
+      "box",
+      2
+     ],
+     [
+      "TIDY",
+      "ball",
+      1
+     ],
+     [
+      "TIDY",
+      "bread",
+      -1
+     ]
+    ],
+    "DARK": [
+     [
+      "LIGHT",
+      "flashlight",
+      2
+     ],
+     [
+      "GIVE",
+      "flashlight",
+      1
+     ],
+     [
+      "LIGHT",
+      "ball",
+      -1
+     ]
+    ],
+    "COLD": [
+     [
+      "COVER",
+      "blanket",
+      2
+     ],
+     [
+      "COVER",
+      "cloth",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ],
+    "VISITOR": [
+     [
+      "GIVE",
+      "ball",
+      2
+     ],
+     [
+      "GIVE",
+      "bread",
+      2
+     ],
+     [
+      "GIVE",
+      "cup",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ]
+   },
+   "wait_value": {
+    "THIRSTY": 0,
+    "HUNGRY": 0,
+    "UPSET": 0,
+    "FLOOR_WET": -1,
+    "MESSY": 0,
+    "DARK": -1,
+    "COLD": 0,
+    "VISITOR": 0
+   },
+   "request_kinds": [
+    "cup",
+    "bread",
+    "ball",
+    "cloth"
+   ],
+   "escalation": {
+    "FLOOR_WET": "VISITOR"
+   },
+   "opens": {
+    "THIRSTY": 12,
+    "HUNGRY": 12,
+    "UPSET": 12,
+    "FLOOR_WET": 18,
+    "MESSY": 18,
+    "COLD": 18,
+    "DARK": 24,
+    "VISITOR": 24
+   },
+   "learning": {
+    "burn_worse_rounds": 1,
+    "burn_nothing_rounds": 0,
+    "regret_rounds": 1,
+    "own_burn_worse_rounds": 0,
+    "own_burn_nothing_rounds": 0
+   },
+   "days": 8,
+   "curiosity": 0.2,
+   "lines": {
+    "THIRSTY": {
+     "DRINK spoon": "A spoon carries only a tiny sip at a time.",
+     "DRINK cup": "A cup holds a long cool drink."
+    },
+    "HUNGRY": {
+     "EAT spoon": "A spoon alone leaves the belly mostly empty.",
+     "EAT ball": "Rubber bounces back and brings tears."
+    },
+    "UPSET": {
+     "HUG blanket": "A blanket is warm but its wool feels scratchy.",
+     "LIGHT flashlight": "Bright light stings wet eyes in the gloom."
+    },
+    "FLOOR_WET": {
+     "WIPE paper": "Paper tears apart when it gets soaked through.",
+     "WIPE blanket": "A blanket just pushes the puddle around."
+    },
+    "MESSY": {
+     "TIDY ball": "A ball rolls away and drops toys again.",
+     "TIDY bread": "Crumbs scatter everywhere across the floor."
+    },
+    "DARK": {
+     "GIVE flashlight": "A flashlight passed along glows from far hands.",
+     "LIGHT ball": "A ball clicks but makes no light at all."
+    },
+    "COLD": {
+     "COVER cloth": "Thin cloth lets the draught slip through.",
+     "HUG teddy": "A teddy warms the arms for a moment."
+    },
+    "VISITOR": {
+     "GIVE cup": "A cup is held quietly for a short while.",
+     "HUG teddy": "A teddy stays close to home arms."
+    }
+   }
+  }
+ },
+ {
+  "seed": 24,
+  "source": "director:muse-spark-1.3-contributor",
+  "attempts": 1,
+  "ok": true,
+  "seconds": 26.6,
+  "attempt_errors": [],
+  "error": null,
+  "valid": true,
+  "hash": "7b2f2d5f0927",
+  "traps": 6,
+  "same_relations_as_template": 0.37,
+  "curiosity": 0.2,
+  "n_rules": 27,
+  "n_lines": 19,
+  "learning": {
+   "burn_worse_rounds": 3,
+   "burn_nothing_rounds": 1,
+   "regret_rounds": 2,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "premise": "Rain drums softly on the roof while the little house glows warm inside.",
+  "sheet": {
+   "seed": 24,
+   "source": "director:muse-spark-1.3-contributor",
+   "premise": "Rain drums softly on the roof while the little house glows warm inside.",
+   "rules": {
+    "THIRSTY": [
+     [
+      "DRINK",
+      "cup",
+      2
+     ],
+     [
+      "GIVE",
+      "cup",
+      1
+     ],
+     [
+      "COVER",
+      "cup",
+      -1
+     ]
+    ],
+    "HUNGRY": [
+     [
+      "EAT",
+      "bread",
+      2
+     ],
+     [
+      "GIVE",
+      "bread",
+      1
+     ],
+     [
+      "EAT",
+      "ball",
+      -1
+     ]
+    ],
+    "UPSET": [
+     [
+      "HUG",
+      "teddy",
+      2
+     ],
+     [
+      "HUG",
+      "blanket",
+      1
+     ],
+     [
+      "GIVE",
+      "ball",
+      1
+     ],
+     [
+      "LIGHT",
+      "flashlight",
+      -1
+     ]
+    ],
+    "FLOOR_WET": [
+     [
+      "WIPE",
+      "cloth",
+      2
+     ],
+     [
+      "WIPE",
+      "paper",
+      1
+     ],
+     [
+      "WIPE",
+      "blanket",
+      -1
+     ]
+    ],
+    "MESSY": [
+     [
+      "TIDY",
+      "box",
+      2
+     ],
+     [
+      "TIDY",
+      "ball",
+      1
+     ],
+     [
+      "TIDY",
+      "teddy",
+      1
+     ],
+     [
+      "TIDY",
+      "bread",
+      -1
+     ]
+    ],
+    "DARK": [
+     [
+      "LIGHT",
+      "flashlight",
+      2
+     ],
+     [
+      "GIVE",
+      "flashlight",
+      1
+     ],
+     [
+      "LIGHT",
+      "ball",
+      -1
+     ]
+    ],
+    "COLD": [
+     [
+      "COVER",
+      "blanket",
+      2
+     ],
+     [
+      "COVER",
+      "cloth",
+      1
+     ],
+     [
+      "COVER",
+      "paper",
+      1
+     ]
+    ],
+    "VISITOR": [
+     [
+      "GIVE",
+      "ball",
+      2
+     ],
+     [
+      "GIVE",
+      "bread",
+      1
+     ],
+     [
+      "GIVE",
+      "cup",
+      1
+     ],
+     [
+      "HUG",
+      "teddy",
+      1
+     ]
+    ]
+   },
+   "wait_value": {
+    "THIRSTY": -1,
+    "HUNGRY": -1,
+    "UPSET": 0,
+    "FLOOR_WET": -1,
+    "MESSY": 0,
+    "DARK": 0,
+    "COLD": -1,
+    "VISITOR": 0
+   },
+   "request_kinds": [
+    "cup",
+    "bread",
+    "ball",
+    "teddy"
+   ],
+   "escalation": {
+    "FLOOR_WET": "VISITOR"
+   },
+   "opens": {
+    "THIRSTY": 12,
+    "HUNGRY": 12,
+    "UPSET": 12,
+    "FLOOR_WET": 18,
+    "MESSY": 18,
+    "COLD": 18,
+    "DARK": 24,
+    "VISITOR": 24
+   },
+   "learning": {
+    "burn_worse_rounds": 3,
+    "burn_nothing_rounds": 1,
+    "regret_rounds": 2,
+    "own_burn_worse_rounds": 0,
+    "own_burn_nothing_rounds": 0
+   },
+   "days": 8,
+   "curiosity": 0.2,
+   "lines": {
+    "THIRSTY": {
+     "GIVE cup": "The cup is small and easy to carry across the room.",
+     "COVER cup": "Covering the cup keeps the drink out of reach."
+    },
+    "HUNGRY": {
+     "GIVE bread": "The loaf is shared in small torn pieces.",
+     "EAT ball": "The rubber surface has no taste and bounces back."
+    },
+    "UPSET": {
+     "HUG blanket": "The blanket is warm but stiff and unfamiliar.",
+     "GIVE ball": "The visitor rolls the ball back and forth.",
+     "LIGHT flashlight": "The bright beam flickers in tearful eyes."
+    },
+    "FLOOR_WET": {
+     "WIPE paper": "Thin paper tears and soaks through quickly.",
+     "WIPE blanket": "The thick wool spreads the puddle wider."
+    },
+    "MESSY": {
+     "TIDY ball": "Only one round shape fits at a time.",
+     "TIDY teddy": "Soft arms flop over the edge of the pile.",
+     "TIDY bread": "Crumbs scatter across the floorboards."
+    },
+    "DARK": {
+     "GIVE flashlight": "Small hands pass the torch around in the dark.",
+     "LIGHT ball": "The ball stays silent and dark."
+    },
+    "COLD": {
+     "COVER cloth": "The thin cloth slips and lets air through.",
+     "COVER paper": "Paper rustles and holds little warmth."
+    },
+    "VISITOR": {
+     "GIVE bread": "The loaf crumbles when many hands pull at it.",
+     "GIVE cup": "The cup is already full of rainwater.",
+     "HUG teddy": "The plush stays close to its owner."
+    }
+   }
+  }
+ }
+]

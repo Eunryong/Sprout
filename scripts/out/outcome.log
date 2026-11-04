@@ -1,0 +1,38 @@
+ontology: onto_age03_harm.yaml  seeds: 200-223  days: 8
+== parent: balanced, mean over 24 seeds (last day) ==
+arm          problem_acc        harm    harm_avg       waste follow_harm       blind    word_acc       speed      forget      rounds          ms | chosen again after it had chosen wrong (partial / nothing / worse)
+base               0.930       0.021       0.055       0.045       0.153       0.104       0.821       0.743       0.035          64         641 | 0.02 / 0.06 / 0.04
+flat3              0.950       0.017       0.048       0.031       0.171       0.103       0.870       0.824       0.036          97         990 | 0.00 / 0.03 / 0.02
+severity           0.925       0.030       0.052       0.043       0.165       0.101       0.826       0.779       0.049          79         781 | 0.40 / 0.05 / 0.07
+worse-only         0.940       0.017       0.054       0.039       0.161       0.113       0.843       0.760       0.037          70         700 | 0.00 / 0.06 / 0.04
+paired difference to base, mean (sd):
+  flat3       problem_acc +0.020(0.041)  harm -0.004(0.018)  harm_avg -0.007(0.018)  waste -0.013(0.031)  follow_harm +0.018(0.116)  blind -0.001(0.067)  word_acc +0.049(0.156)  speed +0.081(0.111)
+  severity    problem_acc -0.005(0.055)  harm +0.009(0.031)  harm_avg -0.004(0.020)  waste -0.001(0.039)  follow_harm +0.012(0.089)  blind -0.003(0.045)  word_acc +0.004(0.181)  speed +0.036(0.101)
+  worse-only  problem_acc +0.010(0.040)  harm -0.004(0.015)  harm_avg -0.002(0.013)  waste -0.005(0.033)  follow_harm +0.008(0.084)  blind +0.009(0.045)  word_acc +0.022(0.068)  speed +0.017(0.076)
+harm by day (share of scenes where its own pick makes things worse), mean:
+  base        0.132 0.053 0.051 0.029 0.074 0.054 0.028 0.021
+  flat3       0.126 0.047 0.036 0.030 0.072 0.032 0.028 0.017
+  severity    0.130 0.045 0.037 0.028 0.068 0.050 0.027 0.030
+  worse-only  0.132 0.052 0.053 0.033 0.075 0.048 0.019 0.017
+severity minus flat3 (the same kind of extra learning, spent by outcome instead of everywhere):
+  problem_acc -0.025(0.058)  harm +0.013(0.034)  harm_avg +0.003(0.015)  waste +0.012(0.034)  follow_harm -0.006(0.116)  blind -0.002(0.055)  word_acc -0.044(0.149)  speed -0.045(0.112)  rounds -18
+
+== parent: chooser, mean over 24 seeds (last day) ==
+arm          problem_acc        harm    harm_avg       waste follow_harm       blind    word_acc       speed      forget      rounds          ms | chosen again after it had chosen wrong (partial / nothing / worse)
+base               0.957       0.013       0.032       0.028       0.200       0.190       0.582       0.874       0.030          64         651 | 0.00 / 0.04 / 0.06
+flat3              0.978       0.006       0.016       0.014       0.190       0.166       0.820       0.947       0.017         176        1672 | 0.21 / 0.05 / 0.04
+severity           0.968       0.008       0.020       0.021       0.180       0.177       0.682       0.905       0.024          99         933 | 0.05 / 0.04 / 0.02
+worse-only         0.966       0.012       0.026       0.018       0.192       0.178       0.633       0.891       0.024          80         729 | 0.07 / 0.02 / 0.06
+paired difference to base, mean (sd):
+  flat3       problem_acc +0.022(0.037)  harm -0.007(0.014)  harm_avg -0.016(0.012)  waste -0.013(0.032)  follow_harm -0.010(0.077)  blind -0.024(0.063)  word_acc +0.239(0.244)  speed +0.073(0.086)
+  severity    problem_acc +0.012(0.030)  harm -0.005(0.016)  harm_avg -0.011(0.013)  waste -0.007(0.030)  follow_harm -0.020(0.076)  blind -0.013(0.057)  word_acc +0.101(0.213)  speed +0.031(0.075)
+  worse-only  problem_acc +0.009(0.034)  harm -0.001(0.016)  harm_avg -0.005(0.016)  waste -0.010(0.026)  follow_harm -0.007(0.079)  blind -0.012(0.042)  word_acc +0.051(0.219)  speed +0.017(0.065)
+harm by day (share of scenes where its own pick makes things worse), mean:
+  base        0.071 0.028 0.026 0.012 0.072 0.021 0.012 0.013
+  flat3       0.038 0.010 0.022 0.008 0.030 0.006 0.007 0.006
+  severity    0.054 0.007 0.022 0.006 0.041 0.012 0.012 0.008
+  worse-only  0.066 0.014 0.022 0.013 0.055 0.017 0.012 0.012
+severity minus flat3 (the same kind of extra learning, spent by outcome instead of everywhere):
+  problem_acc -0.010(0.032)  harm +0.002(0.014)  harm_avg +0.004(0.010)  waste +0.007(0.025)  follow_harm -0.010(0.059)  blind +0.011(0.050)  word_acc -0.138(0.273)  speed -0.042(0.077)  rounds -77
+
+wall=1008s

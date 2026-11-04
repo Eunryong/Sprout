@@ -1,0 +1,174 @@
+{
+ "hash": "fb37a0a3bbf9",
+ "sheet": {
+  "seed": 3,
+  "source": "template",
+  "premise": "A small house, a toddler of 12 months, and a world of its own rules.",
+  "rules": {
+   "THIRSTY": [
+    [
+     "DRINK",
+     "cup",
+     2
+    ],
+    [
+     "DRINK",
+     "spoon",
+     1
+    ]
+   ],
+   "HUNGRY": [
+    [
+     "EAT",
+     "bread",
+     2
+    ]
+   ],
+   "UPSET": [
+    [
+     "HUG",
+     "teddy",
+     2
+    ],
+    [
+     "HUG",
+     "blanket",
+     1
+    ],
+    [
+     "GIVE",
+     "teddy",
+     1
+    ],
+    [
+     "GIVE",
+     "ball",
+     1
+    ]
+   ],
+   "FLOOR_WET": [
+    [
+     "WIPE",
+     "cloth",
+     2
+    ],
+    [
+     "WIPE",
+     "blanket",
+     -1
+    ],
+    [
+     "COVER",
+     "cloth",
+     -1
+    ]
+   ],
+   "MESSY": [
+    [
+     "TIDY",
+     "box",
+     2
+    ]
+   ],
+   "DARK": [
+    [
+     "LIGHT",
+     "flashlight",
+     2
+    ],
+    [
+     "GIVE",
+     "flashlight",
+     1
+    ],
+    [
+     "LIGHT",
+     "ball",
+     -1
+    ]
+   ],
+   "COLD": [
+    [
+     "COVER",
+     "blanket",
+     2
+    ],
+    [
+     "COVER",
+     "cloth",
+     1
+    ],
+    [
+     "COVER",
+     "paper",
+     1
+    ],
+    [
+     "HUG",
+     "teddy",
+     1
+    ]
+   ],
+   "VISITOR": [
+    [
+     "GIVE",
+     "ball",
+     2
+    ],
+    [
+     "GIVE",
+     "cup",
+     2
+    ],
+    [
+     "GIVE",
+     "bread",
+     1
+    ],
+    [
+     "HUG",
+     "teddy",
+     1
+    ]
+   ]
+  },
+  "wait_value": {
+   "THIRSTY": 0,
+   "HUNGRY": 0,
+   "UPSET": -1,
+   "FLOOR_WET": -1,
+   "MESSY": 0,
+   "DARK": -1,
+   "COLD": -1,
+   "VISITOR": 0
+  },
+  "request_kinds": [
+   "cloth",
+   "ball",
+   "paper",
+   "bread"
+  ],
+  "escalation": {
+   "FLOOR_WET": "VISITOR"
+  },
+  "opens": {
+   "THIRSTY": 12,
+   "HUNGRY": 18,
+   "UPSET": 12,
+   "FLOOR_WET": 24,
+   "MESSY": 18,
+   "DARK": 24,
+   "COLD": 24,
+   "VISITOR": 24
+  },
+  "learning": {
+   "burn_worse_rounds": 5,
+   "burn_nothing_rounds": 2,
+   "regret_rounds": 3,
+   "own_burn_worse_rounds": 0,
+   "own_burn_nothing_rounds": 0
+  },
+  "days": 8,
+  "lines": {}
+ }
+}

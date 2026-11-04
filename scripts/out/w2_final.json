@@ -1,0 +1,63 @@
+{
+ "args": {
+  "seeds": "200-239",
+  "days": 10,
+  "cond": "online",
+  "jobs": 16,
+  "grid": [
+   "all base pd10|per_day=10",
+   "all L3 pd10|per_day=10,layers=3,lr=0.002",
+   "all L3 pd16|per_day=16,layers=3,lr=0.002",
+   "problems L3 pd8|per_day=8,topics=problems,layers=3,lr=0.002",
+   "problems L3 pd10|per_day=10,topics=problems,layers=3,lr=0.002",
+   "problems+2tags L3 pd10|per_day=10,topics=problems,multi=0.3,layers=3,lr=0.002"
+  ],
+  "curve": true,
+  "topics_detail": 3,
+  "out": "scripts/out/w2_final.json"
+ },
+ "summary": {
+  "all base pd10": {
+   "d3": 0.6375,
+   "d3_min": 0.5185185185185185,
+   "d3_ok": 0.025,
+   "d6": 0.8655092592592593,
+   "d10": 0.9449074074074074
+  },
+  "all L3 pd10": {
+   "d3": 0.7143518518518518,
+   "d3_min": 0.5925925925925926,
+   "d3_ok": 0.1,
+   "d6": 0.9222222222222222,
+   "d10": 0.9643518518518518
+  },
+  "all L3 pd16": {
+   "d3": 0.8810185185185185,
+   "d3_min": 0.75,
+   "d3_ok": 0.9,
+   "d6": 0.9652777777777778,
+   "d10": 0.975462962962963
+  },
+  "problems L3 pd8": {
+   "d3": 0.93375,
+   "d3_min": 0.8,
+   "d3_ok": 1.0,
+   "d6": 0.9741666666666666,
+   "d10": 0.9904166666666666
+  },
+  "problems L3 pd10": {
+   "d3": 0.9554166666666667,
+   "d3_min": 0.8333333333333334,
+   "d3_ok": 1.0,
+   "d6": 0.98875,
+   "d10": 0.98875
+  },
+  "problems+2tags L3 pd10": {
+   "d3": 0.8901785714285715,
+   "d3_min": 0.7619047619047619,
+   "d3_ok": 0.9,
+   "d6": 0.9717261904761905,
+   "d10": 0.9892857142857143
+  }
+ }
+}

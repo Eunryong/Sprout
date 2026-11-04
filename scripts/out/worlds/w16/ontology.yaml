@@ -1,0 +1,97 @@
+# GENERATED WORLD 21a3488aa5bb (source: template, seed: 16); docs/WORLD.md 22.13. Do not edit.
+tags: [THIRSTY, HUNGRY, UPSET, FLOOR_WET, MESSY, DARK, COLD, VISITOR, REQUEST]
+verbs: [DRINK, EAT, HUG, WIPE, TIDY, LIGHT, COVER, GIVE, FETCH, WAIT]
+colors: [red, blue, green, yellow]
+sizes: [small, big]
+shapes: [cylinder, round, soft, flat, box, tube, long, sphere]
+materials: [ceramic, grain, plush, fabric, paper, wood, wool, metal, rubber]
+locations: [house, yard]
+start_locations: [house]
+kinds:
+  cup:
+    shape: cylinder
+    material: ceramic
+    sizes: [small, big]
+  bread:
+    shape: round
+    material: grain
+    sizes: [small, big]
+  teddy:
+    shape: soft
+    material: plush
+    sizes: [small, big]
+  cloth:
+    shape: flat
+    material: fabric
+    sizes: [small, big]
+  paper:
+    shape: flat
+    material: paper
+    sizes: [small, big]
+  box:
+    shape: box
+    material: wood
+    sizes: [small, big]
+  blanket:
+    shape: flat
+    material: wool
+    sizes: [big]
+  flashlight:
+    shape: tube
+    material: metal
+    sizes: [small, big]
+  spoon:
+    shape: long
+    material: metal
+    sizes: [small, big]
+  ball:
+    shape: sphere
+    material: rubber
+    sizes: [small, big]
+outcomes: {solved: 2, partial: 1, nothing: 0}
+rules:
+  THIRSTY:
+  - [DRINK, cup, 2]
+  - [DRINK, spoon, 1]
+  HUNGRY:
+  - [EAT, bread, 2]
+  - [EAT, spoon, 1]
+  - [GIVE, bread, 1]
+  UPSET:
+  - [HUG, teddy, 2]
+  - [HUG, blanket, 2]
+  - [GIVE, teddy, 1]
+  FLOOR_WET:
+  - [WIPE, cloth, 2]
+  - [WIPE, blanket, -1]
+  MESSY:
+  - [TIDY, box, 2]
+  - [TIDY, ball, 1]
+  - [TIDY, bread, -1]
+  DARK:
+  - [LIGHT, flashlight, 2]
+  - [GIVE, flashlight, 1]
+  - [COVER, flashlight, -1]
+  COLD:
+  - [COVER, blanket, 2]
+  - [COVER, cloth, 2]
+  VISITOR:
+  - [GIVE, ball, 2]
+  - [GIVE, bread, 2]
+  - [GIVE, cup, 1]
+  - [HUG, teddy, 1]
+schedule:
+  start_month: 12
+  months_per_day: 3
+  opens: {THIRSTY: 12, HUNGRY: 12, UPSET: 18, FLOOR_WET: 24, MESSY: 18, DARK: 24, COLD: 18, VISITOR: 24}
+  ramp_skip: 0.5
+wait_value: {THIRSTY: -1, HUNGRY: -1, UPSET: 0, FLOOR_WET: 0, MESSY: 0, DARK: 0, COLD: 0, VISITOR: -1, REQUEST: 0}
+request:
+  verb: FETCH
+  value: 2
+  kinds: [bread, cloth, teddy, cup]
+followups:
+  escalation: {FLOOR_WET: VISITOR}
+  unlocks: {DARK: yard}
+  nameable_min_value: 1
+  requests_per_day: 1

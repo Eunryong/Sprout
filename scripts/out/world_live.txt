@@ -1,0 +1,17 @@
+seeds 1-12, mood 'a rainy week at home': 12 calls
+valid on the first try 12, after one repair 0, fell back to the template world 0
+seconds per world: median 26.2, max 31.6
+distinct worlds 12 of 12; relations shared with the template world of the same seed (Jaccard) mean 0.47; harmful relations mean 4.1
+rejected attempts (reasons):
+  seed  1 director:muse-spark-1.3-contributor      attempts 1  25.6s learning 1/0/1  Rain taps the panes while quiet hours drift by, soft and slow together
+  seed  2 director:muse-spark-1.3-contributor      attempts 1  25.5s learning 1/0/1  Rain drums softly outside while quiet moments gather warmly indoors.
+  seed  3 director:muse-spark-1.3-contributor      attempts 1  28.0s learning 1/0/1  A soft grey week drifts by, cozy and quiet together inside.
+  seed  4 director:muse-spark-1.3-contributor      attempts 1  25.1s learning 1/0/1  Rain taps the windows while the small house glows warm through a quiet
+  seed  5 director:muse-spark-1.3-contributor      attempts 1  24.6s learning 1/0/1  Rain taps the windows while the small house glows warm and quiet aroun
+  seed  6 director:muse-spark-1.3-contributor      attempts 1  31.6s learning 1/0/1  Rain taps the windows as the small house stays warm, soft and full of 
+  seed  7 director:muse-spark-1.3-contributor      attempts 1  30.0s learning 1/0/1  Rain patters softly on the windows while the little house stays warm a
+  seed  8 director:muse-spark-1.3-contributor      attempts 1  28.7s learning 1/0/1  Rain patters on the windows while the little house stays soft, warm an
+  seed  9 director:muse-spark-1.3-contributor      attempts 1  30.3s learning 1/0/1  Rain patters on the windows while the little house glows warm and soft
+  seed 10 director:muse-spark-1.3-contributor      attempts 1  26.0s learning 1/0/1  Rain patters softly outside while we stay cozy together indoors.
+  seed 11 director:muse-spark-1.3-contributor      attempts 1  22.4s learning 1/0/1  Rain drums softly on the roof while the small house glows warm through
+  seed 12 director:muse-spark-1.3-contributor      attempts 1  26.4s learning 1/0/1  Rain drums softly outside while small warm days unfold slowly indoors.

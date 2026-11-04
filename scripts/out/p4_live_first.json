@@ -1,0 +1,35 @@
+{
+ "args": {
+  "client": "live",
+  "rates": "",
+  "seeds": "0-1",
+  "days": 2,
+  "jobs": 8,
+  "max_calls": 60,
+  "cache": null,
+  "out": "scripts/out/p4_live_first.json"
+ },
+ "summary": {
+  "director_calls": 32,
+  "director_ok": 0.90625,
+  "director_first_try": 0.53125,
+  "director_fallback": 0.09375,
+  "narrator_calls": 96,
+  "narrator_ok": 1.0,
+  "director_p50_s": 22.0538,
+  "director_p95_s": 44.5082,
+  "narrator_p50_s": 3.8774,
+  "narrator_p95_s": 6.0223,
+  "teaser_drop": 0.0,
+  "cards": 64,
+  "same_kind_twice": 0.484375,
+  "mean_objects": 3.921875,
+  "mean_options": 3.859375,
+  "with_wait": 0.953125,
+  "last_quiz": 0.5,
+  "requests": 133,
+  "tokens_in": 94103,
+  "tokens_out": 145214
+ },
+ "accepted": false
+}

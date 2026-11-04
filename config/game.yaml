@@ -1,0 +1,5 @@
+per_day: 8          # situations per day (P1: 8 -> 3rd-day 0.93, 10 -> 0.96)
+quiz_per_topic: 12  # held-out quiz questions per topic (never trained on)
+quiz_per_day: 10    # questions asked in the evening, spread over the topics the child has met
+words: [bobo, mimi, tata, lulu]
+talk_cost: 1       # attention units naming a thing costs, of per_day (E-A measured it as one unit)

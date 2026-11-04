@@ -1,0 +1,1 @@
+{"calls": 25, "seconds": 31, "cells": 155, "self_agreement_jaccard": 0.91, "agreement_with_hand_table_jaccard": 0.352, "valence_correlation_with_hand": 0.479}

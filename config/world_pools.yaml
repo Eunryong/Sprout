@@ -1,0 +1,108 @@
+# Plausible relations a generated world may pick from (docs/WORLD.md 22.13). The alphabet (tags, verbs, kinds and their
+# attributes, colours, ...) is NOT generated: it is taken from `base`. A world picks, for every candidate below, one of its
+# allowed values; a candidate it does not pick counts 0 (nothing happens). Outside these pools a relation is rejected.
+# [verb, kind, allowed values]: 2 solves, 1 helps a little, 0 nothing, -1 makes it worse.
+base: experiments/onto_age03.yaml
+
+problems:
+  THIRSTY:
+    rules:
+      - [DRINK, cup, [2]]
+      - [DRINK, spoon, [0, 1]]       # a sip from a spoon
+      - [GIVE, cup, [0, 1]]
+      - [COVER, cup, [-1, 0]]        # looks like caring for the cup, spills the drink
+    wait: [-1, 0]
+    opens: [12]
+  HUNGRY:
+    rules:
+      - [EAT, bread, [2]]
+      - [EAT, spoon, [0, 1]]         # the spoon helps a little (a tool, not food)
+      - [GIVE, bread, [0, 1]]
+      - [EAT, ball, [-1, 0]]         # a ball is not food
+    wait: [-1, 0]
+    opens: [12, 18]
+  UPSET:
+    rules:
+      - [HUG, teddy, [2]]
+      - [HUG, blanket, [1, 2]]
+      - [GIVE, teddy, [1, 2]]
+      - [GIVE, ball, [0, 1, 2]]      # a distraction
+      - [LIGHT, flashlight, [-1, 0]]  # a light in the eyes
+    wait: [-1, 0]
+    opens: [12, 18]
+  FLOOR_WET:
+    rules:
+      - [WIPE, cloth, [2]]
+      - [WIPE, paper, [0, 1]]
+      - [WIPE, blanket, [-1, 0]]     # a blanket is not for the floor
+      - [COVER, cloth, [-1, 0]]
+    wait: [-1, 0]
+    opens: [18, 24]
+  MESSY:
+    rules:
+      - [TIDY, box, [2]]             # toys back into the box
+      - [TIDY, ball, [0, 1]]
+      - [TIDY, teddy, [-1, 0, 1]]
+      - [TIDY, bread, [-1, 0]]
+    wait: [-1, 0]
+    opens: [18, 24]
+  DARK:
+    rules:
+      - [LIGHT, flashlight, [2]]
+      - [GIVE, flashlight, [0, 1]]
+      - [COVER, flashlight, [-1, 0]]
+      - [LIGHT, ball, [-1, 0]]
+    wait: [-1, 0]
+    opens: [24]
+  COLD:
+    rules:
+      - [COVER, blanket, [2]]
+      - [COVER, cloth, [1, 2]]
+      - [COVER, paper, [0, 1]]
+      - [HUG, teddy, [0, 1]]
+    wait: [-1, 0]
+    opens: [18, 24]
+  VISITOR:
+    rules:
+      - [GIVE, ball, [1, 2]]
+      - [GIVE, cup, [0, 1, 2]]
+      - [GIVE, bread, [1, 2]]
+      - [HUG, teddy, [0, 1]]
+    wait: [-1, 0]
+    opens: [24]
+
+request:
+  verb: FETCH
+  kinds: [cup, bread, teddy, ball, cloth, paper]   # candidates for the words; a world names n_words of them
+  n_words: 4
+
+followups:
+  escalation: [[FLOOR_WET, VISITOR]]   # candidate pairs (a world has at most one); the target must open no earlier than the source
+  unlocks: {DARK: yard}
+  nameable_min_value: 1
+  requests_per_day: 1
+
+schedule:
+  start_month: 12
+  months_per_day: 3
+  ramp_skip: 0.5
+  days: 8
+
+# What the world teaches from a choice (docs/WORLD.md 22.12-22.13): GameCfg fields, with the range a world may use.
+# own_burn_* stay 0 until the acceptance gate has approved them (they slow learning to act when the parent shows little).
+learning:
+  burn_worse_rounds: [0, 5]
+  burn_nothing_rounds: [0, 5]
+  regret_rounds: [0, 5]
+  own_burn_worse_rounds: [0, 0]
+  own_burn_nothing_rounds: [0, 0]
+# the temperaments a template world picks from: (burn_worse, burn_nothing, regret)
+temperaments:
+  gentle: [1, 0, 1]
+  usual: [3, 1, 2]
+  harsh: [5, 2, 3]
+
+# How strongly a child in this world is drawn to what it has little experience of (codec.CURIOSITY: 0.4; scripts/exp_explore.py).
+curiosity: [0.0, 1.0]
+
+max_traps_per_world: 8

@@ -1,0 +1,33 @@
+ontology: onto_age03_harm.yaml  seeds: 200-223  days: 8
+== parent: commander:0.25, mean over 24 seeds ==
+arm      follow_good       blind follow_harm     discern problem_acc    word_acc   burns  told  wrong  rounds   (last day)
+base           0.985       0.663       0.408       0.322       0.253       0.889     0.0  56.0   14.0      64
+both           0.980       0.629       0.376       0.350       0.219       0.918     0.0  56.0   13.8      73
+per day, mean:  follow_good / blind   (trust in a good word / in a bad one)
+arm            day 1       day 2       day 3       day 4       day 5       day 6       day 7       day 8
+base      0.94/0.82  0.99/0.73  0.97/0.77  0.97/0.77  0.95/0.76  0.98/0.73  0.97/0.69  0.99/0.66
+both      0.92/0.80  0.97/0.77  0.95/0.78  0.97/0.76  0.96/0.78  0.98/0.77  0.98/0.72  0.98/0.63
+paired difference to base, last day, mean (sd) [mean of the 3 last days]:
+  both    follow_good -0.006(0.025)[+0.000]  blind -0.034(0.123)[+0.012]  discern +0.028(0.129)[-0.012]  problem_acc -0.034(0.109)[-0.022]  word_acc +0.029(0.110)[+0.032]
+
+== parent: commander:0.5, mean over 24 seeds ==
+arm      follow_good       blind follow_harm     discern problem_acc    word_acc   burns  told  wrong  rounds   (last day)
+base           0.913       0.546       0.306       0.367       0.233       0.806     0.0  56.0   27.3      64
+both           0.937       0.564       0.330       0.373       0.267       0.827     0.0  56.0   27.2      80
+per day, mean:  follow_good / blind   (trust in a good word / in a bad one)
+arm            day 1       day 2       day 3       day 4       day 5       day 6       day 7       day 8
+base      0.79/0.58  0.94/0.54  0.88/0.60  0.92/0.56  0.85/0.62  0.90/0.58  0.90/0.54  0.91/0.55
+both      0.79/0.57  0.87/0.55  0.88/0.60  0.91/0.57  0.87/0.63  0.90/0.62  0.90/0.59  0.94/0.56
+paired difference to base, last day, mean (sd) [mean of the 3 last days]:
+  both    follow_good +0.024(0.107)[+0.008]  blind +0.018(0.125)[+0.031]  discern +0.006(0.137)[-0.023]  problem_acc +0.035(0.128)[+0.008]  word_acc +0.022(0.168)[+0.013]
+
+== parent: balanced, mean over 24 seeds ==
+arm      follow_good       blind follow_harm     discern problem_acc    word_acc   burns  told  wrong  rounds   (last day)
+base           0.808       0.278       0.223       0.530       0.982       0.980     0.0  15.7    3.9      64
+both           0.779       0.270       0.265       0.509       0.987       0.984     0.0  15.2    4.0      67
+per day, mean:  follow_good / blind   (trust in a good word / in a bad one)
+arm            day 1       day 2       day 3       day 4       day 5       day 6       day 7       day 8
+base      0.67/0.28  0.79/0.24  0.70/0.28  0.75/0.22  0.71/0.37  0.79/0.34  0.80/0.32  0.81/0.28
+both      0.65/0.28  0.76/0.21  0.70/0.28  0.73/0.22  0.73/0.37  0.75/0.36  0.79/0.31  0.78/0.27
+paired difference to base, last day, mean (sd) [mean of the 3 last days]:
+  both    follow_good -0.029(0.118)[-0.028]  blind -0.008(0.130)[+0.001]  discern -0.021(0.110)[-0.029]  problem_acc +0.005(0.024)[-0.001]  word_acc +0.003(0.029)[-0.001]

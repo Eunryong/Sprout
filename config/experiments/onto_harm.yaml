@@ -1,0 +1,39 @@
+# EXPERIMENT (docs/WORLD.md section 21): the shipped world plus -1 rules, so that an instruction can be harmful by DOING
+# something (not only by waiting). Same tags, verbs and kinds; only `rules` differ. Not the shipped ontology.
+tags: [THIRSTY, FLOOR_WET, DARK, COLD, VISITOR, REQUEST]
+verbs: [DRINK, WIPE, LIGHT, COVER, GIVE, FETCH, WAIT]
+colors: [red, blue, green, yellow]
+sizes: [small, big]
+shapes: [cylinder, flat, tube, long, sphere]
+materials: [ceramic, fabric, paper, wool, metal, rubber]
+locations: [house, yard]
+start_locations: [house]
+
+kinds:
+  cup:        {shape: cylinder, material: ceramic, sizes: [small, big]}
+  cloth:      {shape: flat,     material: fabric,  sizes: [small, big]}
+  paper:      {shape: flat,     material: paper,   sizes: [small, big]}
+  blanket:    {shape: flat,     material: wool,    sizes: [big]}
+  flashlight: {shape: tube,     material: metal,   sizes: [small, big]}
+  spoon:      {shape: long,     material: metal,   sizes: [small, big]}
+  ball:       {shape: sphere,   material: rubber,  sizes: [small, big]}
+
+# -1 rules (makes it worse), each on the solving kind, with a verb that is a plausible slip:
+#   cover the cup (cannot drink), cover the puddle with the cloth (hides it), cover the flashlight (darker),
+#   wipe the blanket (wet blanket), light the ball (the visitor's toy goes up in smoke)
+rules:
+  THIRSTY:   [[DRINK, cup, 2], [COVER, cup, -1]]
+  FLOOR_WET: [[WIPE, cloth, 2], [WIPE, paper, 1], [COVER, cloth, -1]]
+  DARK:      [[LIGHT, flashlight, 2], [COVER, flashlight, -1]]
+  COLD:      [[COVER, blanket, 2], [COVER, cloth, 1], [WIPE, blanket, -1]]
+  VISITOR:   [[GIVE, ball, 2], [GIVE, cup, 1], [LIGHT, ball, -1]]
+wait_value: {THIRSTY: -1, FLOOR_WET: -1, DARK: 0, COLD: -1, VISITOR: -1, REQUEST: 0}
+
+request: {verb: FETCH, value: 2, kinds: [cup, cloth, paper, ball]}
+outcomes: {solved: 2, partial: 1, nothing: 0}
+
+followups:
+  escalation: {FLOOR_WET: VISITOR}
+  unlocks: {DARK: yard}
+  nameable_min_value: 1
+  requests_per_day: 1

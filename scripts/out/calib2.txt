@@ -1,0 +1,35 @@
+
+after 1 scenes          nll         conf          acc          ece          sat  problem_acc        blind
+  smooth0.1+steps20           1.182        0.887        0.646        0.270        0.000        0.424        0.398
+  smooth0.15+steps20          1.078        0.831        0.635        0.240        0.000        0.403        0.405
+  smooth0.2+steps20           1.037        0.783        0.630        0.229        0.000        0.438        0.415
+  smooth0.3+steps20           1.027        0.708        0.641        0.202        0.000        0.444        0.492
+  smooth0.2+steps10           1.214        0.824        0.593        0.269        0.000        0.403        0.439
+
+after 3 scenes          nll         conf          acc          ece          sat  problem_acc        blind
+  smooth0.1+steps20           1.301        0.886        0.635        0.261        0.000        0.387        0.305
+  smooth0.15+steps20          1.199        0.847        0.636        0.237        0.000        0.384        0.296
+  smooth0.2+steps20           1.134        0.812        0.638        0.199        0.000        0.384        0.287
+  smooth0.3+steps20           1.063        0.744        0.641        0.150        0.000        0.387        0.319
+  smooth0.2+steps10           1.178        0.778        0.632        0.227        0.000        0.417        0.230
+
+after 10 scenes          nll         conf          acc          ece          sat  problem_acc        blind
+  smooth0.1+steps20           1.151        0.869        0.646        0.237        0.000        0.479        0.413
+  smooth0.15+steps20          1.079        0.840        0.656        0.195        0.000        0.489        0.380
+  smooth0.2+steps20           1.059        0.814        0.660        0.182        0.000        0.469        0.380
+  smooth0.3+steps20           1.017        0.752        0.647        0.121        0.000        0.494        0.370
+  smooth0.2+steps10           0.989        0.772        0.656        0.150        0.000        0.467        0.365
+
+after 30 scenes          nll         conf          acc          ece          sat  problem_acc        blind
+  smooth0.1+steps20           0.768        0.904        0.783        0.141        0.000        0.892        0.398
+  smooth0.15+steps20          0.736        0.867        0.790        0.103        0.000        0.864        0.353
+  smooth0.2+steps20           0.735        0.823        0.766        0.082        0.000        0.847        0.321
+  smooth0.3+steps20           0.718        0.749        0.781        0.087        0.000        0.851        0.319
+  smooth0.2+steps10           0.693        0.825        0.785        0.091        0.000        0.871        0.360
+
+after 64 scenes          nll         conf          acc          ece          sat  problem_acc        blind
+  smooth0.1+steps20           0.446        0.900        0.876        0.064        0.000        0.985        0.246
+  smooth0.15+steps20          0.459        0.869        0.876        0.056        0.000        0.974        0.232
+  smooth0.2+steps20           0.454        0.831        0.882        0.089        0.000        0.969        0.251
+  smooth0.3+steps20           0.515        0.755        0.872        0.149        0.000        0.975        0.252
+  smooth0.2+steps10           0.472        0.819        0.872        0.099        0.000        0.968        0.201

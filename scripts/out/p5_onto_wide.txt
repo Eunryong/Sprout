@@ -1,0 +1,18 @@
+
+== wide pd8 ==  n=24 seeds, params=110650, learn latency mean 0.46s max 0.70s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d6 mean/min | untrained@d3 chance@d3 | by day
+problems  0.79/0.59/0.08     12/24   0.93   | 0.93/0.83      | 0.32          0.30      | 0.42 0.63 0.79 0.88 0.90 0.93
+requests  0.42/0.17/0.12      0/24   0.52   | 0.52/0.28      | 0.28          0.27      | 0.55 0.46 0.42 0.46 0.44 0.52
+situations picked per run 48: word requests 5.7, two-problem 0.0, follow-up cards offered 0.0, words known 3.0, open issues at end 0.0, yard unlocked 24/24
+reads the tag: intact 0.93 -> swapped 0.38
+seeds=200..223 wall=52s
+
+== wide pd10 ==  n=24 seeds, params=110650, learn latency mean 0.47s max 0.75s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d6 mean/min | untrained@d3 chance@d3 | by day
+problems  0.88/0.75/0.06     21/24   0.97   | 0.97/0.88      | 0.32          0.30      | 0.47 0.73 0.88 0.92 0.94 0.97
+requests  0.43/0.25/0.10      0/24   0.52   | 0.52/0.28      | 0.27          0.26      | 0.55 0.48 0.43 0.44 0.48 0.52
+
+== wide pd12 ==  n=24 seeds, params=110650, learn latency mean 0.43s max 0.62s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d6 mean/min | untrained@d3 chance@d3 | by day
+problems  0.92/0.88/0.03     24/24   0.96   | 0.96/0.89      | 0.32          0.30      | 0.52 0.82 0.92 0.94 0.96 0.96
+requests  0.43/0.31/0.12      0/24   0.54   | 0.54/0.31      | 0.28          0.27      | 0.52 0.44 0.43 0.43 0.47 0.54

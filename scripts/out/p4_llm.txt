@@ -1,0 +1,9 @@
+client=mock seeds=4 days=2
+Director  calls=  64  usable=100.0%  first-try=100.0%  repaired=0.0%  fallback=0.0%  latency p50/p95=0.00/0.00s
+Narrator  calls=  64  usable=100.0%  fallback=0.0%  latency p50/p95=0.00/0.00s
+teasers dropped by the guard: 0.0% of cards
+cards=128  topics={'VISITOR': 24, 'COLD': 24, 'DARK': 24, 'THIRSTY': 22, 'FLOOR_WET': 20, 'REQUEST': 14}
+   objects/card=3.3  options/card=4.1  same kind twice=25%  WAIT offered=54%  colours used=4/4  kinds={'cloth': 69, 'blanket': 68, 'flashlight': 68, 'ball': 64, 'cup': 58, 'paper': 51, 'spoon': 41}
+distinct day themes: 5
+child's evening quiz on the last day played: mean 0.83 (min 0.80)
+acceptance (proposed): PASS Director usable >= 90%; PASS Director first-try >= 60%; PASS Director fallback <= 10%; PASS Narrator usable >= 85%; PASS Director p95 <= 8s; PASS Narrator p95 <= 4s; PASS teaser drop <= 15%

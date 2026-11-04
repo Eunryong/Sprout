@@ -1,0 +1,20 @@
+ontology: onto_age03.yaml  seeds: 200-223  days: 8  steps per learning call: 30
+== parent: balanced, mean over 24 seeds (last day) ==
+arm      problem_acc    word_acc      recall         gap      forget       speed       blind     discern  confidence     latency  firm moves
+gentle         0.881       0.652       0.723      -0.158       0.041       0.590       0.155       0.474       0.876       0.275         0.0
+firm2          0.875       0.681       0.735      -0.140       0.052       0.683       0.152       0.469       0.873       0.288        38.7
+firm3          0.869       0.670       0.707      -0.162       0.053       0.662       0.150       0.461       0.870       0.314        39.4
+paired difference to gentle, mean (sd of the difference):
+  firm2   problem_acc -0.007(0.054)  word_acc +0.030(0.198)  recall +0.011(0.115)  gap +0.018(0.117)  forget +0.010(0.032)  speed +0.094(0.137)  blind -0.003(0.079)  discern -0.005(0.142)
+  firm3   problem_acc -0.012(0.080)  word_acc +0.018(0.152)  recall -0.016(0.130)  gap -0.004(0.107)  forget +0.011(0.047)  speed +0.073(0.132)  blind -0.005(0.067)  discern -0.013(0.147)
+
+== parent: chooser, mean over 24 seeds (last day) ==
+arm      problem_acc    word_acc      recall         gap      forget       speed       blind     discern  confidence     latency  firm moves
+gentle         0.922       0.527       0.775      -0.147       0.045       0.754       0.154       0.046       0.906       0.275         0.0
+firm2          0.931       0.528       0.791      -0.140       0.032       0.770       0.164       0.066       0.909       0.260        20.0
+firm3          0.926       0.487       0.767      -0.159       0.042       0.780       0.149       0.068       0.906       0.262        21.4
+paired difference to gentle, mean (sd of the difference):
+  firm2   problem_acc +0.009(0.061)  word_acc +0.001(0.175)  recall +0.017(0.152)  gap +0.008(0.149)  forget -0.013(0.041)  speed +0.016(0.087)  blind +0.010(0.066)  discern +0.020(0.098)
+  firm3   problem_acc +0.003(0.070)  word_acc -0.040(0.216)  recall -0.008(0.120)  gap -0.012(0.129)  forget -0.003(0.050)  speed +0.026(0.093)  blind -0.005(0.067)  discern +0.022(0.119)
+
+wall=266s

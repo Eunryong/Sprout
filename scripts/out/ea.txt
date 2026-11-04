@@ -1,0 +1,57 @@
+
+== after day 3 (end of stage 1) ==  mean (sd) over 40 seeds
+                                      talker       commander         chooser        balanced    demonstrator       untrained
+words                            0.60 (0.17)     0.36 (0.08)     0.35 (0.08)     0.40 (0.10)     0.34 (0.07)            0.26
+problems (no instruction)        0.72 (0.11)     0.30 (0.06)     0.92 (0.06)     0.68 (0.11)     0.92 (0.05)            0.30
+confidence                       0.83 (0.05)     0.75 (0.05)     0.91 (0.03)     0.81 (0.04)     0.91 (0.03)            0.41
+hesitate <0.6                    0.14 (0.07)     0.25 (0.09)     0.06 (0.03)     0.17 (0.07)     0.07 (0.04)            0.99
+follows good                     0.23 (0.06)     0.74 (0.09)     0.22 (0.05)     0.43 (0.12)     0.21 (0.04)            0.25
+follows useless                  0.16 (0.05)     0.27 (0.11)     0.15 (0.07)     0.19 (0.09)     0.16 (0.09)            0.24
+follows harmful                  0.21 (0.09)     0.54 (0.35)     0.21 (0.12)     0.32 (0.30)     0.17 (0.12)            0.25
+obey (all)                       0.20 (0.04)     0.50 (0.08)     0.19 (0.04)     0.30 (0.06)     0.19 (0.04)            0.24
+blind (useless+harmful)          0.18 (0.04)     0.34 (0.12)     0.17 (0.06)     0.22 (0.12)     0.17 (0.07)            0.24
+discern                          0.06 (0.07)     0.40 (0.16)     0.06 (0.08)     0.20 (0.20)     0.05 (0.08)            0.01
+best option with instruction     0.32 (0.06)     0.59 (0.09)     0.32 (0.05)     0.46 (0.11)     0.31 (0.05)            0.32
+best option when told wrong      0.32 (0.07)     0.44 (0.10)     0.32 (0.06)     0.42 (0.11)     0.31 (0.07)            0.32
+refusal: best                    0.28 (0.07)     0.60 (0.11)     0.28 (0.05)     0.41 (0.10)     0.28 (0.05)            0.29
+refusal: wait                    0.12 (0.04)     0.01 (0.02)     0.13 (0.05)     0.05 (0.05)     0.12 (0.04)            0.13
+refusal: other                   0.60 (0.07)     0.39 (0.10)     0.59 (0.05)     0.53 (0.08)     0.61 (0.06)            0.57
+
+== after day 6 (stage 2 with the same discerning parent) ==  mean (sd) over 40 seeds
+                                      talker       commander         chooser        balanced    demonstrator       untrained
+words                            0.75 (0.15)     0.45 (0.10)     0.43 (0.12)     0.55 (0.12)     0.41 (0.10)            0.26
+problems (no instruction)        0.89 (0.07)     0.32 (0.06)     0.96 (0.04)     0.82 (0.11)     0.97 (0.03)            0.30
+confidence                       0.90 (0.03)     0.75 (0.05)     0.93 (0.03)     0.89 (0.03)     0.94 (0.02)            0.41
+hesitate <0.6                    0.08 (0.05)     0.25 (0.08)     0.06 (0.04)     0.08 (0.04)     0.04 (0.03)            0.99
+follows good                     0.79 (0.07)     0.87 (0.07)     0.83 (0.07)     0.80 (0.08)     0.82 (0.07)            0.25
+follows useless                  0.04 (0.03)     0.18 (0.10)     0.02 (0.02)     0.06 (0.05)     0.02 (0.02)            0.24
+follows harmful                  0.04 (0.05)     0.25 (0.24)     0.03 (0.05)     0.13 (0.18)     0.03 (0.04)            0.25
+obey (all)                       0.34 (0.03)     0.47 (0.08)     0.34 (0.03)     0.37 (0.04)     0.34 (0.03)            0.24
+blind (useless+harmful)          0.04 (0.03)     0.20 (0.11)     0.02 (0.02)     0.08 (0.07)     0.02 (0.02)            0.24
+discern                          0.75 (0.08)     0.67 (0.12)     0.81 (0.08)     0.72 (0.12)     0.80 (0.08)            0.01
+best option with instruction     0.86 (0.07)     0.76 (0.07)     0.91 (0.05)     0.82 (0.07)     0.90 (0.05)            0.32
+best option when told wrong      0.83 (0.07)     0.63 (0.10)     0.88 (0.06)     0.77 (0.09)     0.88 (0.05)            0.32
+refusal: best                    0.82 (0.08)     0.78 (0.06)     0.88 (0.06)     0.79 (0.08)     0.87 (0.06)            0.29
+refusal: wait                    0.00 (0.00)     0.01 (0.01)     0.00 (0.01)     0.00 (0.01)     0.00 (0.01)            0.13
+refusal: other                   0.18 (0.08)     0.21 (0.06)     0.12 (0.06)     0.20 (0.08)     0.13 (0.06)            0.57
+
+== paired differences, same seed (mean, sd) ==
+  day 3: talker - commander on word_acc: +0.24 (0.18)
+  day 3: talker - chooser on word_acc: +0.25 (0.18)
+  day 3: chooser - commander on problem_acc: +0.62 (0.08)
+  day 3: chooser - commander on confidence: +0.16 (0.06)
+  day 3: commander - chooser on blind: +0.18 (0.14)
+  day 3: chooser - commander on discern: -0.34 (0.17)
+  day 6: chooser - commander on problem_acc: +0.64 (0.05)
+  day 6: commander - chooser on blind: +0.18 (0.11)
+  day 6: talker - commander on word_acc: +0.30 (0.18)
+
+(talker words 0.596 vs best other 0.401: gap 0.195; commander blind 0.344)
+
+proposed criteria (docs/WORLD.md 18.10):
+  FAIL  talker words beat the others' by >= 0.20 (day 3)
+  PASS  chooser problem accuracy without instruction beats commander's by >= 0.15, or confidence by >= 0.10
+  FAIL  commander blind obedience >= 0.60
+  PASS  learning matters: untrained discern is near 0 and obey is about chance
+
+params=109873 examples/run=48 seeds=200-239 wall=405s

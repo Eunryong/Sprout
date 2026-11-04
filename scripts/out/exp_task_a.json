@@ -1,0 +1,1266 @@
+{
+ "args": {
+  "seeds": "0,1,2",
+  "conds": "online,batch,none,narrow",
+  "days": 10,
+  "per_day": 6,
+  "quiz_n": 20,
+  "lr": 0.003,
+  "steps": 60,
+  "replay": 16,
+  "oversample": 4,
+  "d_model": 64,
+  "layers": 2,
+  "out": "scripts/out/exp_task_a.json"
+ },
+ "results": [
+  {
+   "seed": 0,
+   "cond": "online",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 80,
+     "p_correct": 0.342,
+     "greedy": 0.338,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.606,
+     "greedy": 0.637,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.894,
+     "greedy": 0.912,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.973,
+     "greedy": 0.975,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.96,
+     "greedy": 0.963,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.932,
+     "greedy": 0.95,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.981,
+     "greedy": 0.988,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.985,
+     "greedy": 0.988,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.987,
+     "greedy": 0.988,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.802,
+     "greedy": 0.838,
+     "random": 0.29,
+     "untrained_p": 0.293
+    }
+   ],
+   "max_latency": 0.31896349997259676,
+   "mean_latency": 0.23362818468012847,
+   "n_params": 76536
+  },
+  {
+   "seed": 1,
+   "cond": "online",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 80,
+     "p_correct": 0.408,
+     "greedy": 0.45,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.497,
+     "greedy": 0.512,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.627,
+     "greedy": 0.675,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.584,
+     "greedy": 0.662,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.875,
+     "greedy": 0.912,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.788,
+     "greedy": 0.775,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.865,
+     "greedy": 0.875,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.923,
+     "greedy": 0.925,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.86,
+     "greedy": 0.887,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.919,
+     "greedy": 0.938,
+     "random": 0.291,
+     "untrained_p": 0.282
+    }
+   ],
+   "max_latency": 0.2782222090754658,
+   "mean_latency": 0.21328966048701356,
+   "n_params": 76536
+  },
+  {
+   "seed": 2,
+   "cond": "online",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 80,
+     "p_correct": 0.351,
+     "greedy": 0.412,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.399,
+     "greedy": 0.4,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.535,
+     "greedy": 0.625,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.702,
+     "greedy": 0.738,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.786,
+     "greedy": 0.863,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.877,
+     "greedy": 0.9,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.907,
+     "greedy": 0.9,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.913,
+     "greedy": 0.95,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.922,
+     "greedy": 0.975,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.852,
+     "greedy": 0.887,
+     "random": 0.28,
+     "untrained_p": 0.261
+    }
+   ],
+   "max_latency": 0.3091208339901641,
+   "mean_latency": 0.2155596992583014,
+   "n_params": 76536
+  },
+  {
+   "seed": 0,
+   "cond": "batch",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 40,
+     "p_correct": 0.819,
+     "greedy": 0.85,
+     "random": 0.294,
+     "untrained_p": 0.292
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.584,
+     "greedy": 0.625,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.858,
+     "greedy": 0.863,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.911,
+     "greedy": 0.925,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.989,
+     "greedy": 1.0,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.999,
+     "greedy": 1.0,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.29,
+     "untrained_p": 0.293
+    }
+   ],
+   "max_latency": 1.62234341702424,
+   "mean_latency": 1.4239509917213582,
+   "n_params": 76536
+  },
+  {
+   "seed": 1,
+   "cond": "batch",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 60,
+     "p_correct": 0.713,
+     "greedy": 0.717,
+     "random": 0.288,
+     "untrained_p": 0.273
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 60,
+     "p_correct": 0.984,
+     "greedy": 0.983,
+     "random": 0.288,
+     "untrained_p": 0.273
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.984,
+     "greedy": 1.0,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.991,
+     "greedy": 0.988,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.991,
+     "greedy": 0.988,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.994,
+     "greedy": 1.0,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 1.0,
+     "greedy": 1.0,
+     "random": 0.291,
+     "untrained_p": 0.282
+    }
+   ],
+   "max_latency": 1.80647441605106,
+   "mean_latency": 1.5739304624963553,
+   "n_params": 76536
+  },
+  {
+   "seed": 2,
+   "cond": "batch",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 60,
+     "p_correct": 0.251,
+     "greedy": 0.233,
+     "random": 0.281,
+     "untrained_p": 0.274
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.367,
+     "greedy": 0.388,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.347,
+     "greedy": 0.35,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.455,
+     "greedy": 0.475,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.577,
+     "greedy": 0.588,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.645,
+     "greedy": 0.662,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.662,
+     "greedy": 0.675,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.715,
+     "greedy": 0.738,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.771,
+     "greedy": 0.825,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.798,
+     "greedy": 0.8,
+     "random": 0.28,
+     "untrained_p": 0.261
+    }
+   ],
+   "max_latency": 1.751498292083852,
+   "mean_latency": 1.4664924083277584,
+   "n_params": 76536
+  },
+  {
+   "seed": 0,
+   "cond": "none",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 40,
+     "p_correct": 0.292,
+     "greedy": 0.35,
+     "random": 0.294,
+     "untrained_p": 0.292
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.293,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293
+    }
+   ],
+   "max_latency": 0.0,
+   "mean_latency": 0.0,
+   "n_params": 76536
+  },
+  {
+   "seed": 1,
+   "cond": "none",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 60,
+     "p_correct": 0.273,
+     "greedy": 0.2,
+     "random": 0.288,
+     "untrained_p": 0.273
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.282,
+     "greedy": 0.25,
+     "random": 0.291,
+     "untrained_p": 0.282
+    }
+   ],
+   "max_latency": 0.0,
+   "mean_latency": 0.0,
+   "n_params": 76536
+  },
+  {
+   "seed": 2,
+   "cond": "none",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 60,
+     "p_correct": 0.274,
+     "greedy": 0.25,
+     "random": 0.281,
+     "untrained_p": 0.274
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.261,
+     "greedy": 0.237,
+     "random": 0.28,
+     "untrained_p": 0.261
+    }
+   ],
+   "max_latency": 0.0,
+   "mean_latency": 0.0,
+   "n_params": 76536
+  },
+  {
+   "seed": 0,
+   "cond": "narrow",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 60,
+     "p_correct": 0.371,
+     "greedy": 0.383,
+     "random": 0.292,
+     "untrained_p": 0.29,
+     "p_correct_offsurface": 0.318,
+     "n_off": 49
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.277,
+     "greedy": 0.275,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.192,
+     "n_off": 67
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.294,
+     "greedy": 0.287,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.21,
+     "n_off": 67
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.308,
+     "greedy": 0.287,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.232,
+     "n_off": 67
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.318,
+     "greedy": 0.312,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.215,
+     "n_off": 67
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.447,
+     "greedy": 0.438,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.35,
+     "n_off": 67
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.373,
+     "greedy": 0.388,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.282,
+     "n_off": 67
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.352,
+     "greedy": 0.362,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.256,
+     "n_off": 67
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.462,
+     "greedy": 0.487,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.378,
+     "n_off": 67
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.524,
+     "greedy": 0.5,
+     "random": 0.29,
+     "untrained_p": 0.293,
+     "p_correct_offsurface": 0.444,
+     "n_off": 67
+    }
+   ],
+   "max_latency": 0.2729112080996856,
+   "mean_latency": 0.22255030415835791,
+   "n_params": 76536
+  },
+  {
+   "seed": 1,
+   "cond": "narrow",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 60,
+     "p_correct": 0.307,
+     "greedy": 0.3,
+     "random": 0.29,
+     "untrained_p": 0.279,
+     "p_correct_offsurface": 0.235,
+     "n_off": 53
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.273,
+     "greedy": 0.287,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.219,
+     "n_off": 71
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.357,
+     "greedy": 0.35,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.294,
+     "n_off": 71
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.398,
+     "greedy": 0.425,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.34,
+     "n_off": 71
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.382,
+     "greedy": 0.4,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.324,
+     "n_off": 71
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.298,
+     "greedy": 0.3,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.239,
+     "n_off": 71
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.357,
+     "greedy": 0.362,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.312,
+     "n_off": 71
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.358,
+     "greedy": 0.35,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.313,
+     "n_off": 71
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.327,
+     "greedy": 0.312,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.271,
+     "n_off": 71
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.331,
+     "greedy": 0.35,
+     "random": 0.291,
+     "untrained_p": 0.282,
+     "p_correct_offsurface": 0.267,
+     "n_off": 71
+    }
+   ],
+   "max_latency": 0.2891573329688981,
+   "mean_latency": 0.2118552257074043,
+   "n_params": 76536
+  },
+  {
+   "seed": 2,
+   "cond": "narrow",
+   "rows": [
+    {
+     "day": 1,
+     "n_examples": 6,
+     "n_quiz": 80,
+     "p_correct": 0.287,
+     "greedy": 0.275,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.241,
+     "n_off": 73
+    },
+    {
+     "day": 2,
+     "n_examples": 12,
+     "n_quiz": 80,
+     "p_correct": 0.285,
+     "greedy": 0.275,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.26,
+     "n_off": 73
+    },
+    {
+     "day": 3,
+     "n_examples": 18,
+     "n_quiz": 80,
+     "p_correct": 0.331,
+     "greedy": 0.362,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.313,
+     "n_off": 73
+    },
+    {
+     "day": 4,
+     "n_examples": 24,
+     "n_quiz": 80,
+     "p_correct": 0.274,
+     "greedy": 0.287,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.232,
+     "n_off": 73
+    },
+    {
+     "day": 5,
+     "n_examples": 30,
+     "n_quiz": 80,
+     "p_correct": 0.314,
+     "greedy": 0.325,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.281,
+     "n_off": 73
+    },
+    {
+     "day": 6,
+     "n_examples": 36,
+     "n_quiz": 80,
+     "p_correct": 0.272,
+     "greedy": 0.263,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.21,
+     "n_off": 73
+    },
+    {
+     "day": 7,
+     "n_examples": 42,
+     "n_quiz": 80,
+     "p_correct": 0.323,
+     "greedy": 0.338,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.268,
+     "n_off": 73
+    },
+    {
+     "day": 8,
+     "n_examples": 48,
+     "n_quiz": 80,
+     "p_correct": 0.305,
+     "greedy": 0.312,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.253,
+     "n_off": 73
+    },
+    {
+     "day": 9,
+     "n_examples": 54,
+     "n_quiz": 80,
+     "p_correct": 0.311,
+     "greedy": 0.312,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.27,
+     "n_off": 73
+    },
+    {
+     "day": 10,
+     "n_examples": 60,
+     "n_quiz": 80,
+     "p_correct": 0.366,
+     "greedy": 0.375,
+     "random": 0.28,
+     "untrained_p": 0.261,
+     "p_correct_offsurface": 0.316,
+     "n_off": 73
+    }
+   ],
+   "max_latency": 0.3611295419977978,
+   "mean_latency": 0.21396295692344816,
+   "n_params": 76536
+  }
+ ]
+}

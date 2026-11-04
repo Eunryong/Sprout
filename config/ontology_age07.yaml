@@ -1,0 +1,129 @@
+# The 0-7 years world: the MVP ontology of the web game (docs/DIRECTION.md). One union table; which problems can come up at which age is
+# the `schedule` below (a problem has an opening month, and some a closing one). The rules table is the world's physics and the
+# researcher's yardstick only: nothing in the child's learning reads it.
+#   0-11 months   baby:        BABY_HUNGRY UPSET COLD                 (the baby cannot act yet: the parent shows, the baby watches)
+#   12-35 months  toddler:     + THIRSTY HUNGRY, words; FLOOR_WET MESSY (18); DARK VISITOR (24)
+#   36-59 months  little kid:  + DIRTY_HANDS HURT (36), BORED (42), RAIN (48)
+#   60-83 months  schoolchild: + SCHOOL_MORNING (60), FRIEND_SAD (66)
+tags: [BABY_HUNGRY, UPSET, COLD, THIRSTY, HUNGRY, FLOOR_WET, MESSY, DARK, VISITOR, DIRTY_HANDS, HURT, BORED, RAIN, SCHOOL_MORNING, FRIEND_SAD, REQUEST]
+verbs: [FEED, DRINK, EAT, HUG, WIPE, TIDY, LIGHT, COVER, GIVE, FETCH, WASH, DRAW, READ, SHELTER, WEAR, WAIT]
+colors: [red, blue, green, yellow]
+sizes: [small, big]
+shapes: [cylinder, round, soft, flat, box, tube, long, sphere, bottle, bar, strip, stick, slab, canopy, pack]
+materials: [ceramic, grain, plush, fabric, paper, wood, wool, metal, rubber, plastic, soap, cotton, wax, canvas]
+locations: [house, yard]
+start_locations: [house]
+
+# kind -> its attributes. The child sees shape/material/size/colour only, never the kind.
+# cloth / paper / blanket share a shape; paper / book a material; flashlight / spoon a material; cloth / umbrella a material:
+# no single attribute is enough.
+kinds:
+  cup:        {shape: cylinder, material: ceramic, sizes: [small, big]}
+  bread:      {shape: round,    material: grain,   sizes: [small, big]}
+  teddy:      {shape: soft,     material: plush,   sizes: [small, big]}
+  cloth:      {shape: flat,     material: fabric,  sizes: [small, big]}
+  paper:      {shape: flat,     material: paper,   sizes: [small, big]}
+  box:        {shape: box,      material: wood,    sizes: [small, big]}
+  blanket:    {shape: flat,     material: wool,    sizes: [big]}
+  flashlight: {shape: tube,     material: metal,   sizes: [small, big]}
+  spoon:      {shape: long,     material: metal,   sizes: [small, big]}
+  ball:       {shape: sphere,   material: rubber,  sizes: [small, big]}
+  bottle:     {shape: bottle,   material: plastic, sizes: [small]}
+  soap:       {shape: bar,      material: soap,    sizes: [small, big]}
+  bandage:    {shape: strip,    material: cotton,  sizes: [small]}
+  crayon:     {shape: stick,    material: wax,     sizes: [small, big]}
+  book:       {shape: slab,     material: paper,   sizes: [small, big]}
+  umbrella:   {shape: canopy,   material: fabric,  sizes: [big]}
+  backpack:   {shape: pack,     material: canvas,  sizes: [small, big]}
+
+# affordances: what can sensibly be done with what (common sense, not the rules below: it says nothing about whether it helps). The engine
+# rejects an option whose verb cannot be done with its thing, so a scene only holds attempts a person might really make.
+affordances:
+  FEED:    [bottle, spoon, bread]
+  DRINK:   [cup, bottle]
+  EAT:     [bread, spoon]
+  HUG:     [teddy, blanket]
+  WIPE:    [cloth, paper]
+  TIDY:    [box, backpack]
+  LIGHT:   [flashlight]
+  COVER:   [blanket, cloth, bandage]
+  GIVE:    [cup, bread, teddy, cloth, paper, box, blanket, flashlight, spoon, ball, bottle, soap, crayon, book]
+  FETCH:   [cup, bread, teddy, cloth, paper, box, blanket, flashlight, spoon, ball, bottle, soap, crayon, book, umbrella, backpack]
+  WASH:    [soap, cloth]
+  DRAW:    [crayon]
+  READ:    [book, paper]
+  SHELTER: [umbrella, cloth, blanket]
+  WEAR:    [backpack]
+
+# plausible: what a person might really try for a baby's trouble. Wrong options of those scenes are drawn only from here (a rule's own pairs are
+# always kept); the other problems have no list, so anything afforded may come up.
+plausible:
+  BABY_HUNGRY: [[FEED, bottle], [FEED, spoon], [HUG, teddy], [COVER, blanket]]
+  UPSET:       [[HUG, teddy], [READ, book], [GIVE, ball], [COVER, blanket]]
+  COLD:        [[COVER, blanket], [HUG, teddy], [READ, book], [GIVE, cup]]
+  THIRSTY:     [[DRINK, cup], [EAT, bread], [READ, book], [HUG, teddy]]
+  HUNGRY:      [[EAT, bread], [DRINK, cup], [READ, book], [HUG, teddy]]
+  FLOOR_WET:   [[WIPE, cloth], [TIDY, box], [READ, book], [HUG, teddy]]
+  MESSY:       [[TIDY, box], [READ, book], [DRAW, crayon], [GIVE, ball]]
+  DARK:        [[LIGHT, flashlight], [HUG, teddy], [COVER, blanket], [READ, book]]
+  VISITOR:     [[GIVE, ball], [READ, book], [DRAW, crayon], [EAT, bread]]
+  DIRTY_HANDS: [[WASH, soap], [WIPE, cloth], [READ, book], [DRAW, crayon]]
+  HURT:        [[COVER, bandage], [HUG, teddy], [READ, book], [GIVE, ball]]
+  BORED:       [[READ, book], [DRAW, crayon], [GIVE, ball], [HUG, teddy]]
+  RAIN:        [[SHELTER, umbrella], [COVER, blanket], [READ, book], [HUG, teddy]]
+  SCHOOL_MORNING: [[WEAR, backpack], [EAT, bread], [READ, book], [TIDY, box]]
+  FRIEND_SAD:  [[HUG, teddy], [GIVE, ball], [READ, book], [DRAW, crayon]]
+
+baby_only: {verbs: [FEED], kinds: [bottle]}  # nothing of an older child's trouble offers a bottle
+
+# rules: problem tag -> [verb, target kind, value]. +2 solves, +1 partly, 0 nothing (anything not listed), WAIT below.
+rules:
+  BABY_HUNGRY:   [[FEED, bottle, 2], [FEED, spoon, 1]]
+  UPSET:         [[HUG, teddy, 2], [FEED, bottle, 1], [GIVE, ball, 1]]  # milk soothes a little
+  COLD:          [[COVER, blanket, 2], [COVER, cloth, 1], [HUG, blanket, 1], [HUG, teddy, 1]]  # holding the baby close warms it a little
+  THIRSTY:       [[DRINK, cup, 2], [GIVE, cup, 1]]
+  HUNGRY:        [[EAT, bread, 2], [EAT, spoon, 1]]
+  FLOOR_WET:     [[WIPE, cloth, 2], [WIPE, paper, 1]]
+  MESSY:         [[TIDY, box, 2]]
+  DARK:          [[LIGHT, flashlight, 2]]
+  VISITOR:       [[GIVE, ball, 2], [GIVE, cup, 1]]
+  DIRTY_HANDS:   [[WASH, soap, 2], [WASH, cloth, 1]]
+  HURT:          [[COVER, bandage, 2], [HUG, teddy, 1]]
+  BORED:         [[DRAW, crayon, 2], [READ, book, 2], [GIVE, ball, 1]]
+  RAIN:          [[SHELTER, umbrella, 2], [SHELTER, cloth, 1]]
+  SCHOOL_MORNING: [[WEAR, backpack, 2]]
+  FRIEND_SAD:    [[GIVE, teddy, 2], [GIVE, paper, 1]]
+wait_value: {BABY_HUNGRY: -1, UPSET: -1, COLD: -1, THIRSTY: -1, HUNGRY: -1, FLOOR_WET: -1, MESSY: 0, DARK: 0, VISITOR: -1, DIRTY_HANDS: 0, HURT: -1, BORED: 0, RAIN: -1, SCHOOL_MORNING: -1, FRIEND_SAD: -1, REQUEST: 0}
+
+# REQUEST: FETCH the named kind = 2, any other thing = 0. Only these kinds can be given a word, and only from `request_from_month` on.
+request: {verb: FETCH, value: 2, kinds: [cup, bread, teddy, ball]}   # four, as many as game.yaml has words
+request_from_month: 12
+
+outcomes: {solved: 2, partial: 1, nothing: 0}
+
+followups:
+  escalation: {FLOOR_WET: VISITOR}
+  unlocks: {DARK: yard}
+  lingers: []  # a need left alone is not brought back by force
+  nameable_min_value: 1
+  requests_per_day: 1
+
+# Age schedule: a day is 6 months, from birth to 7 years (14 days). `opens` = the first month a problem can come up, `closes` = the
+# month from which it no longer does (a baby's bottle is not a school-age scene).
+schedule:
+  start_month: 0
+  months_per_day: 6
+  opens: {BABY_HUNGRY: 0, UPSET: 0, COLD: 0, THIRSTY: 12, HUNGRY: 12, FLOOR_WET: 18, MESSY: 18, DARK: 24, VISITOR: 24, DIRTY_HANDS: 36, HURT: 36, BORED: 36, RAIN: 42, SCHOOL_MORNING: 60, FRIEND_SAD: 60}
+  closes: {BABY_HUNGRY: 12, COLD: 36, THIRSTY: 36, HUNGRY: 36, FLOOR_WET: 36, DARK: 36}
+  ramp_skip: 0.5
+
+# What this world sets in GameCfg (the shipped config/game.yaml is for the small world).
+game: {days: 14, per_day: 6}
+
+# The stages of the life (player-facing). `from` = month. Before `acts_from_month` the child cannot choose: the parent only shows.
+acts_from_month: 12
+stages:
+  - {from: 0,  name: "Baby",         voice: baby, blurb: "Everything is new. You feed, hold and soothe. The baby cannot choose yet: it watches what you do."}
+  - {from: 12, name: "Toddler",      voice: self, blurb: "First steps, first words. The child starts to reach for things and to try."}
+  - {from: 36, name: "Little kid",   voice: self, blurb: "Questions, mess and make-believe. The child does more and more by itself."}
+  - {from: 60, name: "Schoolchild",  voice: grandma, blurb: "School mornings and friends. The child's own choices matter more every day."}

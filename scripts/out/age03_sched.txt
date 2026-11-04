@@ -1,0 +1,19 @@
+
+== sched ==  n=24 seeds, params=111421, learn latency mean 0.48s max 0.62s
+group     d3 mean/min/sd   d3>=.8  d6 mean | d8 mean/min | untrained@d3 chance@d3 | by day
+problems  0.82/0.63/0.08     18/24   0.88   | 0.95/0.86      | 0.28          0.30      | 0.75 0.94 0.82 0.91 0.81 0.88 0.92 0.95
+requests  0.51/0.33/0.11      0/24   0.51   | 0.59/0.29      | 0.28          0.27      | 0.64 0.61 0.51 0.54 0.58 0.51 0.57 0.59
+situations picked per run 64: word requests 7.5, two-problem 0.0, follow-up cards offered 0.0, words known 4.0, open issues at end 0.0, yard unlocked 24/24
+reads the tag: intact 0.95 -> swapped 0.40
+
+== sched: accuracy by days since the problem opened (k=0 is the end of its first day), last day D=8 ==
+problem    opens       k=0     k=1     k=2     k=3    day 8   peak  met
+THIRSTY    day 1      0.70    0.91    0.95    0.96     0.98   0.99   24
+HUNGRY     day 1      0.76    0.96    0.94    0.98     0.98   1.00   24
+UPSET      day 1      0.78    0.95    0.97    0.97     0.98   1.00   24
+FLOOR_WET  day 3      0.56    0.82    0.86    0.93     0.96   0.98   24
+MESSY      day 3      0.59    0.84    0.89    0.92     0.95   0.98   24
+DARK       day 5      0.59    0.72    0.79    0.87     0.87   0.90   24
+COLD       day 5      0.56    0.81    0.85    0.90     0.90   0.93   24
+VISITOR    day 5      0.54    0.73    0.92    0.94     0.94   0.97   24
+seeds=200..223 wall=70s

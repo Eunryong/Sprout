@@ -1,0 +1,3 @@
+model: {d_model: 64, n_layers: 3, n_heads: 4, d_ff: 128}
+# Chosen by scripts/exp_world2.py in P1 (tuning seeds 100-119, validated on 200-239); see docs/WORLD.md section 12.
+online: {lr: 0.002, steps: 20, replay: 16, oversample: 1, weight_decay: 0.05, redraw: 1.0}
