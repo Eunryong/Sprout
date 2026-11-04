@@ -84,6 +84,11 @@ def _build(rng: random.Random, tags: list[str], word_kind: str | None, decoys: s
 
     sensible_others = [k for k in KINDS if k not in good_kinds and (sensible is None or any(kk == k for _, kk in sensible)) and not (older and k in BABY_ONLY_KINDS)]
     fallback_others = [k for k in KINDS if k not in good_kinds and not (older and k in BABY_ONLY_KINDS)]
+    if request:
+        # Every REQUEST option uses REQUEST_VERB, so a wrong thing must afford it too:
+        # otherwise validation rejects the scene (e.g. "FETCH cannot be done with a bandage").
+        sensible_others = [k for k in sensible_others if afforded(REQUEST_VERB, k)]
+        fallback_others = [k for k in fallback_others if afforded(REQUEST_VERB, k)]
     n_wrong = rng.choice([2, 3]) if request else (1 if len(pairs) > 1 and rng.random() < 0.5 else 2)
 
     wrong_idx = []
@@ -137,6 +142,10 @@ def _build(rng: random.Random, tags: list[str], word_kind: str | None, decoys: s
         rest = [k for k in KINDS if k not in good_kinds and k not in picks and not conflicts_category(k, good_kinds + picks)]
         if not rest:
             rest = [k for k in KINDS if k not in good_kinds and k not in picks]
+            if not rest:
+                break
+        if request:
+            rest = [k for k in rest if afforded(REQUEST_VERB, k)]
             if not rest:
                 break
         picks.append(rng.choice(rest))

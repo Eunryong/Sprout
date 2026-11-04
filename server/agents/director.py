@@ -150,7 +150,17 @@ def template_proposal(ctx: DirectorContext, rng: random.Random, forbidden: set[s
         kind = sp.get("word_kind")
         word, token = word_map[kind] if kind else (None, None)
         loc = sp.get("location") or ("yard" if "yard" in ctx.unlocked and rng.random() < 0.3 else "house")
-        sit = make_situation(rng, sp["tags"], f"tmp{i}", loc, word, token, kind, sp.get("links_to"), forbidden)
+        sit = None
+        for _ in range(10):
+            cand = make_situation(rng, sp["tags"], f"tmp{i}", loc, word, token, kind, sp.get("links_to"), forbidden)
+            try:
+                validate_situation(cand)
+            except BadSituation:
+                continue  # the draw paired a verb with a thing it cannot be done with: draw again
+            sit = cand
+            break
+        if sit is None:
+            raise ProposalError(f"could not compose a valid card for {sp['tags']}")
         cards.append(_card_from_situation(sit))
     return DirectorProposal(cards=cards, theme="")
 
@@ -274,12 +284,30 @@ class DirectorAgent:
                 self.stats.record(source=self.last_source, ok=True, attempts=attempts, error=None, started=t0,
                                   attempt_errors=errs)
                 return out
-        prop = template_proposal(ctx, rng, forbidden, self.word_map)
+        # The template draw is deterministic in `rng`: a rejected draw would replay forever
+        # (a failed draw persists nothing, so the next scene re-derives the same rng). Retry bounded
+        # with fresh randomness so one bad draw never poisons later scenes.
+        last: ProposalError | None = None
+        attempt_rng = rng
+        for _ in range(3):
+            try:
+                prop = template_proposal(ctx, attempt_rng, forbidden, self.word_map)
+                out = build_offer(prop, self.word_map, ctx.start_index, forbidden)
+            except ProposalError as e:
+                last = e
+                self.last_error = f"ProposalError: {e}"[:300]
+                errs.append(self.last_error)
+                attempt_rng = random.Random(f"retry:{time.time_ns()}:{rng.randrange(1 << 30)}")
+                continue
+            self.last_source = "template"
+            self._finish(prop)
+            self.stats.record(source="template" if self.client is not None else "none", ok=False, attempts=attempts,
+                              error=self.last_error, started=t0, attempt_errors=errs)
+            return out
         self.last_source = "template"
-        self._finish(prop)
         self.stats.record(source="template" if self.client is not None else "none", ok=False, attempts=attempts,
                           error=self.last_error, started=t0, attempt_errors=errs)
-        return build_offer(prop, self.word_map, ctx.start_index, forbidden)
+        raise last if last is not None else ProposalError("template proposal failed")
 
     def world(self, seed: int, mood: str = "", pools: dict | None = None) -> WorldSheet:
         """Propose the hidden rules of a new world (docs/WORLD.md 22.13). The sheet goes through the same checks as a template

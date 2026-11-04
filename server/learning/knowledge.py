@@ -44,6 +44,7 @@ class PrincipleNode(BaseModel):
     source_turns: list[int] = Field(default_factory=list)
     hop_depth: int = 2
     outcome_tendency: str = "solved"
+    confidence: float = 1.0
 
 
 class PersonalityNode(BaseModel):

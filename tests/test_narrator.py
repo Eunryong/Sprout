@@ -321,7 +321,7 @@ def test_ask_child_cognitive_scaling_instructions():
         "4.0B ~ 4.9B = 4세 수준 (인과 관계 이해, 3-hop)",
         "5.0B ~ 5.9B = 5세 수준 (비교/분류 추론, 3~4-hop)",
         "6.0B ~ 6.9B = 6세 수준 (복합 규칙 추론, 4-hop)",
-        "7.0B = 7세 수준 (원리 일반화, 5-hop)",
+        "7.0B = 7세 수준 (원리 일반화 및 통합 추론, 5-hop)",
     ]
     for tier in expected_tiers:
         assert tier in CHILD_QA_SYSTEM
@@ -352,6 +352,139 @@ def test_ask_child_cognitive_scaling_instructions():
         call_args = client.complete_json.call_args[1]
         payload = json.loads(call_args["user"])
         assert expected_label in payload["cognitive_scale_instruction"]
+
+    # 7.0B instruction includes 7-year-old principle generalization guidance
+    client_7b = MagicMock()
+    client_7b.available.return_value = True
+    client_7b.complete_json.return_value = ChildQAOut(answer="원리에 따라 그래요.")
+    n_7b = NarratorAgent(client_7b)
+    ctx_7b = {"cognitive": {"scale_b": 7.0}}
+    n_7b.ask_child("질문", ctx_7b)
+    call_args_7b = client_7b.complete_json.call_args[1]
+    payload_7b = json.loads(call_args_7b["user"])
+    instruction_7b = payload_7b["cognitive_scale_instruction"]
+    assert "7세 수준" in instruction_7b
+    assert "원리 일반화 및 통합 추론" in instruction_7b
+    assert "왜 세상이 그렇게 작동하는지" in instruction_7b
+    assert "공통 원리와 인과 법칙" in instruction_7b
+    assert "personality" in instruction_7b
+
+
+def test_ask_child_question_alignment_and_matched_memories():
+    from server.agents.narrator import CHILD_QA_SYSTEM, ChildQAOut
+
+    # 1. Strict Question Alignment prompt checks
+    assert "질문 의도 정조준 (Strict Question Alignment — 동문서답 및 takeaway 복붙 절대 금지)" in CHILD_QA_SYSTEM
+    assert "takeaway" in CHILD_QA_SYSTEM
+
+    # 2. ask_child includes current_scene and question_matched_memories in payload
+    client = MagicMock()
+    client.available.return_value = True
+    client.complete_json.return_value = ChildQAOut(answer="그림책 보면서 아기 곰처럼 뒹굴뒹굴 놀아보고 싶었어!")
+    n = NarratorAgent(client)
+
+    current_scene_data = {
+        "narration": "방 안에서 그림책을 보며 뒹굴거리고 있어요.",
+        "options": ["그림책 같이 읽기", "장난감 가지고 놀기"],
+    }
+    memories = [
+        {"summary": "아지트를 만들었는데 금방 심심해졌어", "takeaway": "다음에는 친구랑 해야지"},
+        {"summary": "그림책을 읽으며 재미있는 상상을 했어요", "takeaway": "책 읽기는 신나"},
+        {"summary": "비누로 손을 씻었어요", "takeaway": "손이 깨끗해졌어"},
+    ]
+    principles = ["물은 높은 곳에서 낮은 곳으로 흐른다"]
+    concepts = {"그림책": "재미있는 그림이 그려진 책"}
+
+    ctx = {
+        "current_scene": current_scene_data,
+        "brain_state": {
+            "relevant_memories": memories,
+            "principles": principles,
+            "concepts": concepts,
+        },
+    }
+
+    n.ask_child("책을 읽거나 놀면서 어떤 걸 해보고 싶었어?", ctx)
+    call_args = client.complete_json.call_args[1]
+    payload = json.loads(call_args["user"])
+
+    assert "current_scene" in payload
+    assert payload["current_scene"] == current_scene_data
+    assert "question_matched_memories" in payload
+    assert isinstance(payload["question_matched_memories"], list)
+    assert len(payload["question_matched_memories"]) > 0
+
+    matched_texts = [json.dumps(m, ensure_ascii=False) for m in payload["question_matched_memories"]]
+    assert any("그림책" in t or "책" in t for t in matched_texts)
+    assert "relevant_memories" in payload
+    assert len(payload["relevant_memories"]) <= 12
+
+
+def test_ask_child_conversational_flow_and_dialogue_history():
+    from server.agents.narrator import CHILD_QA_SYSTEM, ChildQAOut, NarratorAgent
+
+    # 1. Anti-memo & conversational flow rules in CHILD_QA_SYSTEM
+    assert "메모지식 '배운 것 설명/브리핑' 절대 금지 & 배운 것과 성격을 바탕으로 살아있는 대화 이어가기" in CHILD_QA_SYSTEM
+    assert "Conversational Flow & Anti-Memo Rule" in CHILD_QA_SYSTEM
+    assert "메모지" in CHILD_QA_SYSTEM
+    assert "대화를 이어가세요" in CHILD_QA_SYSTEM
+    assert "dialogue_history" in CHILD_QA_SYSTEM
+    assert "previous_child_answers" in CHILD_QA_SYSTEM
+
+    # 2. Conversational engagement in cognitive scaling tiers (3.0B ~ 7.0B)
+    assert "천진하게 말을 건네며 대화를 이어감" in CHILD_QA_SYSTEM
+    assert "제안하며 대화를 이어가는 2문장" in CHILD_QA_SYSTEM
+    assert "이야기하며 대화를 이어가는 2문장" in CHILD_QA_SYSTEM
+    assert "궁금증을 건네며 대화를 이어가는 2~3문장" in CHILD_QA_SYSTEM
+    assert "깊이 있게 주고받으며 대화를 이어감" in CHILD_QA_SYSTEM
+
+    # 3. Payload includes dialogue_history and previous_child_answers
+    client = MagicMock()
+    client.available.return_value = True
+    client.complete_json.return_value = ChildQAOut(answer="응, 엄마랑 같이 해볼래!")
+    n = NarratorAgent(client)
+
+    history = [
+        {"turn": 1, "parent": "안녕", "answer": "엄마 안녕!"},
+        {"turn": 2, "parent": "오늘 뭐 하고 놀았어?", "answer": "블록 쌓고 놀았어."},
+        {"turn": 3, "parent": "재밌었어?", "answer": "응, 재밌었어!"},
+        {"turn": 4, "parent": "누구랑 했어?", "answer": "혼자 했어."},
+        {"turn": 5, "parent": "심심하지 않았어?", "answer": "조금 심심했어."},
+        {"turn": 6, "parent": "그럼 이제 뭐 할까?", "answer": "그림 그릴래."},
+        {"turn": 7, "parent": "어떤 그림?", "answer": "공룡 그림!"},
+        {"turn": 8, "parent": "멋지다!", "answer": "헤헤 좋아."},
+        {"turn": 9, "parent": "색칠도 할 거야?", "answer": "초록색으로 칠할래."},
+    ]
+    ctx = {
+        "dialogue_history": history,
+        "cognitive": {"scale_b": 4.5},
+    }
+
+    n.ask_child("엄마가 도와줄까?", ctx)
+    call_args = client.complete_json.call_args[1]
+    payload = json.loads(call_args["user"])
+
+    assert "dialogue_history" in payload
+    assert len(payload["dialogue_history"]) == 8
+    assert payload["dialogue_history"][-1]["answer"] == "초록색으로 칠할래."
+
+    assert "previous_child_answers" in payload
+    assert len(payload["previous_child_answers"]) == 6
+    assert payload["previous_child_answers"][-1] == "초록색으로 칠할래."
+    assert payload["previous_child_answers"][0] == "혼자 했어."
+
+    # Also test extracting dialogue_history from brain_state
+    client.reset_mock()
+    ctx_brain = {
+        "brain_state": {
+            "dialogue_history": history[-3:],
+        }
+    }
+    n.ask_child("엄마랑 같이 할까?", ctx_brain)
+    call_args2 = client.complete_json.call_args[1]
+    payload2 = json.loads(call_args2["user"])
+    assert len(payload2["dialogue_history"]) == 3
+    assert payload2["previous_child_answers"] == ["공룡 그림!", "헤헤 좋아.", "초록색으로 칠할래."]
 
 
 def test_ask_child_personality_and_no_episode_listing_prompt():
@@ -792,3 +925,26 @@ def test_director_agent_live_llm_and_direct_scene():
     cached = d_live.direct_scene(sit, 24, "grandma")
     assert cached == bundle
     assert live_c.complete_json.call_count == 1
+
+
+def test_fallback_lines_hide_grade_words():
+    from server.agents.narrator import fixed_flavor, intro
+
+    grades = ("solved", "partial", "nothing", "worse")
+    sit = make_situation(random.Random(1), ["FLOOR_WET"], sid="test_sit_grade_leak")
+    handler = mock_narrator_handler()
+
+    i18n.set_lang("en")
+    scene_text, _ = intro(sit, False)
+    assert scene_text
+    for grade in grades:
+        assert grade not in scene_text.lower()
+        assert grade not in fixed_flavor(sit, grade).lower()
+        res = handler({"task": "outcome", "language": "English", "label": grade})
+        assert grade not in res["text"].lower()
+
+    i18n.set_lang("ko")
+    for grade in grades:
+        assert grade not in fixed_flavor(sit, grade).lower()
+        res = handler({"task": "outcome", "language": "Korean", "label": grade})
+        assert grade not in res["text"].lower()

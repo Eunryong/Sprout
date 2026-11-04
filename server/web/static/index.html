@@ -386,11 +386,14 @@
     </div>
 
     <div class="qa-chips" id="qaChips">
+      <button type="button" class="primary" id="runQuizBtn" data-t="quizBtn">🧩 안 배운 낯선 상황 3개 퀴즈 대결 (LLM 개입 없음)</button>
       <button type="button" class="qa-chip" data-q-ko="엄마/아빠랑 함께한 것 중에 뭐가 제일 기억에 남아?" data-q-en="What do you remember most about being with mom/dad?">엄마/아빠랑 함께한 것 중에 뭐가 제일 기억에 남아?</button>
       <button type="button" class="qa-chip" data-q-ko="심심하거나 속상할 때는 어떻게 하고 싶어?" data-q-en="What do you want to do when you're bored or upset?">심심하거나 속상할 때는 어떻게 하고 싶어?</button>
       <button type="button" class="qa-chip" data-q-ko="책을 읽거나 놀면서 어떤 걸 해보고 싶었어?" data-q-en="What did you want to try while reading books or playing?">책을 읽거나 놀면서 어떤 걸 해보고 싶었어?</button>
       <button type="button" class="qa-chip" data-q-ko="친구가 울고 있거나 도움이 필요하면 어떻게 할 거야?" data-q-en="What will you do if a friend is crying or needs help?">친구가 울고 있거나 도움이 필요하면 어떻게 할 거야?</button>
     </div>
+
+    <div class="banner" id="quizBox" hidden></div>
 
     <div class="qa-messages" id="qaMessages"></div>
 
@@ -432,10 +435,10 @@ const TEXT = {
     hintSolo: "Now the child faces a new situation alone. Instead of only repeating what it already knows, watch how the child tries something unfamiliar and learns from the experience.",
     newToChild: "new to the child", leanRemembers: "The child seems drawn to this: it remembers how it went.", leanCurious: "The child seems curious about this.",
     writing: (s) => `Preparing the next choices… ${s}s`, writing0: "Preparing the next choices…",
-    scene: (age, n) => `${age} · scene ${n}`,
+    scene: (age, n, name) => name ? `${name} · ${age} · scene ${n}` : `${age} · scene ${n}`,
     srcScenes: "Scenes: ", srcMock: "stand-in (mock mode)", srcDirector: "Director · ", srcTemplate: "template (the Director did not answer)", srcNone: "not asked yet",
     srcWorld: "World: ", srcWords: "Words: ", srcWordsMock: "stand-in text (mock)", srcWordsLive: (ok, n) => `${ok} of ${n} written by the model`, srcWordsFixed: "fixed text",
-    grown: (age) => `The child is grown: ${age}`,
+    grown: (age, name) => name ? `${name} · The child is grown: ${age}` : `The child is grown: ${age}`,
     lived: (n, a, b, c) => `${n} moments lived. You showed ${a} times, told ${b} times and left it to the child ${c} times.`,
     remembersTitle: "What the child remembers:",
     whoShow: "👀 You demonstrated it (the child watched and learned)", whoLeave: "🌱 The child chose by itself", whoSolo: "🌱 The child faced the situation and chose alone",
@@ -447,6 +450,8 @@ const TEXT = {
     raiseNew: "A new child, in a new world", raising: (s) => `A new child is being born and growing to three… ${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")} (a few minutes)`, raiseFailed: "Raising the child did not work.", other: "한국어",
     adoptTitle: "Start raising a 3-year-old child (Choose temperament)",
     adoptSub: "Babyhood (0–2 yrs) is skipped. The child starts at age 3 (36 months) with baseline 3-year-old intelligence and common sense.",
+    adoptNameLabel: "Name your child",
+    adoptNamePlaceholder: "e.g. Mina",
     temperaments: [
       { id: "warm", label: "🌱 Warm & Empathetic 3-year-old" },
       { id: "playful", label: "🎈 Curious & Playful 3-year-old" },
@@ -471,11 +476,15 @@ const TEXT = {
     qaChildBadge: (age) => `Child (${age})`,
     qaUserBadge: "Parent",
     qaThinking: "The child is thinking...",
-    cognitiveBadge: (tier, concepts, principles) => `🧠 Cognitive Scale: ${tier} · Concepts ${concepts} · Principles ${principles}`,
+    cognitiveBadge: (tier, concepts, principles, persona) => persona ? `🧠 Cognitive Scale: ${tier} · Personality: ${persona} · Concepts ${concepts} · Principles ${principles}` : `🧠 Cognitive Scale: ${tier} · Concepts ${concepts} · Principles ${principles}`,
     expansionTitle: "🌱 Knowledge Expansion",
     expansionPrinciple: "Synthesized Principle",
     expansionConcepts: "Expanded Concepts",
     expansionLearned: "What Learned",
+    quizBtn: "🧩 3 Unseen Scenes Quiz (Zero LLM — Pure Brain Test)",
+    quizMoreBtn: "🔄 Draw 3 Other Unseen Scenes",
+    quizCloseBtn: "Hide Quiz",
+    newbornLine: (x) => `As a newborn I would have tried: ${x}`,
   },
   ko: {
     thinking: "아이가 생각하는 중…", newChild: "새 아이", newChildTitle: "새 아이를 시작해요. 지금 아이는 저장된 채로 남아요.",
@@ -502,10 +511,10 @@ const TEXT = {
     hintSolo: "이번에는 아이 혼자 새로운 상황을 마주합니다. 이미 배운 좋은 답만 고르지 않고, 아직 잘 모르는 행동을 직접 경험하며 배우는 과정을 지켜보세요.",
     newToChild: "아이에게 처음인 일", leanRemembers: "아이가 끌리는 듯해요: 어땠는지 기억하고 있어요.", leanCurious: "아이가 이걸 궁금해하는 듯해요.",
     writing: (s) => `다음 선택지를 만드는 중… ${s}초`, writing0: "다음 선택지를 만드는 중…",
-    scene: (age, n) => `${age} · ${n}번째 장면`,
+    scene: (age, n, name) => name ? `${name} · ${age} · ${n}번째 장면` : `${age} · ${n}번째 장면`,
     srcScenes: "장면: ", srcMock: "대역 (mock 모드)", srcDirector: "감독 · ", srcTemplate: "기본 틀 (감독이 답하지 않았어요)", srcNone: "아직 묻지 않음",
     srcWorld: "세계: ", srcWords: "글: ", srcWordsMock: "대역 글 (mock)", srcWordsLive: (ok, n) => `${n}개 중 ${ok}개를 모델이 썼어요`, srcWordsFixed: "정해진 글",
-    grown: (age) => `아이가 자랐어요: ${age}`,
+    grown: (age, name) => name ? `${name} · 아이가 자랐어요: ${age}` : `아이가 자랐어요: ${age}`,
     lived: (n, a, b, c) => `${n}번의 순간을 지났어요. 보여 준 것 ${a}번, 말해 준 것 ${b}번, 아이에게 맡긴 것 ${c}번.`,
     remembersTitle: "아이가 기억하는 것:",
     whoShow: "👀 당신이 직접 보여 줬어요 (아이가 옆에서 보고 배워요)", whoLeave: "🌱 아이가 스스로 선택했어요", whoSolo: "🌱 아이가 혼자 상황에서 스스로 선택했어요",
@@ -517,6 +526,8 @@ const TEXT = {
     raiseNew: "새 아이 만나기 (새로 만든 세계)", raising: (s) => `새 아이가 태어나 세 살까지 자라는 중… ${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")} (몇 분 걸려요)`, raiseFailed: "아이를 키우는 데 실패했어요.", other: "English",
     adoptTitle: "어떤 성향의 3세 아이와 시작할까요?",
     adoptSub: "학습 요소가 적은 0~2세 아기 과정은 제외하고, 기초 상식과 말문을 갖춘 3세(36개월) 지능의 아이부터 바로 시작합니다.",
+    adoptNameLabel: "아이 이름 정하기",
+    adoptNamePlaceholder: "예: 미나",
     temperaments: [
       { id: "warm", label: "🌱 다정하고 공감을 잘하는 3세 아이" },
       { id: "playful", label: "🎈 호기심 많고 장난기 넘치는 3세 아이" },
@@ -541,11 +552,15 @@ const TEXT = {
     qaChildBadge: (age) => `아이 (${age})`,
     qaUserBadge: "부모",
     qaThinking: "아이가 생각하는 중...",
-    cognitiveBadge: (tier, concepts, principles) => `🧠 지능 스케일: ${tier} · 개념 ${concepts} · 원리 ${principles}`,
+    cognitiveBadge: (tier, concepts, principles, persona) => persona ? `🧠 지능 스케일: ${tier} · 성격: ${persona} · 개념 ${concepts} · 원리 ${principles}` : `🧠 지능 스케일: ${tier} · 개념 ${concepts} · 원리 ${principles}`,
     expansionTitle: "🌱 지식 확장 (Knowledge Expansion)",
     expansionPrinciple: "도출된 원리",
     expansionConcepts: "확장된 개념",
     expansionLearned: "학습한 내용",
+    quizBtn: "🧩 안 배운 낯선 상황 3개 퀴즈 대결 (LLM 개입 없음)",
+    quizMoreBtn: "🔄 다른 낯선 상황 3개 더 보기",
+    quizCloseBtn: "퀴즈 접기",
+    newbornLine: (x) => `갓난아기였으면 이렇게 했을 거예요: ${x}`,
   },
 };
 let LANG = "en";
@@ -572,6 +587,7 @@ let busy = false;
 let qaBusy = false;
 let currentAgeText = "";
 let currentCognitive = null;
+let currentChildName = null;
 
 function formatCognitiveTier(c, lang) {
   if (!c) return "";
@@ -637,7 +653,7 @@ function setBusy(on) {
   busy = on;
   $("busy").hidden = !on;
   document.querySelectorAll("button").forEach((b) => {
-    if (b.id !== "qaSendBtn" && b.id !== "qaCloseBtn" && !b.classList.contains("qa-chip")) {
+    if (b.id !== "runQuizBtn" && b.id !== "qaSendBtn" && b.id !== "qaCloseBtn" && !b.classList.contains("qa-chip")) {
       b.disabled = on;
     }
   });
@@ -690,8 +706,8 @@ function optionCard(o, sc) {
   const li = document.createElement("li");
   li.className = "opt";
   const isResearch = document.body.classList.contains("research");
-  const lived = isResearch && o.seen === 0 ? t("newToChild") : "";
-  const lean = isResearch && (o.lean === "remembers" ? t("leanRemembers") : o.lean === "curious" ? t("leanCurious") : "");
+  const lived = (isResearch && o.seen === 0) ? t("newToChild") : "";
+  const lean = o.lean === "remembers" ? t("leanRemembers") : o.lean === "curious" ? t("leanCurious") : "";
   let research = "";
   if (isResearch) {
     const top = RES.reduce((a, b) => (o.expects[a] >= o.expects[b] ? a : b));
@@ -706,14 +722,14 @@ function optionCard(o, sc) {
     // Step 2: Child is facing the situation alone and thinking about candidate actions
     li.className = "opt thought-opt";
     const thoughtText = o.speech || (o.text.charAt(0).toUpperCase() + o.text.slice(1));
-    const leanHtml = isResearch && lean ? '<p class="lean"></p>' : "";
-    const memHtml = isResearch && o.memory ? '<p class="memory"></p>' : "";
-    const livedHtml = isResearch && lived ? `<span>${lived}</span>` : "";
+    const leanHtml = lean ? '<p class="lean"></p>' : "";
+    const memHtml = o.memory ? '<p class="memory"></p>' : "";
+    const livedHtml = lived ? `<span>${lived}</span>` : "";
     li.innerHTML = `<h3></h3>${leanHtml}${memHtml}${research}
       <div class="foot"><div class="meta">${livedHtml}</div></div>`;
     li.querySelector("h3").textContent = thoughtText;
-    if (isResearch && lean) li.querySelector(".lean").textContent = lean;
-    if (isResearch && o.memory) li.querySelector(".memory").textContent = o.memory;
+    if (lean) li.querySelector(".lean").textContent = lean;
+    if (o.memory) li.querySelector(".memory").textContent = o.memory;
     return li;
   }
 
@@ -722,16 +738,16 @@ function optionCard(o, sc) {
   const part = isStep1 ? "show" : (canSpeak ? "say" : "show");
   const btnLabel = isStep1 ? t("showBtn") : (isBaby ? t("babyBtn") : (canSpeak ? t("sayBtn") : t("choose")));
   const btns = `<button class="primary" data-part="${part}">${btnLabel}</button>`;
-  const leanHtml = isResearch && lean ? '<p class="lean"></p>' : "";
-  const memHtml = isResearch && o.memory ? '<p class="memory"></p>' : "";
-  const livedHtml = isResearch && lived ? `<span>${lived}</span>` : "";
+  const leanHtml = lean ? '<p class="lean"></p>' : "";
+  const memHtml = o.memory ? '<p class="memory"></p>' : "";
+  const livedHtml = lived ? `<span>${lived}</span>` : "";
   const mainLine = o.text ? (o.text.charAt(0).toUpperCase() + o.text.slice(1)) : "";
   li.innerHTML = `<h3></h3>${leanHtml}${memHtml}${research}
     <div class="foot"><div class="meta">${livedHtml}</div>
     <div class="row">${btns}</div></div>`;
   li.querySelector("h3").textContent = mainLine;
-  if (isResearch && lean) li.querySelector(".lean").textContent = lean;
-  if (isResearch && o.memory) li.querySelector(".memory").textContent = o.memory;
+  if (lean) li.querySelector(".lean").textContent = lean;
+  if (o.memory) li.querySelector(".memory").textContent = o.memory;
   li.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => play(b.dataset.part, o.index)));
   return li;
 }
@@ -768,11 +784,21 @@ async function showAlbum(info) {
 async function chooseChild() {
   return new Promise((resolve) => {
     const box = $("adopt");
+    const nameLabel = Object.assign(document.createElement("label"), { textContent: t("adoptNameLabel"), className: "custom-action-label" });
+    nameLabel.htmlFor = "childNameInput";
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.id = "childNameInput";
+    nameInput.className = "custom-action-input";
+    nameInput.placeholder = t("adoptNamePlaceholder");
+    nameInput.style.margin = "0 0 10px";
+    nameInput.style.width = "100%";
     const go = async (persona) => {
+      const name = nameInput ? (nameInput.value || "").trim() : "";
       box.hidden = true;
       setBusy(true);
       try {
-        const r = await api("/api/new", { persona });
+        const r = await api("/api/new", { persona, name });
         if (r && r.restarting) {  // another world: the game starts again in it, then this page reloads
           box.replaceChildren(Object.assign(document.createElement("h2"), { textContent: t("restarting") }));
           box.hidden = false;
@@ -791,6 +817,8 @@ async function chooseChild() {
     box.replaceChildren(
       Object.assign(document.createElement("h2"), { textContent: t("adoptTitle") }),
       Object.assign(document.createElement("p"), { textContent: t("adoptSub") }),
+      nameLabel,
+      nameInput,
       ...items.map((item) => btn(item.label, () => go(item.id), "primary")),
       btn(t("cancel"), () => { box.hidden = true; resolve(false); }, "quiet")
     );
@@ -803,7 +831,7 @@ async function showEnd() {
   const life = $("life");
   life.replaceChildren();
   const add = (tag, text) => { const e = document.createElement(tag); e.textContent = text; life.appendChild(e); return e; };
-  add("h2", t("grown", s.age));
+  add("h2", t("grown", s.age, currentChildName));
   add("p", t("lived", s.scenes, s.took_part.showed, s.took_part.told, s.took_part.left));
   add("p", s.stages.map((x) => `${x.name}: ${x.scenes}`).join("  ·  "));
   add("p", t("remembersTitle"));
@@ -832,13 +860,14 @@ async function loadScene(opts = {}) {
   try {
     const [sc, info] = await Promise.all([api("/api/scene"), api("/api/info")]);
     currentAgeText = sc.age;
+    currentChildName = (info && info.child_name) || null;
     const cog = sc.cognitive || sc.cognitive_status || (info && info.cognitive);
     if (cog) updateCognitiveBadge(cog);
     if (Array.isArray(info.qa_history)) renderQaHistory(info.qa_history);
     try {
       if (sessionStorage.getItem("qaOpen") === "1" && info.qa_history && info.qa_history.length > 0) $("qaCard").hidden = false;
     } catch (_) {}
-    $("sceneNo").textContent = sc.ended ? "" : t("scene", sc.age, sc.number);
+    $("sceneNo").textContent = sc.ended ? "" : t("scene", sc.age, sc.number, currentChildName);
     const gr = $("growth"), gf = $("growthFill");
     if (gr && gf) {  // the growing line: where this child is between birth and seven
       gr.hidden = false;
@@ -892,6 +921,8 @@ function resultCard(r) {
   if (r.explanation && RESEARCH) add("surprise", t("research") + r.explanation);  // the child's guess against what happened: for the researcher, not the player
   if (r.remembers) add("learned", r.remembers);
   else if (!RESEARCH && r.learned) add("learned", r.learned);
+  if (r.newborn_line) add("learned newborn-compare", r.newborn_line);
+  if (r.newborn_pick_text != null) add("learned", t("newbornLine", r.newborn_pick_text));
   if (RESEARCH) add("learned", t("learnedR", r.learned));
 
   // Knowledge Expansion box (synthesized_principle or expanded_concepts)
@@ -1051,9 +1082,11 @@ $("newGame").addEventListener("click", async () => {
   if (went) {
     lastResult = null;
     currentCognitive = null;
+    currentChildName = null;
     updateCognitiveBadge(null);
     if ($("qaMessages")) $("qaMessages").replaceChildren();
     if ($("qaCard")) $("qaCard").hidden = true;
+    if ($("quizBox")) $("quizBox").hidden = true;
     try { sessionStorage.removeItem("qaOpen"); } catch (_) {}
     loadScene();
   }
@@ -1146,7 +1179,10 @@ function renderQaHistory(history) {
 
     const childMsg = document.createElement("div");
     childMsg.className = "qa-msg child";
-    const ageBadge = item.age || currentAgeText || (LANG === "ko" ? "성장 중" : "growing");
+    let ageBadge = item.age || currentAgeText || (LANG === "ko" ? "성장 중" : "growing");
+    if (currentCognitive && currentCognitive.personality && currentCognitive.personality.label) {
+      ageBadge += ` · ${currentCognitive.personality.label}`;
+    }
     childMsg.innerHTML = `<span class="badge">${t("qaChildBadge", ageBadge)}</span><div class="qa-bubble-text"></div>`;
     childMsg.querySelector(".qa-bubble-text").textContent = item.answer || "";
     msgs.appendChild(childMsg);
@@ -1177,13 +1213,20 @@ async function sendQa(qText) {
 
   const pendingMsg = document.createElement("div");
   pendingMsg.className = "qa-msg child";
-  pendingMsg.innerHTML = `<span class="badge">${t("qaChildBadge", currentAgeText || (LANG === "ko" ? "성장 중" : "growing"))}</span><div class="qa-bubble-text" style="font-style:italic">${t("qaThinking")}</div>`;
+  let pendingAge = currentAgeText || (LANG === "ko" ? "성장 중" : "growing");
+  if (currentCognitive && currentCognitive.personality && currentCognitive.personality.label) {
+    pendingAge += ` · ${currentCognitive.personality.label}`;
+  }
+  pendingMsg.innerHTML = `<span class="badge">${t("qaChildBadge", pendingAge)}</span><div class="qa-bubble-text" style="font-style:italic">${t("qaThinking")}</div>`;
   msgs.appendChild(pendingMsg);
   msgs.scrollTop = msgs.scrollHeight;
 
   try {
     const res = await api("/api/ask", { question: text });
-    const ageLabel = res.age || currentAgeText || (LANG === "ko" ? "성장 중" : "growing");
+    let ageLabel = res.age || currentAgeText || (LANG === "ko" ? "성장 중" : "growing");
+    if (currentCognitive && currentCognitive.personality && currentCognitive.personality.label) {
+      ageLabel += ` · ${currentCognitive.personality.label}`;
+    }
     pendingMsg.querySelector(".badge").textContent = t("qaChildBadge", ageLabel);
     const bodyEl = pendingMsg.querySelector(".qa-bubble-text");
     bodyEl.style.fontStyle = "normal";
@@ -1210,6 +1253,78 @@ if ($("qaInput")) $("qaInput").addEventListener("keydown", (e) => {
     sendQa();
   }
 });
+
+let quizOffset = 0;
+async function runQuiz(offset = 0) {
+  let box = $("quizBox");
+  if (!box && $("qaCard")) {
+    box = document.createElement("div");
+    box.id = "quizBox";
+    box.className = "banner";
+    const msgs = $("qaMessages");
+    if (msgs && msgs.parentNode) msgs.parentNode.insertBefore(box, msgs);
+    else $("qaCard").appendChild(box);
+  }
+  if (!box) return;
+  box.hidden = false;
+  box.replaceChildren(Object.assign(document.createElement("p"), { className: "memory", textContent: t("qaThinking") }));
+  try {
+    const data = await api(`/api/quiz?offset=${encodeURIComponent(offset)}`);
+    box.replaceChildren();
+    const h = document.createElement("h2");
+    h.textContent = data.title || "";
+    const sub = document.createElement("p");
+    sub.textContent = data.subtitle || "";
+    box.append(h, sub);
+    const ul = document.createElement("ul");
+    ul.className = "opts";
+    ul.style.marginTop = "10px";
+    for (const it of (data.items || [])) {
+      const li = document.createElement("li");
+      li.className = "opt";
+      const title = document.createElement("h3");
+      title.textContent = `${it.index}. ${it.situation}`;
+      li.appendChild(title);
+      for (const o of (it.options || [])) {
+        const p = document.createElement("p");
+        p.className = "memory";
+        const mark = (o.is_child_pick && o.is_newborn_pick) ? "🌱👶 " : o.is_child_pick ? "🌱 " : o.is_newborn_pick ? "👶 " : "• ";
+        p.textContent = `${mark}${o.text} [${o.feel_tag}]${o.memory ? ` — ${o.memory}` : ""}`;
+        li.appendChild(p);
+      }
+      if (it.comparison_line) {
+        const cmp = document.createElement("p");
+        cmp.className = "lean";
+        cmp.textContent = it.comparison_line;
+        li.appendChild(cmp);
+      }
+      if (it.happened) {
+        const hap = document.createElement("p");
+        hap.className = "memory";
+        hap.textContent = `→ ${it.happened}`;
+        li.appendChild(hap);
+      }
+      ul.appendChild(li);
+    }
+    box.appendChild(ul);
+    const row = document.createElement("div");
+    row.className = "row";
+    const moreBtn = document.createElement("button");
+    moreBtn.className = "primary";
+    moreBtn.textContent = t("quizMoreBtn");
+    moreBtn.addEventListener("click", () => { quizOffset += 1; runQuiz(quizOffset); });
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "quiet";
+    closeBtn.textContent = t("quizCloseBtn");
+    closeBtn.addEventListener("click", () => { box.hidden = true; });
+    row.append(moreBtn, closeBtn);
+    box.appendChild(row);
+  } catch (e) {
+    box.replaceChildren(Object.assign(document.createElement("p"), { className: "memory", textContent: t("errPlay") + e.message }));
+  }
+}
+
+if ($("runQuizBtn")) $("runQuizBtn").addEventListener("click", () => { quizOffset = 0; runQuiz(0); });
 
 applyText();
 chooseLang(LANG).then(loadScene);

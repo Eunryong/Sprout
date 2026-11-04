@@ -192,10 +192,11 @@ def probe_child_brain(session: Any, lang: str = "ko") -> dict[str, Any]:
             out_text = f.outcome_text
             takeaway_text = getattr(f, "takeaway", "")
             if act_text or out_text or takeaway_text:
+                prev_d = fact_details.get(key, {})
                 fact_details[key] = {
-                    "action_text": act_text,
-                    "outcome_text": out_text,
-                    "takeaway": takeaway_text,
+                    "action_text": act_text or prev_d.get("action_text", ""),
+                    "outcome_text": out_text or prev_d.get("outcome_text", ""),
+                    "takeaway": takeaway_text or prev_d.get("takeaway", ""),
                 }
 
     model_beliefs: list[dict[str, Any]] = []
@@ -237,7 +238,7 @@ def probe_child_brain(session: Any, lang: str = "ko") -> dict[str, Any]:
             act_label = act_txt or default_act
 
             if lang == "ko":
-                if confidence < 0.35 or count == 0:
+                if count == 0 or (confidence < 0.35 and not takeaway_txt and not out_txt):
                     summary = f"{prob_label} 때 {act_label}: 아직 잘 몰라요 (확신도 {confidence}, 변화량 {delta})."
                 elif takeaway_txt:
                     summary = f"{prob_label} 때 {act_label} → {takeaway_txt} (예측: {pred_outcome}, 확신도 {confidence}, 변화량 {delta})."
@@ -247,7 +248,7 @@ def probe_child_brain(session: Any, lang: str = "ko") -> dict[str, Any]:
                     outcome_desc = {"solved": "해결", "partial": "부분 완화", "nothing": "변화 없음", "worse": "악화"}.get(pred_outcome, pred_outcome)
                     summary = f"{prob_label} 때 {act_label} → {outcome_desc} 예측 (확신도 {confidence}, 변화량 {delta})."
             else:
-                if confidence < 0.35 or count == 0:
+                if count == 0 or (confidence < 0.35 and not takeaway_txt and not out_txt):
                     summary = f"Not sure yet about {act_label} for {prob_label} (confidence {confidence}, delta {delta})."
                 elif takeaway_txt:
                     summary = f"{prob_label}: {act_label} → {takeaway_txt} (predicted: {pred_outcome}, confidence {confidence}, delta {delta})."
@@ -387,13 +388,31 @@ def probe_child_brain(session: Any, lang: str = "ko") -> dict[str, Any]:
 
     cognitive = cognitive_status(knowledge_graph, lang=lang)
     personality = cognitive.get("personality", {})
-    principles = [p.principle for p in knowledge_graph.principles[-8:]]
-    concepts = {k: v.observations[-3:] for k, v in list(knowledge_graph.concepts.items())[-12:]}
+    sorted_prins = sorted(knowledge_graph.principles, key=lambda p: (p.hop_depth, p.confidence), reverse=True)
+    top_prins = [p.principle for p in sorted_prins[:12]]
+    recent_prins = [p.principle for p in knowledge_graph.principles[-16:]]
+    principles = list(dict.fromkeys(recent_prins + top_prins))[:24]
+    concepts = {k: v.observations[-3:] for k, v in list(knowledge_graph.concepts.items())[-30:]}
+
+    relevant_memories = [
+        {
+            "turn": ep.turn,
+            "scene": ep.scene_text,
+            "action": ep.action_text,
+            "outcome_text": ep.outcome_text,
+            "takeaway": ep.takeaway,
+            "outcome": ep.outcome,
+            "parent_mode": ep.parent_mode,
+            "summary": f"{ep.action_text} -> {ep.outcome_text or ep.takeaway}",
+        }
+        for ep in knowledge_graph.episodes[-24:]
+    ]
 
     return {
         "model_beliefs": model_beliefs,
         "learned_habits": learned_habits,
         "trial_memories": trial_memories,
+        "relevant_memories": relevant_memories,
         "unlearned_note": unlearned_note,
         "cognitive": cognitive,
         "personality": personality,

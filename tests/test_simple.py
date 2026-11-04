@@ -381,7 +381,7 @@ def test_wet_floor_blanket_shows_physical_consequence_and_causal_lesson_in_korea
         # 1. Outcome narration must not be a generic no-change sentence,
         # but describe the concrete physical consequence or narrator outcome.
         assert "아무 변화도 없었어요" not in t.narration
-        assert ("담요" in t.narration and "젖" in t.narration) or "별다른 차이가 없어요" in t.narration or "별다른 변화가 일어나지 않고 그대로예요" in t.narration or "담요" in t.narration or "결과는 nothing입니다." in t.narration
+        assert ("담요" in t.narration and "젖" in t.narration) or "별다른 차이가 없어요" in t.narration or "별다른 변화가 일어나지 않고 그대로예요" in t.narration or "담요" in t.narration or "결과는 nothing입니다." in t.narration or "상황은 그대로예요" in t.narration
 
         # 2. will_remember (t.remembers) must also describe the physical consequence and causal takeaway
         assert "아무 변화도 없었어요" not in t.remembers
@@ -915,6 +915,152 @@ def test_scene_called_twice_before_play_preserves_options_narration_and_bundle(t
     assert t.world_says == "원인 1"
 
 
+def test_two_step_populates_memory_and_lean_on_reencounter(tmp_path, monkeypatch):
+    import server.learning.codec as codec
+    import server.world.situation as sit_mod
+    import server.world.ontology as onto_mod
+    import server.world.generator as gen_mod
+    import server.game.memory as mem_mod
+    from server.world.situation import Obj, OptionSpec, Situation
+    from server.world.ontology import KindSpec
+    from server.world.state import Phase
+
+    monkeypatch.setitem(onto_mod.RULES, "UPSET", {("HUG", "teddy"): 2})
+    monkeypatch.setitem(sit_mod.RULES, "UPSET", {("HUG", "teddy"): 2})
+    monkeypatch.setitem(onto_mod.WAIT_VALUE, "UPSET", -1)
+    monkeypatch.setitem(sit_mod.WAIT_VALUE, "UPSET", -1)
+
+    monkeypatch.setitem(onto_mod.NEEDS, "UPSET", ("HUG", "teddy"))
+    monkeypatch.setitem(gen_mod.NEEDS, "UPSET", ("HUG", "teddy"))
+
+    teddy_spec = KindSpec("teddy", "sphere", "fabric", ("small", "big"))
+    monkeypatch.setitem(onto_mod.KINDS, "teddy", teddy_spec)
+    monkeypatch.setitem(gen_mod.KINDS, "teddy", teddy_spec)
+    monkeypatch.setitem(mem_mod._KIND_OF, ("sphere", "fabric"), "teddy")
+
+    monkeypatch.setitem(codec.TOK, "TAG_UPSET", codec.TOK["TAG_THIRSTY"])
+    monkeypatch.setitem(codec.TOK, "VERB_HUG", codec.TOK["VERB_GIVE"])
+
+    g = SimpleGame.new(tmp_path / "two_step_reencounter", seed=42, two_step=True)
+    g.s.narrator.generate_scene_bundle = None
+
+    teddy = Obj(kind="teddy", color="blue", shape="sphere", size="small", material="fabric")
+    sit1 = Situation(
+        id="sit_upset_1",
+        tags=["UPSET"],
+        location="house",
+        objects=[teddy],
+        options=[OptionSpec(verb="HUG", target=0), OptionSpec(verb="WAIT", target=None)],
+    )
+    g.s.engine.state.phase = Phase.SITUATION
+    g.s.engine.state.current = sit1
+    sc1 = g.scene()
+    assert sc1.options[0].memory == ""
+    assert sc1.options[0].lean == ""
+
+    # Play Step 1 and Step 2 for Scene 1
+    g.play("show", 0)
+    g.play("leave")
+
+    # In Scene 2, re-encounter the same tag (UPSET)
+    sit2 = Situation(
+        id="sit_upset_2",
+        tags=["UPSET"],
+        location="house",
+        objects=[teddy],
+        options=[OptionSpec(verb="HUG", target=0), OptionSpec(verb="WAIT", target=None)],
+    )
+    g.s.engine.state.phase = Phase.SITUATION
+    g.s.engine.state.current = sit2
+    sc2 = g.scene()
+    assert sc2.step == 1
+    # Option 0 now has lived memory and lean in Step 1
+    assert sc2.options[0].memory != ""
+    assert sc2.options[0].lean != ""
+
+    # Play Step 1 and inspect Step 2 (solo scene)
+    g.play("show", 0)
+    g.solo_sit = sit2
+    sc2_solo = g.scene()
+    assert sc2_solo.step == 2
+    assert sc2_solo.options[0].memory != ""
+    assert sc2_solo.options[0].lean != ""
+    assert sc2_solo.options[0].seen > 0
+
+
+def test_simple_turn_newborn_comparison_no_verdict_or_digits(tmp_path):
+    from server import i18n
+    import re
+
+    for lang in ("ko", "en"):
+        prev = i18n.lang()
+        try:
+            i18n.set_lang(lang)
+            g = SimpleGame.new(tmp_path / f"newborn_{lang}", seed=123, two_step=False)
+            g.s.narrator.generate_scene_bundle = None
+            g.scene()
+            t = g.play("show", 0)
+
+            assert t.newborn_acted is not None
+            assert t.newborn_choice_text != ""
+            assert t.newborn_line != ""
+            assert isinstance(t.changed_from_newborn, bool)
+
+            # Must contain no digits (0-9) or percentage symbols
+            assert not re.search(r"[0-9%]", t.newborn_line)
+
+            # Must contain no verdict words
+            verdict_words = ["right", "wrong", "solved", "worse", "정답", "성공", "실패"]
+            lower_line = t.newborn_line.lower()
+            for w in verdict_words:
+                assert w not in lower_line
+        finally:
+            i18n.set_lang(prev)
+
+
+def test_quiz_challenge_held_out_no_leak_no_llm(tmp_path):
+    import re
+    from unittest.mock import MagicMock
+
+    g = SimpleGame.new(tmp_path / "quiz_game", seed=99, two_step=False)
+    # Ensure no LLM calls can happen
+    mock_narrator = MagicMock()
+    mock_narrator.complete_json = MagicMock(side_effect=RuntimeError("LLM should not be called"))
+    g.s.narrator.client = mock_narrator
+
+    buf_len_before = len(g.s.buffer)
+    res = g.quiz_challenge(n=3)
+
+    # 1. Output structure
+    assert "items" in res
+    assert "age" in res
+    assert "lived" in res
+    assert "changed_count" in res
+    assert len(res["items"]) <= 3
+
+    # 2. Buffer untouched (zero learning / no mutations)
+    assert len(g.s.buffer) == buf_len_before
+
+    # 3. All quiz items are held out in self.s.forbidden
+    for it in res["items"]:
+        assert it["hash"] in g.s.forbidden
+        assert "child_pick" in it
+        assert "newborn_pick" in it
+        assert "options" in it
+        assert len(it["options"]) > 0
+        for opt in it["options"]:
+            assert "feel_tag" in opt
+            assert opt["feel_tag"] != ""
+            assert "after_text" in opt
+        assert it["comparison_line"] != ""
+        # No digits or verdict words in comparison_line
+        assert not re.search(r"[0-9%]", it["comparison_line"])
+        verdict_words = ["right", "wrong", "solved", "worse", "정답", "성공", "실패"]
+        lower_line = it["comparison_line"].lower()
+        for w in verdict_words:
+            assert w not in lower_line
+
+
 def test_bootstrap_age_three(tmp_path, monkeypatch):
     import sys
     from pathlib import Path
@@ -950,6 +1096,84 @@ def test_bootstrap_age_three(tmp_path, monkeypatch):
     finally:
         _reload_onto(None)
         import server.game.simple  # restore default module in sys.modules
+
+
+def test_summary_moments_have_no_grades_or_option_numbers(tmp_path):
+    import re
+    g = game(tmp_path / "moments_neutral", seed=0)
+    for _ in range(4):
+        g.scene()
+        g.play("show", 0)
+    s = g.summary()
+    assert s.moments
+    for m in s.moments:
+        assert " — " in m, m
+        assert re.search(r"\b(solved|partial|nothing|worse)\b", m, re.IGNORECASE) is None, m
+        assert re.search(r"\boption\s*\d+\b", m, re.IGNORECASE) is None, m
+
+
+def test_neutral_moment_outcome_segment_is_nonempty():
+    import re
+    from server.game.simple import _neutral_moment
+    m = _neutral_moment("dirty hands", "wipe with a cloth", "solved.")
+    assert m == "dirty hands — wipe with a cloth — the trouble is over", m
+    for label in ("solved", "partial", "nothing", "worse"):
+        mm = _neutral_moment("dirty hands", "wipe with a cloth", f"{label}.")
+        segs = [s.strip() for s in mm.split("—")]
+        assert len(segs) == 3, mm
+        assert segs[2].strip(" .!?,;:").strip() != "", mm
+        assert re.search(r"\b(solved|partial|nothing|worse)\b", mm, re.IGNORECASE) is None, mm
+        assert re.search(r"\boption\s*\d+\b", mm, re.IGNORECASE) is None, mm
+
+
+def test_summary_moments_outcome_segment_is_nonempty(tmp_path):
+    import re
+    g = game(tmp_path / "moments_outcome", seed=0)
+    for _ in range(4):
+        g.scene()
+        g.play("show", 0)
+    s = g.summary()
+    assert s.moments
+    for m in s.moments:
+        segs = [sg.strip() for sg in m.split("—")]
+        assert len(segs) >= 2, m
+        assert segs[-1].strip(" .!?,;:").strip() != "", m
+
+
+def test_played_turn_carries_newborn_pick_text(tmp_path):
+    g = game(tmp_path / "newborn_pick", seed=0)
+    sc = g.scene()
+    t = g.play("show", 0)
+    assert t.newborn_pick_text is not None
+    assert t.newborn_pick_text in [o.text for o in sc.options]
+    assert t.newborn_pick_text == t.newborn_choice_text
+
+
+def test_reloaded_scene_serves_persisted_bundle_without_new_narration(tmp_path):
+    g = game(tmp_path / "persist_bundle", seed=7)
+    g._ready()
+    calls = []
+
+    def changing_bundle(sit, age, voice, solo=False, recent_scenes=(), still=()):
+        calls.append(1)
+        n = len(calls)
+        return {
+            "narration": f"persisted scene {n}",
+            "options": [f"persisted option {n}-{i}" for i in range(len(sit.options))],
+            "speeches": [f"persisted speech {n}-{i}" for i in range(len(sit.options))],
+        }
+
+    g.s.narrator.generate_scene_bundle = changing_bundle
+    sc1 = g.scene()
+    assert sc1.narration == "persisted scene 1"
+    assert len(calls) == 1
+
+    g2 = SimpleGame.load(tmp_path / "persist_bundle" / "g")
+    g2.s.narrator.generate_scene_bundle = changing_bundle
+    sc2 = g2.scene()
+    assert sc2.narration == "persisted scene 1"
+    assert [o.text for o in sc2.options] == [o.text for o in sc1.options]
+    assert len(calls) == 1
 
 
 

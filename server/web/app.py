@@ -15,6 +15,7 @@ import subprocess
 import sys
 import threading
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +24,7 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
 from server import i18n
+from server.agents.director import ProposalError
 from server.agents.factory import load_llm_cfg
 from server.game.memory import probe_child_brain
 from server.game.simple import Part, SimpleGame
@@ -48,10 +50,52 @@ class NewIn(BaseModel):
     seed: int | None = None
     child: str | None = None
     persona: str | None = None
+    name: str | None = None
 
 
 class LangIn(BaseModel):
     lang: str
+
+
+NAME_POOL = ["bori", "kong", "byeol", "narae", "haneul", "bada", "dami", "sol"]  # cute defaults, same style as /api/raise
+
+
+def _validated_name(raw: str | None) -> str | None:
+    """Strip a requested name; None when missing/empty, 422 when longer than 20 chars."""
+    if raw is None or not raw.strip():
+        return None
+    name = raw.strip()
+    if len(name) > 20:
+        raise HTTPException(422, "name must be 1-20 characters")
+    return name
+
+
+def resolve_child_name(raw: str | None, seed: int) -> str:
+    """Strip and validate a requested name; missing/empty falls back to a seed-picked default."""
+    return _validated_name(raw) or NAME_POOL[seed % len(NAME_POOL)]
+
+
+def _read_child_name(d: Path) -> str | None:
+    try:
+        v = json.loads((d / "meta.json").read_text()).get("child_name")
+        return v if isinstance(v, str) and v else None
+    except (OSError, ValueError):
+        return None
+
+
+def _rotation_suffix() -> str:
+    """Microsecond-precision save-rotation suffix: two /api/new calls in the same second must not collide."""
+    return datetime.now().strftime("%Y%m%d-%H%M%S-%f")
+
+
+def _write_child_name(d: Path, name: str) -> None:
+    p = d / "meta.json"
+    try:
+        meta = json.loads(p.read_text())
+    except (OSError, ValueError):
+        return
+    meta["child_name"] = name
+    p.write_text(json.dumps(meta, indent=1), encoding="utf-8")
 
 
 class Holder:
@@ -77,25 +121,29 @@ class Holder:
         else:
             self.game = SimpleGame.new(self.dir, seed=seed, two_step=self.two_step, start_at_three=has_3yo_stage)
 
-    def adopt(self, src: Path) -> None:
+    def adopt(self, src: Path, name: str | None = None) -> None:
         """Take over a child that was raised to three: its save is copied here; the earlier child is kept aside."""
+        _validated_name(name)  # fail before anything is moved aside
         if (self.dir / "meta.json").exists() or self.dir.exists():
-            self.dir.rename(self.dir.with_name(f"{self.dir.name}-old-{time.strftime('%Y%m%d-%H%M%S')}"))
+            self.dir.rename(self.dir.with_name(f"{self.dir.name}-old-{_rotation_suffix()}"))
         shutil.copytree(src, self.dir)
         self.game = SimpleGame.load(self.dir, two_step=self.two_step)
         self.seed = self.game.s.seed
+        _write_child_name(self.dir, resolve_child_name(name, self.seed))
 
-    def restart(self, seed: int, persona: str | None = None) -> None:
+    def restart(self, seed: int, persona: str | None = None, name: str | None = None) -> None:
+        child_name = resolve_child_name(name, seed)  # fail before anything is moved aside
         if (self.dir / "meta.json").exists():
-            old = self.dir.with_name(f"{self.dir.name}-old-{time.strftime('%Y%m%d-%H%M%S')}")
+            old = self.dir.with_name(f"{self.dir.name}-old-{_rotation_suffix()}")
             self.dir.rename(old)
-            for name in ("ontology.yaml", "world.json"):  # the running world may live in the save itself: the next child grows up in the same one
-                if (old / name).exists():
+            for fname in ("ontology.yaml", "world.json"):  # the running world may live in the save itself: the next child grows up in the same one
+                if (old / fname).exists():
                     self.dir.mkdir(parents=True, exist_ok=True)
-                    shutil.copy(old / name, self.dir / name)
+                    shutil.copy(old / fname, self.dir / fname)
         self.seed = seed
         has_3yo_stage = any(s.get("from", 0) >= 36 for s in STAGES) or (persona is not None)
         self.game = SimpleGame.new(self.dir, seed=seed, two_step=self.two_step, start_at_three=has_3yo_stage, persona=persona or "warm")
+        _write_child_name(self.dir, child_name)
 
 
 def premise_text(sheet) -> str:
@@ -175,7 +223,7 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
             sheet = g.s.world_sheet()
             d, n = g.s.director, g.s.narrator.stats.summary()
             raised = None
-            return {"raised": raised, "lang": i18n.lang(), "lived": g.lived, "seed": h.seed, "premise": premise_text(sheet),
+            return {"raised": raised, "lang": i18n.lang(), "lived": g.lived, "seed": h.seed, "child_name": _read_child_name(h.dir), "premise": premise_text(sheet),
                     "world": sheet.source if sheet else f"hand-written ({'0-7 years' if STAGES else 'small'})", "curiosity": g.s.game.curiosity,
                     "mode": os.environ.get("GROWING_LLM") or load_llm_cfg().mode, "ended": g.ended,
                     "director": {"source": d.last_source if d.stats.calls + d.stats.no_client else None, "error": d.last_error},  # who wrote today's scenes: director:<model> or template
@@ -185,7 +233,14 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
     @app.get("/api/scene")
     def scene():
         with h.lock:
-            return h.game.scene().model_dump()
+            try:
+                return h.game.scene().model_dump()
+            except HTTPException:
+                raise
+            except (RuleError, ProposalError) as e:
+                raise HTTPException(409, str(e))
+            except Exception as e:  # noqa: BLE001  a rejected draw is a conflict, never a raw 500
+                raise HTTPException(409, str(e))
 
     @app.get("/api/summary")
     def summary():
@@ -227,9 +282,13 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
                 turn_data = turn.model_dump() if hasattr(turn, "model_dump") else turn
                 if isinstance(turn_data, dict):
                     turn_data.setdefault("outcome_text", turn_data.get("narration", ""))
+            except HTTPException:
+                raise
             except ValueError as e:
                 raise HTTPException(400, str(e))
-            except RuleError as e:
+            except (RuleError, ProposalError) as e:
+                raise HTTPException(409, str(e))
+            except Exception as e:  # noqa: BLE001  a rejected draw is a conflict, never a raw 500
                 raise HTTPException(409, str(e))
         prefetch_next()  # after the lock is released: the next scene is made while the player reads this result
         return turn_data
@@ -296,6 +355,11 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
             learned_count = len(learned_habits)
             moments = [b["summary"] for b in brain["model_beliefs"][-5:]] if brain["model_beliefs"] else []
 
+            cur_narration = getattr(g, "_current_solo_narration", "") or getattr(g, "_current_scene_narration", "")
+            cur_options = getattr(g, "_current_solo_option_texts", []) or getattr(g, "_current_option_texts", [])
+
+            history = _load_qa_history(h.dir)
+
             ask_ctx = {
                 **brain,
                 "brain_state": brain,
@@ -303,6 +367,8 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
                 "age_months": v.age_months,
                 "stage": stage_title,
                 "moments": moments,
+                "current_scene": {"narration": cur_narration, "options": cur_options},
+                "dialogue_history": history[-8:],
             }
 
             try:
@@ -310,7 +376,6 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
             except TypeError:
                 answer = g.s.narrator.ask_child(req.question, ask_ctx)
 
-            history = _load_qa_history(h.dir)
             history.append({
                 "question": req.question,
                 "answer": answer,
@@ -360,23 +425,28 @@ def create_app(save_dir: str | Path = "saves/web/current", seed: int = 0, prefet
     @app.post("/api/new")
     def new(body: NewIn):
         with h.lock:
-            if body.persona:
-                h.restart(h.seed + 1 if body.seed is None else body.seed, persona=body.persona)
-            elif body.child and body.child in ("warm", "playful", "busy", "strict") and not (kids and (kids / body.child / "raised.json").exists()):
-                h.restart(h.seed + 1 if body.seed is None else body.seed, persona=body.child)
-            elif body.child:
-                src = (kids / body.child) if kids else None
-                if src is None or "/" in body.child or not (src / "raised.json").exists():
-                    raise HTTPException(404, f"no raised child called {body.child!r}")
-                if child_world(src) != ONTOLOGY_HASH:
-                    relaunch("--child", str(src))
-                    return {"restarting": True}
-                try:
-                    h.adopt(src)
-                except ValueError as e:
-                    raise HTTPException(409, str(e))
-            else:
-                h.restart(h.seed + 1 if body.seed is None else body.seed)
+            try:
+                if body.persona:
+                    h.restart(h.seed + 1 if body.seed is None else body.seed, persona=body.persona, name=body.name)
+                elif body.child and body.child in ("warm", "playful", "busy", "strict") and not (kids and (kids / body.child / "raised.json").exists()):
+                    h.restart(h.seed + 1 if body.seed is None else body.seed, persona=body.child, name=body.name)
+                elif body.child:
+                    src = (kids / body.child) if kids else None
+                    if src is None or "/" in body.child or not (src / "raised.json").exists():
+                        raise HTTPException(404, f"no raised child called {body.child!r}")
+                    if child_world(src) != ONTOLOGY_HASH:
+                        relaunch("--child", str(src))
+                        return {"restarting": True}
+                    try:
+                        h.adopt(src, name=body.name)
+                    except ValueError as e:
+                        raise HTTPException(409, str(e))
+                else:
+                    h.restart(h.seed + 1 if body.seed is None else body.seed, name=body.name)
+            except HTTPException:
+                raise
+            except Exception as e:  # noqa: BLE001  a rotation clash is a conflict, never a raw 500
+                raise HTTPException(409, str(e))
         prefetch_next()
         return {"seed": h.seed}
 

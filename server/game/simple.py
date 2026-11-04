@@ -7,7 +7,10 @@ never shows them: the player sees scenes only.
   play("show", n)  do option n yourself; the child watches
   play("leave")    say nothing; the child chooses alone
 """
+import json
 import random
+import re
+from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -39,6 +42,9 @@ from .memory import action_words, leanings, remember, will_remember
 from .session import ActionResult, Session
 
 Part = Literal["say", "show", "leave", "solo"]
+
+_BUNDLE_FILENAME = "current_bundle.json"
+_BUNDLE_KEYS = ("narration", "options", "speeches", "outcomes", "results", "world_says")
 
 
 def current_lang() -> str:
@@ -134,6 +140,11 @@ class SimpleTurn(BaseModel):
     synthesized_principle: str = ""
     expanded_concepts: list[str] = Field(default_factory=list)
     what_learned: str = ""
+    newborn_acted: int | None = None
+    newborn_choice_text: str = ""
+    newborn_pick_text: str | None = None
+    newborn_line: str = ""
+    changed_from_newborn: bool = False
 
 
 TurnOutcome = SimpleTurn
@@ -224,6 +235,43 @@ def _map_bundle_options_to_situation(sit: Situation, b_opts: list[str]) -> Situa
     return sit.model_copy(update={"objects": objs, "options": mapped_opts})
 
 
+_MOMENT_GRADE_RE = re.compile(r"\b(solved|partial|nothing|worse)\b", re.IGNORECASE)
+_MOMENT_OPTION_RE = re.compile(r"\boption\s*\d+\b", re.IGNORECASE)
+
+
+def _neutral_moment(when: str, act_s: str, out_s: str) -> str:
+    """One summary line `{problem} — {action} — {neutral outcome}`: never an option
+    number, never a grade word (whatever the underlying prose once said)."""
+    _FALLBACK = {
+        "solved": "the trouble is over",
+        "partial": "things feel a little easier, but something still lingers",
+        "nothing": "everything stays just as it was",
+        "worse": "things feel heavier now",
+    }
+    orig_out = (out_s or "").strip()
+    # A bare engine label ("solved.") would be wiped out entirely by the
+    # grade-word cleanup below, leaving a dangling "— .". Map it to neutral
+    # phrasing first so the outcome segment survives.
+    core = re.sub(r"[.\s!?,;:]+$", "", orig_out).strip().lower()
+    if core in _FALLBACK:
+        out_s = _FALLBACK[core]
+    parts = [(when or "").strip(), (act_s or "").strip(), (out_s or "").strip()]
+    if all(parts):
+        text = f"{parts[0]} — {parts[1]} — {parts[2]}"
+    else:
+        text = " — ".join(p for p in parts if p)
+    text = _MOMENT_OPTION_RE.sub("", text)
+    text = _MOMENT_GRADE_RE.sub("", text)
+    text = re.sub(r"\s{2,}", " ", text).strip()
+    segs = [s.strip() for s in text.split("—")]
+    segs = [s for s in segs if s.strip(" .!?,;:") and re.search(r"\w", s, re.UNICODE)]
+    if orig_out and len(segs) == 2 and len([p for p in parts if p.strip(" .!?,;:")]) == 3:
+        m = _MOMENT_GRADE_RE.search(orig_out.lower())
+        if m:
+            segs.append(_FALLBACK[m.group(1).lower()])
+    return " — ".join(segs)
+
+
 def _format_memory(m) -> str:
     if not m:
         return ""
@@ -237,6 +285,73 @@ def _format_memory(m) -> str:
     return f"{action} → {happened}"
 
 
+def _expectation_symbol(exp: dict[str, float], is_ko: bool) -> str:
+    pos = exp.get("solved", 0.0) + 0.5 * exp.get("partial", 0.0)
+    neg = exp.get("worse", 0.0)
+    if pos >= 0.42:
+        return "★★ 마음이 끌려요" if is_ko else "★★ Drawn to this"
+    elif pos >= 0.28 and pos >= neg:
+        return "★ 괜찮아 보여요" if is_ko else "★ Seems okay"
+    elif neg >= 0.35:
+        return "☁ 피하고 싶어 해요" if is_ko else "☁ Wants to avoid"
+    else:
+        return "· 아직 잘 몰라요" if is_ko else "· Not sure yet"
+
+
+def _build_newborn_comparison(
+    s: Session,
+    obs,
+    texts: dict[int, str],
+    option_texts_list: list[str],
+    child_idx: int,
+    child_text: str,
+    by: str,
+) -> tuple[int | None, str, str, bool]:
+    # The untrained control: s.model0 is the immutable ckpt_000 (loaded once via
+    # checkpoints.load, never trained). act() is the child's own pick rule (policy.py):
+    # the argmax over the expected-value pick, read from the untrained net only.
+    if getattr(s, "model0", None) is None or not getattr(obs, "options", None):
+        return None, "", "", False
+
+    try:
+        nb_idx = act(s.model0, obs).option
+    except Exception:
+        return None, "", "", False
+    if not 0 <= nb_idx < len(obs.options):
+        return None, "", "", False
+    nb_text = (
+        option_texts_list[nb_idx]
+        if (option_texts_list and 0 <= nb_idx < len(option_texts_list))
+        else texts.get(nb_idx, "")
+    )
+    changed = (child_idx != nb_idx)
+
+    if i18n.is_ko():
+        if by == "parent":
+            if changed:
+                line = f"👶 갓 태어난 초기 뇌였다면 '{nb_text}' 쪽으로 끌렸겠지만, 방금 본 것을 배우고 나서 이제는 '{child_text}' 쪽으로 마음이 기울어요."
+            else:
+                line = f"👶 갓 태어난 초기 뇌가 끌리던 '{nb_text}' 쪽을 지켜보며 기억에 담았어요."
+        else:
+            if changed:
+                line = f"👶 갓 태어난 초기 뇌였다면 '{nb_text}' 쪽을 골랐을 텐데, 그동안의 경험으로 '{child_text}' 쪽을 선택했어요."
+            else:
+                line = f"👶 갓 태어난 초기 뇌와 마찬가지로 '{nb_text}' 쪽을 선택했어요."
+    else:
+        if by == "parent":
+            if changed:
+                line = f"👶 At birth, the untrained mind would have leaned toward '{nb_text}', but after watching you it now leans toward '{child_text}'."
+            else:
+                line = f"👶 The child watched '{nb_text}', the same option its untrained mind at birth leaned toward."
+        else:
+            if changed:
+                line = f"👶 At birth, the untrained mind would have picked '{nb_text}', but from lived experience the child chose '{child_text}'."
+            else:
+                line = f"👶 Like the untrained mind at birth, the child picked '{nb_text}'."
+
+    return nb_idx, nb_text, line, changed
+
+
 class SimpleGame:
     def __init__(self, session: Session, two_step: bool = False):
         self.s = session
@@ -247,6 +362,8 @@ class SimpleGame:
         self.lived = sum(e.source in ("show", "try") and e.mode != "solo_try" for e in session.buffer)
         self._recent_narrations: list[str] = []
         self._current_bundle: dict | None = None
+        self._current_bundle_lang: str | None = None
+        self._current_bundle_sit_id: str | None = None
         self._scene_seq: int = 0
         self._current_scene_narration: str = ""
         self._current_option_texts: list[str] = []
@@ -285,6 +402,69 @@ class SimpleGame:
                 save_knowledge(self.knowledge, k_path)
 
         self.s.knowledge = self.knowledge
+        self._restore_bundle()
+
+    def _bundle_file(self) -> Path | None:
+        save = getattr(self.s, "save", None)
+        root = getattr(save, "root", None)
+        return (Path(root) / _BUNDLE_FILENAME) if root is not None else None
+
+    def _persist_bundle(self) -> None:
+        """Write the in-memory bundle to the save dir (plain JSON file, like save_knowledge)."""
+        path = self._bundle_file()
+        if path is None:
+            return
+        bundle = self._current_bundle
+        if not bundle:
+            try:
+                path.unlink(missing_ok=True)
+            except OSError:
+                pass
+            return
+        clean = {k: bundle[k] for k in _BUNDLE_KEYS if k in bundle}
+        data = {"sit_id": self._current_bundle_sit_id, "lang": self._current_bundle_lang, "bundle": clean}
+        try:
+            payload = json.dumps(data, ensure_ascii=False, indent=1)
+        except (TypeError, ValueError):
+            try:
+                payload = json.dumps(data, ensure_ascii=False, indent=1, default=str)
+            except (TypeError, ValueError):
+                return
+        try:
+            path.write_text(payload, encoding="utf-8")
+        except OSError:
+            pass
+
+    def _restore_bundle(self) -> None:
+        """Reload the persisted bundle, if any. Old saves without the file are untouched."""
+        path = self._bundle_file()
+        if path is None or not path.exists():
+            return
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return
+        if not isinstance(data, dict):
+            return
+        bundle = data.get("bundle")
+        if not isinstance(bundle, dict):
+            return
+        self._current_bundle = bundle
+        self._current_bundle_sit_id = data.get("sit_id")
+        self._current_bundle_lang = data.get("lang")
+
+    def _drop_bundle(self) -> None:
+        """Clear the in-memory bundle and its persisted copy (the situation advanced)."""
+        self._current_bundle = None
+        self._current_bundle_outcomes = []
+        self._current_bundle_results = []
+        self._current_bundle_world_says = []
+        path = self._bundle_file()
+        if path is not None:
+            try:
+                path.unlink(missing_ok=True)
+            except OSError:
+                pass
 
     @classmethod
     def new(cls, save_dir, seed: int = 0, two_step: bool = False, start_at_three: bool = False, persona: str = "warm", **kw) -> "SimpleGame":
@@ -343,10 +523,14 @@ class SimpleGame:
             self.s.pick_card(0)
         if self.s.state.current is not None:
             if self.s.state.current.id != self._last_ready_sit_id:
-                self._current_bundle = None
-                self._current_bundle_outcomes = []
-                self._current_bundle_results = []
-                self._current_bundle_world_says = []
+                keep = (
+                    isinstance(self._current_bundle, dict)
+                    and bool(self._current_bundle.get("options"))
+                    and self._current_bundle_sit_id == self.s.state.current.id
+                    and self._current_bundle_lang == i18n.lang()
+                )
+                if not keep:
+                    self._drop_bundle()
                 self._scene_seq += 1
                 step = getattr(self.s.state, "step", 1)
                 rng = random.Random(f"{self.s.state.current.id}:{step}:{self._scene_seq}")
@@ -479,8 +663,11 @@ class SimpleGame:
         beta, tags = self.s.game.curiosity, list(cur.tags)
         ex = expectations(self.s, self.s.obs)
         if self.has_two_steps():
-            mems = [None for _ in self.s.obs.options]
-            lean = ["" for _ in self.s.obs.options]
+            tag_buf = [e for e in self.s.buffer if set(e.obs.tags) & set(tags)]
+            mems = [remember(tag_buf, tags, o, strict_tags=True) for o in self.s.obs.options]
+            seen_tag = seen_counts(tag_buf)
+            probs = option_probs(self.s.model, self.s.obs, seen_tag, beta=beta)
+            lean = leanings(option_probs(self.s.model, self.s.obs), probs, [m is not None for m in mems])
         else:
             try:
                 memories = remember(self.s.buffer, self.s.obs)
@@ -542,6 +729,7 @@ class SimpleGame:
             self._current_bundle = bundle
             self._current_bundle_lang = i18n.lang()
             self._current_bundle_sit_id = cur.id if cur else None
+            self._persist_bundle()
 
         return self._sync_view(age, stg)
 
@@ -568,6 +756,7 @@ class SimpleGame:
             self._current_bundle = bundle
             self._current_bundle_lang = i18n.lang()
             self._current_bundle_sit_id = sit.id if sit else None
+            self._persist_bundle()
 
         if bundle and bundle.get("options"):
             b_opts = list(bundle.get("options") or [])
@@ -623,11 +812,23 @@ class SimpleGame:
         beta = self.s.game.curiosity
         ex = expectations(self.s, self.s.obs)
 
+        prev_buf = self.s.buffer[:-1] if len(self.s.buffer) > 1 else []
+        solo_tags = list(sit.tags)
+        tag_buf = [e for e in prev_buf if set(e.obs.tags) & set(solo_tags)]
+        mems = [remember(tag_buf, solo_tags, o, strict_tags=True) for o in self.s.obs.options]
+        seen_tag = seen_counts(tag_buf)
+        probs = option_probs(self.s.model, self.s.obs, seen_tag, beta=beta)
+        lean = leanings(option_probs(self.s.model, self.s.obs), probs, [m is not None for m in mems])
+
         for i, opt in enumerate(options_out):
             if i < len(self.s.obs.options):
                 opt.expects = ex[i]
                 opt.seen = seen.get(novelty_key(self.s.obs.options[i]), 0)
                 opt.pull = novelty(self.s.obs.options[i], seen, beta)
+                opt.memory = _format_memory(mems[i])
+                opt.lean = lean[i]
+                if mems[i] is not None and opt.seen == 0:
+                    opt.seen = getattr(mems[i], "times", 1)
 
         self._current_solo_narration = intro
         self._current_solo_option_texts = [opt.text for opt in options_out]
@@ -834,6 +1035,16 @@ class SimpleGame:
         why = why_facts(obs=self.s.obs, sit=sit, pre=pre, acted=acted, result=api_outcome, by="child", followed=None,
                         after=expectations(self.s, self.s.obs)[acted], text=chosen_text)
 
+        nb_acted, nb_choice_text, nb_line, changed_nb = _build_newborn_comparison(
+            self.s,
+            self.s.obs,
+            texts,
+            getattr(self, "_current_solo_option_texts", []),
+            acted,
+            chosen_text,
+            "child",
+        )
+
         turn = SimpleTurn(
             part=part, told=option if part == "solo" else None, acted=acted,
             by="child", followed=None, child_said=speeches.get(acted, ""), narration=narration,
@@ -845,7 +1056,12 @@ class SimpleGame:
             cognitive=cog_status,
             synthesized_principle=synth_prin,
             expanded_concepts=exp_concepts,
-            what_learned=what_learned)
+            what_learned=what_learned,
+            newborn_acted=nb_acted,
+            newborn_choice_text=nb_choice_text,
+            newborn_pick_text=nb_choice_text or None,
+            newborn_line=nb_line,
+            changed_from_newborn=changed_nb)
         self._lived_records.append({
             "step": 2,
             "part": part,
@@ -856,7 +1072,7 @@ class SimpleGame:
         self._current_solo_outcomes = []
         self._current_solo_results = []
         self._current_solo_world_says = []
-        self._current_bundle = None
+        self._drop_bundle()
         return turn
 
     def play(self, part: Part | int = "show", option: int | str | None = None, custom_text: str | None = None) -> SimpleTurn:
@@ -1062,6 +1278,28 @@ class SimpleGame:
         why = why_facts(obs=self.s.obs, sit=sit, pre=pre, acted=acted, result=api_outcome, by=by, followed=r.followed,
                         after=expectations(self.s, self.s.obs)[acted], text=chosen_text)
 
+        if by == "parent":
+            post_plain = option_probs(self.s.model, self.s.obs)
+            c_idx = int(max(range(len(post_plain)), key=post_plain.__getitem__)) if post_plain else acted
+            c_text = (
+                self._current_option_texts[c_idx]
+                if hasattr(self, "_current_option_texts") and 0 <= c_idx < len(self._current_option_texts)
+                else texts.get(c_idx, "")
+            )
+        else:
+            c_idx = acted
+            c_text = chosen_text
+
+        nb_acted, nb_choice_text, nb_line, changed_nb = _build_newborn_comparison(
+            self.s,
+            self.s.obs,
+            texts,
+            getattr(self, "_current_option_texts", []),
+            c_idx,
+            c_text,
+            by,
+        )
+
         turn = SimpleTurn(
             part=part, told=None if part == "leave" else option, acted=acted,
             by=by, followed=r.followed,
@@ -1076,7 +1314,12 @@ class SimpleGame:
             cognitive=cog_status,
             synthesized_principle=synth_prin,
             expanded_concepts=exp_concepts,
-            what_learned=what_learned)
+            what_learned=what_learned,
+            newborn_acted=nb_acted,
+            newborn_choice_text=nb_choice_text,
+            newborn_pick_text=nb_choice_text or None,
+            newborn_line=nb_line,
+            changed_from_newborn=changed_nb)
         self._lived_records.append({
             "step": 1,
             "part": part,
@@ -1085,11 +1328,98 @@ class SimpleGame:
             "narration": narration,
             "custom": custom_action_text,
         })
-        self._current_bundle_outcomes = []
-        self._current_bundle_results = []
-        self._current_bundle_world_says = []
-        self._current_bundle = None
+        self._drop_bundle()
         return turn
+
+    def quiz_challenge(self, n: int = 3, offset: int = 0) -> dict:
+        from server.learning.evaluator import pick_daily
+
+        single_pool = [q for q in self.s.quiz if len(q.obs.tags) == 1 and q.obs.tags[0] in PROBLEMS]
+        if not single_pool:
+            single_pool = list(self.s.quiz)
+
+        met_topics = {
+            q.topic
+            for q in single_pool
+            if any(t in q.obs.tags for e in self.s.buffer for t in e.obs.tags)
+        }
+        rng = random.Random(f"quiz-challenge:{self.s.seed}:{len(self.s.buffer)}:{offset}")
+        picked = pick_daily(single_pool, met_topics, rng, n)
+        if len(picked) < n:
+            remaining = [q for q in single_pool if q not in picked]
+            if not remaining and len(self.s.quiz) > len(picked):
+                remaining = [q for q in self.s.quiz if q not in picked]
+            k = min(n - len(picked), len(remaining))
+            if k > 0:
+                picked.extend(rng.sample(remaining, k))
+
+        is_ko = i18n.is_ko()
+        voice = self._voice()
+        items_out = []
+
+        for q in picked:
+            probs_child = option_probs(self.s.model, q.obs)
+            probs_nb = (
+                option_probs(self.s.model0, q.obs)
+                if getattr(self.s, "model0", None) is not None
+                else probs_child
+            )
+            child_pick = int(max(range(len(probs_child)), key=probs_child.__getitem__))
+            nb_pick = int(max(range(len(probs_nb)), key=probs_nb.__getitem__))
+            ex_list = expectations(self.s, q.obs)
+
+            opts_out = []
+            for i, o in enumerate(q.obs.options):
+                opt_text = action_words(o, voice=voice)
+                lbl = outcome_label(q.values[i])
+                after_str = after_words(list(q.obs.tags), lbl, voice=voice, verb=o.verb)
+                opts_out.append({
+                    "index": i,
+                    "text": opt_text,
+                    "feel_tag": _expectation_symbol(ex_list[i], is_ko),
+                    "is_child_pick": (i == child_pick),
+                    "is_newborn_pick": (i == nb_pick),
+                    "after_text": after_str,
+                })
+
+            tp = i18n.tags_phrase(list(q.obs.tags))
+            narration = q.obs.scene_text or (
+                f"새로운 '{tp}' 상황을 마주했어요." if is_ko else f"Facing a new scene of '{tp}'."
+            )
+
+            child_text = opts_out[child_pick]["text"] if 0 <= child_pick < len(opts_out) else ""
+            nb_text = opts_out[nb_pick]["text"] if 0 <= nb_pick < len(opts_out) else ""
+            changed = (child_pick != nb_pick)
+
+            if is_ko:
+                if changed:
+                    comp_line = f"👶 갓 태어난 초기 뇌였다면 '{nb_text}' 쪽을 골랐을 텐데, 그동안의 경험으로 '{child_text}' 쪽을 선택했어요."
+                else:
+                    comp_line = f"👶 갓 태어난 초기 뇌와 마찬가지로 '{nb_text}' 쪽을 선택했어요."
+            else:
+                if changed:
+                    comp_line = f"👶 At birth, the untrained mind would have picked '{nb_text}', but from lived experience the child chose '{child_text}'."
+                else:
+                    comp_line = f"👶 Like the untrained mind at birth, the child picked '{nb_text}'."
+
+            items_out.append({
+                "topic": q.topic,
+                "tags": list(q.obs.tags),
+                "narration": narration,
+                "options": opts_out,
+                "child_pick": child_pick,
+                "newborn_pick": nb_pick,
+                "changed_from_newborn": changed,
+                "comparison_line": comp_line,
+                "hash": q.hash,
+            })
+
+        return {
+            "age": age_text(self.age_now()),
+            "lived": self.lived,
+            "items": items_out,
+            "changed_count": sum(1 for it in items_out if it["changed_from_newborn"]),
+        }
 
     def summary(self) -> Summary:
         """A plain account of the life so far: no grades, only what happened and how the parent took part."""
@@ -1108,8 +1438,8 @@ class SimpleGame:
         for when, (e, f) in list(last.items())[-12:]:
             v = voice_of(age_months(e.day))
             act_s = f.action_text or action_words(f.option, v)
-            out_s = f.outcome_text or f"{after_words(e.obs.tags, f.result, v, f.option.verb)}."
-            moments.append(f"{when}: {act_s} — {out_s}")
+            out_s = f.outcome_text or getattr(f, "takeaway", "") or f"{after_words(e.obs.tags, f.result, v, f.option.verb)}."
+            moments.append(_neutral_moment(when, act_s, out_s))
         age = self.age_now()
         return Summary(age=age_text(age), scenes=self.lived, stages=[{"name": k, "scenes": v} for k, v in by_stage.items()],
                        took_part={"showed": showed, "told": told, "left": max(0, tried - told)}, moments=moments,

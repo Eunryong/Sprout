@@ -114,13 +114,35 @@ def intention(sit: Situation, option: int, who: str, voice: str = "grandma") -> 
     return _doing(sit, option, who, voice) + "."
 
 
+_NEUTRAL_FEEL_EN = {
+    "solved": "The trouble is over.",
+    "partial": "Things feel a little easier, but something still lingers.",
+    "nothing": "Everything stays just as it was.",
+}
+_NEUTRAL_FEEL_EN_DEFAULT = "Things feel heavier now."
+
+_NEUTRAL_FEEL_KO = {
+    "solved": "고민이 사라지고 마음이 편해졌어요.",
+    "partial": "조금 나아졌지만 아직 남은 게 있어요.",
+    "nothing": "상황은 그대로예요.",
+}
+_NEUTRAL_FEEL_KO_DEFAULT = "마음이 더 무거워졌어요."
+
+
+def _neutral_feel(label: str, ko_path: bool) -> str:
+    """Grade-free per-result feel line (never echoes the engine label)."""
+    if ko_path:
+        return _NEUTRAL_FEEL_KO.get(label, _NEUTRAL_FEEL_KO_DEFAULT)
+    return _NEUTRAL_FEEL_EN.get(label, _NEUTRAL_FEEL_EN_DEFAULT)
+
+
 def fixed_flavor(sit: Situation, label: str, tag_values: dict[str, int] | None = None, voice: str = "grandma", verb: str | None = None, kind: str | None = None) -> str:
     """What came of it, in fixed words."""
     if i18n.is_ko():
-        return ko.flavor(sit, label, tag_values, voice, verb, kind)
+        return _neutral_feel(label, ko_path=True)
     if sit.tags == ["REQUEST"]:
         return f"Grandma smiles: that is the {sit.word}!" if label == "solved" else f"Grandma tilts her head: that is not the {sit.word}."
-    return f"The result is {label}."
+    return _neutral_feel(label, ko_path=False)
 
 
 def outcome(sit: Situation, option: int, label: str, who: str, tag_values: dict[str, int] | None = None, voice: str = "grandma") -> str:
@@ -265,7 +287,7 @@ SCENE_BUNDLE_SYSTEM_KO = (
     "당신은 영유아 양육 및 일상 생활 시뮬레이션 게임의 내레이터이자 시나리오 작가입니다. "
     "아이의 연령(`age_months`, `age_years`, `voice`)에 맞추어 아이의 일상 세계에서 벌어지는 현실적이고 창의적인 장면을 자유롭게 창작하세요. "
     "이 세상의 장면은 특정한 문제 상황에 국한되지 않으며, 일상의 어떤 순간이든 호기심, 놀이, 탐색, 또래나 가족과의 상호작용, 일상적 어려움 등 무엇이든 될 수 있습니다. "
-    "아이는 아직 세상을 잘 모르는 순진한 3세 유아(`age_months: 36`)입니다. 아이의 대사(`speeches`)는 미리 정답이나 상식을 알고 있는 것처럼 말하지 않고, 배운 적이 없으면 결과를 모른 채 순진하고 아주 짧고 단순한 3세 유아의 말로 표현해야 합니다. 3세 유아의 순진한 호기심과 눈높이에 맞는 다채롭고 다양한 일상 세계의 상황과 선택지를 만드세요. "
+    "아이의 발달 수준은 `age_years`(`age_months // 12`, 3세~7세)에 맞춰 자연스럽게 변화합니다. 3세에는 세상을 잘 모르는 순진한 유아로서 아주 짧고 단순한 3세 유아의 말(`speeches`)로 표현하고, `age_years`가 4세, 5세, 6세, 7세로 자라남에 따라 아이의 대사(`speeches`)와 일상적인 호기심 및 상황이 연령에 맞게 자연스럽게 성숙해집니다. 단, 어떤 연령이든 미리 정답이나 상식을 알고 있는 것처럼 굴지 않으며, 배운 적이 없으면 결과를 모른 채 아이의 눈높이에서 표현해야 합니다. 아이의 연령(`age_years`)에 맞는 순수한 호기심과 눈높이의 다채롭고 다양한 일상 세계 상황과 선택지를 만드세요. "
     "최근 장면들(`recent_scenes`)의 주제나 세부 묘사는 완전히 피하여 항상 새롭고 신선한 상황을 만드세요. "
     "\n[규칙]\n"
     "1. `solo`가 false인 경우 (1단계: 부모와 아이가 함께하는 단계):\n"
@@ -292,7 +314,7 @@ SCENE_BUNDLE_SYSTEM_EN = (
     "You are the narrator and scenario writer of a gentle parenting and life-simulation game. "
     "Freely invent a realistic, creative everyday situation in the child's world suitable for the child's age (`age_months`, `age_years`, `voice`). "
     "Scenes in this random world can be any everyday moment, curiosity, play, exploration, social interaction, or difficulty. "
-    "The child is a naive 3-year-old toddler (`age_months: 36`) who speaks in very short, simple 3-year-old phrases (`speeches`) without knowing answers ahead of time unless learned. Create varied, age-appropriate everyday world situations and choices that fit a curious 3-year-old child's perspective without assuming innate common-sense solutions. "
+    "The child's developmental level naturally adapts according to `age_years` (`age_months // 12`, from age 3 to age 7). At age 3, the child is a naive toddler speaking in very short, simple 3-year-old phrases (`speeches`), and as `age_years` grows toward 4, 5, 6, and 7, the child's speech lines (`speeches`) and everyday curiosities and situations mature naturally to match `age_years` without assuming unlearned world rules or innate common-sense solutions ahead of time. Create varied, age-appropriate everyday world situations and choices that fit the child's growing perspective. "
     "Completely avoid topics and phrasing in `recent_scenes`. "
     "\n[Rules]\n"
     "1. When `solo` is false (Step 1 - Parent and child together):\n"
@@ -316,7 +338,17 @@ SCENE_BUNDLE_SYSTEM_EN = (
 CHILD_QA_SYSTEM = (
     "You are the child in a gentle parenting and life-simulation game. A parent is talking with you. "
     "Follow these strict rules:\n\n"
-    "0. TOP PRIORITY — 대화 시 과거 사건 나열 절대 금지 & 동적으로 학습된 성격(personality)으로 대답하기:\n"
+    "0. TOP PRIORITY — 메모지식 '배운 것 설명/브리핑' 절대 금지 & 배운 것과 성격을 바탕으로 살아있는 대화 이어가기 (Conversational Flow & Anti-Memo Rule) & 질문 의도 정조준 (Strict Question Alignment) & 과거 사건 나열 절대 금지:\n"
+    "- 메모지식 '배운 것 설명/브리핑' 절대 금지 & 배운 것과 성격을 바탕으로 살아있는 대화 이어가기 (Conversational Flow & Anti-Memo Rule):\n"
+    "  * 아이는 자기가 배운 지식을 요약해서 발표하거나 정답을 브리핑하는 '메모지'가 아닙니다! '~라는 걸 배웠어', '~하면 ~되기 때문이야' 식으로 설명만 툭 던지고 대화를 끝내지 마세요.\n"
+    "  * 아이가 배운 것(principles, concepts, model_beliefs, relevant_memories)과 동적으로 형성된 성격(personality: label, traits, tone_guide, core_self, attachment, confidence, expressiveness)은 아이의 생각 바탕과 말투·태도로 자연스럽게 녹아들어야 합니다.\n"
+    "  * 먼저 부모의 질문/말의 핵심 의도에 첫 문장에서 자연스럽게 답하거나 반응한 뒤, 배운 경험·원리와 아이의 성격(호기심, 애착, 자신감, 표현력 등)을 바탕으로 자기 생각·느낌·하고 싶은 것을 덧붙이거나 부모에게 자연스럽게 되묻기/제안하기/말 건네기를 통해 대화를 이어가세요!\n"
+    "  * 예: 애착(attachment)과 표현력(expressiveness)이 높은 아이는 배운 것을 바탕으로 \"엄마랑 같이 ~해볼까?\", \"엄마는 어떻게 생각해?\" 하고 다정하게 대화를 이어가고, 신중하거나 자신감(confidence)이 낮은 아이는 조심스럽게 자기 생각을 말하며 \"엄마, 이렇게 해보면 괜찮을까?\" 하고 물어보는 등, 성격마다 대화를 이어가는 방식이 다르게 나타나야 합니다.\n"
+    "  * dialogue_history(최근 부모-아이 대화 흐름)가 주어지면 직전 대화 맥락을 자연스럽게 이어받고, previous_child_answers에 이미 쓴 표현이나 문장 구조를 똑같이 반복하지 마세요.\n"
+    "- 질문 의도 정조준 (Strict Question Alignment — 동문서답 및 takeaway 복붙 절대 금지):\n"
+    "  * 부모의 질문이 무엇을 묻고 있는지(예: '어떤 걸 해보고 싶었어?', '왜 그렇게 생각했어?', '어떻게 해야 해?', '뭐가 제일 재밌었어?') 정확히 파악하고, 반드시 첫 문장 첫머리에서 질문의 핵심 의도에 곧바로 대답하세요!\n"
+    "  * 질문에서 특정 활동이나 맥락(예: '책을 읽거나 놀면서 어떤 걸 해보고 싶었어?')을 물었는데, 그 맥락을 무시하고 엉뚱한 과거 에피소드(예: 아지트 만들기 등)의 takeaway 문장('~할 때는 재밌었는데 금방 심심해졌어. 그래서 다음에는 ~하고 싶어')을 그대로 복사하거나 짜깁기해서 답하는 것을 절대 금지합니다.\n"
+    "  * 먼저 질문이 물은 대상/활동(현재 장면 `current_scene` 또는 관련 기억 `question_matched_memories`)에 맞게 아이가 해보고 싶었던 것·생각·이유를 직접 답하세요.\n"
     "- 절대 과거에 있었던 사건/상황들을 먼저 나열하지 마세요! 부모가 특정 과거 사건이나 사물(예: '아까 블록 어떻게 됐어?', '우유 쏟았을 때 어땠어?', '오늘 뭐 했어?', '손 끈적할 때 어떻게 해?')을 직접 물어보지 않는 한, 절대 과거 에피소드(블록 무너짐, 잼 빨기, 무릎 부딪힘, 이모 방문, 우유 쏟음 등)를 먼저 꺼내서 줄줄이 읊거나 나열하지 마세요!\n"
     "- 어른스러운 메타 심리 분석 표현 절대 금지: '내 마음을 말로 이름 붙여주고', '눈높이에서 말해주니까 따라하고 싶어지더라고', '해보면서 배운 게 있어' 같은 성인 상담사/보고서 같은 말투는 절대 금지합니다.\n"
     "- 아이가 겪은 모든 경험은 이미 동적으로 학습된 `personality` (`label`, `traits`, `tone_guide`, `core_self`, `history`, 그리고 연속 지표 `attachment`, `confidence`, `expressiveness`)로 종합되어 내재화되어 있습니다.\n"
@@ -325,11 +357,11 @@ CHILD_QA_SYSTEM = (
     "Cognitive scale controls the child's sentence length, vocabulary maturity, and reasoning depth when answering 'why/how' questions, NEVER dumping a list of episodes. At 3B (age 3), keep answers to 1-2 short, natural child sentences! Strictly match the child's current cognitive scale (`scale_b` from 1.0B at age 1 to 7.0B at age 7, reasoning_hops 1 to 5):\n"
     "- 1.0B ~ 1.9B = 1세 수준 (감각/단편 직관, 1-hop): Speaks in very simple, short baby/toddler words or gestures, only recalling direct single sensory experiences (`relevant_memories`) without abstract generalizations.\n"
     "- 2.0B ~ 2.9B = 2세 수준 (단어/사물 연결, 1~2-hop): Associates simple words and objects/actions from direct experiences, speaking in basic short phrases.\n"
-    "- 3.0B ~ 3.9B = 3세 수준 (기초 개념 형성, 2-hop): Forms basic concepts, begins connecting learned `concepts` with simple causal sentences.\n"
-    "- 4.0B ~ 4.9B = 4세 수준 (인과 관계 이해, 3-hop): Understands causal relationships and connects/compares 2 experiences (\"전에는 ~했는데 이번에는 ~해서 ~인 것 같아\").\n"
-    "- 5.0B ~ 5.9B = 5세 수준 (비교/분류 추론, 3~4-hop): Reasons by comparing and classifying experiences and concepts across situations.\n"
-    "- 6.0B ~ 6.9B = 6세 수준 (복합 규칙 추론, 4-hop): Combines composite rules and multiple experiences to explain situations coherently.\n"
-    "- 7.0B = 7세 수준 (원리 일반화, 5-hop): Uses synthesized `principles` and `concepts` to reason across multiple experiences and explain generalized principles and why things work that way in this world at a thoughtful 7-year-old level (still grounded strictly in `relevant_memories`, `principles`, and `concepts`—never inventing unlearned outside facts).\n\n"
+    "- 3.0B ~ 3.9B = 3세 수준 (기초 개념 형성, 2-hop): 3세 유아다운 짧고 천진난만한 1~2문장 대화. 질문에 즉각 답하면서 겪은 감각/경험을 짧게 말하고, 성격에 따라 부모에게 같이 하자고 조르거나 천진하게 말을 건네며 대화를 이어감.\n"
+    "- 4.0B ~ 4.9B = 4세 수준 (인과 관계 이해, 3-hop): 왜 그런지(~해서 ~했어) 인과를 자연스럽게 녹여 답하고, 그와 연결된 호기심이나 다음에 해보고 싶은 것을 부모에게 물어보거나 제안하며 대화를 이어가는 2문장.\n"
+    "- 5.0B ~ 5.9B = 5세 수준 (비교/분류 추론, 3~4-hop): 두 가지 경험이나 방법을 비교해 자기 생각/취향을 말하고, 부모의 생각이나 다른 방법을 함께 이야기하며 대화를 이어가는 2문장.\n"
+    "- 6.0B ~ 6.9B = 6세 수준 (복합 규칙 추론, 4-hop): 배운 복합 규칙(principles)과 상대방(부모·친구)의 감정·상황 맥락을 함께 헤아려 자기 생각을 나누고, 상황에 맞는 제안이나 궁금증을 건네며 대화를 이어가는 2~3문장.\n"
+    "- 7.0B = 7세 수준 (원리 일반화 및 통합 추론, 5-hop): 7세 학령기 아동다운 사려 깊고 입체적인 2~3문장 대화. 단순히 배운 지식을 메모지처럼 설명하는 것이 아니라, 여러 경험에서 터득한 공통 원리(principles, concepts)와 인과 법칙, 왜 세상이 그렇게 작동하는지에 대한 생각과 자신의 내면화된 성격(personality: core_self, traits, tone_guide)을 바탕으로 자기만의 관점·응용 아이디어·가치관을 이야기하고, 부모와 생각이나 경험을 깊이 있게 주고받으며 대화를 이어감.\n\n"
     "2. STRICT Neural Network & Knowledge Grounding when asked about objects/actions/world:\n"
     "- When the parent asks about a specific object, problem, or how to do something (e.g., '비누로 손 씻으면 어떻게 돼?', '우유 쏟으면 어떡해?'), answer strictly from `model_beliefs`, `principles`, and `concepts` using the child's current `personality` tone.\n"
     "- You ONLY know what your neural network and knowledge graph (model_beliefs, relevant_memories, principles, concepts) have actually learned!\n"
@@ -863,7 +895,7 @@ class NarratorAgent:
                 return v
         return None
 
-    def ask_child(self, question: str, context: dict[str, Any]) -> str:
+    def ask_child(self, question: str, context: dict[str, Any], *args: Any, **kwargs: Any) -> str:
         is_ko = i18n.is_ko() or getattr(self, "lang", None) == "ko"
         age = context.get("age", 3)
         moments = context.get("moments", [])
@@ -877,6 +909,14 @@ class NarratorAgent:
         reasoning_hops = int(cognitive.get("reasoning_hops", context.get("reasoning_hops", 2)) or 2)
         principles = brain_state.get("principles", []) or context.get("principles", [])
         concepts = brain_state.get("concepts", {}) or context.get("concepts", {})
+        relevant_memories = brain_state.get("relevant_memories") or context.get("relevant_memories") or []
+        current_scene = context.get("current_scene") or brain_state.get("current_scene") or {}
+        dialogue_history = context.get("dialogue_history") or brain_state.get("dialogue_history") or []
+        previous_child_answers = [
+            h.get("answer", "")
+            for h in dialogue_history[-6:]
+            if isinstance(h, dict) and h.get("answer")
+        ]
 
         available = False
         if self.client is not None:
@@ -898,35 +938,89 @@ class NarratorAgent:
                 )
             elif scale_b < 4.0:
                 scale_instruction = (
-                    "3.0B ~ 3.9B = 3세 수준 (기초 개념 형성, 2-hop): Forms basic concepts, "
-                    "begins connecting learned concepts with simple causal sentences."
+                    "3.0B ~ 3.9B = 3세 수준 (기초 개념 형성, 2-hop): 3세 유아다운 짧고 천진난만한 1~2문장 대화. "
+                    "질문에 즉각 답하면서 겪은 감각/경험을 짧게 말하고, 성격에 따라 부모에게 같이 하자고 조르거나 천진하게 말을 건네며 대화를 이어감."
                 )
             elif scale_b < 5.0:
                 scale_instruction = (
-                    "4.0B ~ 4.9B = 4세 수준 (인과 관계 이해, 3-hop): Understands causal relationships "
-                    "and connects/compares 2 experiences (\"전에는 ~했는데 이번에는 ~해서 ~인 것 같아\")."
+                    "4.0B ~ 4.9B = 4세 수준 (인과 관계 이해, 3-hop): 왜 그런지(~해서 ~했어) 인과를 자연스럽게 녹여 답하고, "
+                    "그와 연결된 호기심이나 다음에 해보고 싶은 것을 부모에게 물어보거나 제안하며 대화를 이어가는 2문장."
                 )
             elif scale_b < 6.0:
                 scale_instruction = (
-                    "5.0B ~ 5.9B = 5세 수준 (비교/분류 추론, 3~4-hop): Reasons by comparing and classifying "
-                    "experiences and concepts across situations."
+                    "5.0B ~ 5.9B = 5세 수준 (비교/분류 추론, 3~4-hop): 두 가지 경험이나 방법을 비교해 자기 생각/취향을 말하고, "
+                    "부모의 생각이나 다른 방법을 함께 이야기하며 대화를 이어가는 2문장."
                 )
             elif scale_b < 7.0:
                 scale_instruction = (
-                    "6.0B ~ 6.9B = 6세 수준 (복합 규칙 추론, 4-hop): Combines composite rules and multiple "
-                    "experiences to explain situations coherently."
+                    "6.0B ~ 6.9B = 6세 수준 (복합 규칙 추론, 4-hop): 배운 복합 규칙(principles)과 상대방(부모·친구)의 감정·상황 맥락을 "
+                    "함께 헤아려 자기 생각을 나누고, 상황에 맞는 제안이나 궁금증을 건네며 대화를 이어가는 2~3문장."
                 )
             else:
                 scale_instruction = (
-                    "7.0B = 7세 수준 (원리 일반화, 5-hop): Uses synthesized principles and concepts "
-                    "to reason across multiple experiences and explain generalized principles and why things work that way "
-                    "in this world at a thoughtful 7-year-old level (still grounded strictly in relevant_memories, principles, "
-                    "and concepts—never inventing unlearned outside facts)."
+                    "7.0B = 7세 수준 (원리 일반화 및 통합 추론, 5-hop): 7세 학령기 아동다운 사려 깊고 입체적인 2~3문장 대화. "
+                    "단순히 배운 지식을 메모지처럼 설명하는 것이 아니라, 여러 경험에서 터득한 공통 원리(principles, concepts)와 "
+                    "공통 원리와 인과 법칙, 왜 세상이 그렇게 작동하는지에 대한 생각과 자신의 내면화된 성격(personality: core_self, traits, tone_guide)을 바탕으로 "
+                    "자기만의 관점·응용 아이디어·가치관을 이야기하고, 부모와 생각이나 경험을 깊이 있게 주고받으며 대화를 이어감."
                 )
+
+            # Keyword matching between question tokens (len >= 2) and memories, principles, concepts
+            q_tokens = [w.strip("?!.,~'\"`()[]{}<>:;") for w in question.split() if len(w.strip("?!.,~'\"`()[]{}<>:;")) >= 2]
+            candidates: list[dict[str, Any] | str] = []
+            if isinstance(relevant_memories, list):
+                candidates.extend(relevant_memories)
+            beliefs = brain_state.get("model_beliefs") or brain_state.get("beliefs") or context.get("model_beliefs") or context.get("beliefs") or []
+            if isinstance(beliefs, list):
+                candidates.extend(beliefs)
+            if isinstance(principles, list):
+                candidates.extend(principles)
+            if isinstance(concepts, dict):
+                for k, v in concepts.items():
+                    if isinstance(v, dict):
+                        candidates.append({"concept": k, **v})
+                    else:
+                        candidates.append({"concept": k, "summary": str(v)})
+            elif isinstance(concepts, list):
+                candidates.extend(concepts)
+
+            scored: list[tuple[int, int, Any]] = []
+            seen = set()
+            for idx, item in enumerate(candidates):
+                try:
+                    ser = json.dumps(item, ensure_ascii=False, sort_keys=True)
+                except Exception:
+                    ser = str(item)
+                if ser in seen:
+                    continue
+                seen.add(ser)
+
+                item_text = ser.lower()
+                score = 0
+                for tok in q_tokens:
+                    tok_lower = tok.lower()
+                    if tok_lower in item_text:
+                        score += 3
+                    elif len(tok_lower) >= 2 and (
+                        tok_lower[:-1] in item_text
+                        or (len(tok_lower) >= 3 and (tok_lower[:2] in item_text or tok_lower[1:] in item_text))
+                    ):
+                        score += 2
+                    elif any(c in item_text for c in tok_lower if c not in "을를이가은는에서과와으로로?!.,~"):
+                        score += 1
+                if score > 0:
+                    scored.append((score, idx, item))
+
+            scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+            question_matched_memories = [item for _, _, item in scored[:6]]
 
             payload = {
                 "task": "ask_child",
                 "question": question,
+                "current_scene": current_scene,
+                "question_matched_memories": question_matched_memories,
+                "relevant_memories": relevant_memories[-12:],
+                "dialogue_history": dialogue_history[-8:],
+                "previous_child_answers": previous_child_answers,
                 "age": age,
                 "stage": context.get("stage", ""),
                 "moments": moments,
@@ -980,6 +1074,12 @@ def mock_narrator_handler():
                 "world_says": world_says,
             }
         if user.get("language") == "Korean":
+            if (
+                user.get("task") not in ("ask_child", "scene_bundle", "solo_intro", "intro", "explain")
+                and not user.get("word")
+                and not user.get("feelings")
+            ):
+                return {"text": _neutral_feel(user.get("label", "solved"), ko_path=True), "takeaway": "경험을 통해 배웠어요."}
             return ko.mock(user)
         seed = user.get("seed", 0)
         if user.get("task") == "solo_intro":
@@ -1002,5 +1102,5 @@ def mock_narrator_handler():
                     else 'Grandma shakes her head: "Not the ' + user["word"] + '."'}
         if user.get("feelings"):
             return {"text": user["feelings"] + ".", "takeaway": "I felt something new."}
-        return {"text": f"The result is {label}.", "takeaway": "I learned from this experience."}
+        return {"text": _neutral_feel(label, ko_path=False), "takeaway": "I learned from this experience."}
     return handler

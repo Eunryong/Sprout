@@ -255,6 +255,54 @@ def test_ask_child_does_not_treat_nothing_as_learned_habit(client):
     assert data["answer"]
 
 
+def test_bad_director_draw_never_500s_and_next_scene_works(client, monkeypatch):
+    """Bug A: an invalid draw (e.g. FETCH on a bandage) is retried/mapped, never a 500,
+    and the failed draw persists nothing so the next scene works."""
+    from server.agents import director as dmod
+    from server.agents.director import ProposalError
+
+    orig_template = dmod.template_proposal
+    calls = {"n": 0}
+
+    def flaky_template(ctx, rng, forbidden, word_map):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise ProposalError("FETCH cannot be done with a bandage")
+        return orig_template(ctx, rng, forbidden, word_map)
+
+    monkeypatch.setattr(dmod, "template_proposal", flaky_template)
+    r1 = client.get("/api/scene")  # the retry heals it inside offer()
+    assert r1.status_code != 500
+    assert r1.status_code == 200 and r1.json()["narration"]
+
+    # Play the scene so the next one needs a fresh draw ...
+    assert client.post("/api/play", json={"part": "show", "option": 0}).status_code == 200
+
+    # ... a draw that keeps failing is a 409 (like RuleError), never a 500
+    def always_fail(ctx, rng, forbidden, word_map):
+        raise ProposalError("FETCH cannot be done with a bandage")
+
+    monkeypatch.setattr(dmod, "template_proposal", always_fail)
+    assert client.get("/api/scene").status_code == 409
+    assert client.post("/api/play", json={"part": "show", "option": 0}).status_code == 409
+
+    # ... and once the director recovers the game carries on (no poisoned state)
+    monkeypatch.setattr(dmod, "template_proposal", orig_template)
+    r2 = client.get("/api/scene")
+    assert r2.status_code == 200 and r2.json()["narration"]
+
+
+def test_two_rapid_new_games_both_succeed(tmp_path):
+    """Bug B: two /api/new in the same second must not collide on rotation names."""
+    from fastapi.testclient import TestClient
+
+    c = TestClient(create_app(tmp_path / "current", seed=1, prefetch=False))
+    r1 = c.post("/api/new", json={"seed": 2})
+    r2 = c.post("/api/new", json={"seed": 3})
+    assert r1.status_code == 200 and r2.status_code == 200
+    assert len(list(tmp_path.glob("current-old-*"))) == 2
+
+
 def test_new_child_with_persona_bootstraps_3yo_foundation(client):
     r_new = client.post("/api/new", json={"persona": "playful", "seed": 11})
     assert r_new.status_code == 200

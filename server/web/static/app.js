@@ -75,6 +75,9 @@ const TEXT = {
     expansionPrinciple: "Synthesized Principle",
     expansionConcepts: "Expanded Concepts",
     expansionLearned: "What Learned",
+    quizBtn: "🧩 3 Unseen Scenes Quiz (Zero LLM — Pure Brain Test)",
+    quizMoreBtn: "🔄 Draw 3 Other Unseen Scenes",
+    quizCloseBtn: "Hide Quiz",
   },
   ko: {
     thinking: "아이가 생각하는 중…", newChild: "새 아이", newChildTitle: "새 아이를 시작해요. 지금 아이는 저장된 채로 남아요.",
@@ -145,6 +148,9 @@ const TEXT = {
     expansionPrinciple: "도출된 원리",
     expansionConcepts: "확장된 개념",
     expansionLearned: "학습한 내용",
+    quizBtn: "🧩 안 배운 낯선 상황 3개 퀴즈 대결 (LLM 개입 없음)",
+    quizMoreBtn: "🔄 다른 낯선 상황 3개 더 보기",
+    quizCloseBtn: "퀴즈 접기",
   },
 };
 let LANG = "en";
@@ -240,7 +246,7 @@ function setBusy(on) {
   busy = on;
   $("busy").hidden = !on;
   document.querySelectorAll("button").forEach((b) => {
-    if (b.id !== "qaSendBtn" && b.id !== "qaCloseBtn" && !b.classList.contains("qa-chip")) {
+    if (b.id !== "runQuizBtn" && b.id !== "qaSendBtn" && b.id !== "qaCloseBtn" && !b.classList.contains("qa-chip")) {
       b.disabled = on;
     }
   });
@@ -293,8 +299,8 @@ function optionCard(o, sc) {
   const li = document.createElement("li");
   li.className = "opt";
   const isResearch = typeof document !== "undefined" && document.body.classList.contains("research");
-  const lived = isResearch && o.seen === 0 ? t("newToChild") : "";
-  const lean = isResearch && (o.lean === "remembers" ? t("leanRemembers") : o.lean === "curious" ? t("leanCurious") : "");
+  const lived = o.seen === 0 ? t("newToChild") : "";
+  const lean = o.lean === "remembers" ? t("leanRemembers") : o.lean === "curious" ? t("leanCurious") : "";
   let research = "";
   if (isResearch) {
     const top = RES.reduce((a, b) => (o.expects[a] >= o.expects[b] ? a : b));
@@ -308,14 +314,14 @@ function optionCard(o, sc) {
   if (isStep2) {
     li.className = "opt thought-opt";
     const thoughtText = o.speech || (o.text.charAt(0).toUpperCase() + o.text.slice(1));
-    const leanHtml = isResearch && lean ? '<p class="lean"></p>' : "";
-    const memHtml = isResearch && o.memory ? '<p class="memory"></p>' : "";
-    const livedHtml = isResearch && lived ? `<span>${lived}</span>` : "";
+    const leanHtml = lean ? '<p class="lean"></p>' : "";
+    const memHtml = o.memory ? '<p class="memory"></p>' : "";
+    const livedHtml = lived ? `<span>${lived}</span>` : "";
     li.innerHTML = `<h3></h3>${leanHtml}${memHtml}${research}
       <div class="foot"><div class="meta">${livedHtml}</div></div>`;
     li.querySelector("h3").textContent = thoughtText;
-    if (isResearch && lean) li.querySelector(".lean").textContent = lean;
-    if (isResearch && o.memory) li.querySelector(".memory").textContent = o.memory;
+    if (lean) li.querySelector(".lean").textContent = lean;
+    if (o.memory) li.querySelector(".memory").textContent = o.memory;
     return li;
   }
 
@@ -323,16 +329,16 @@ function optionCard(o, sc) {
   const part = isStep1 ? "show" : (canSpeak ? "say" : "show");
   const btnLabel = isStep1 ? t("showBtn") : (isBaby ? t("babyBtn") : (canSpeak ? t("sayBtn") : t("choose")));
   const btns = `<button class="primary" data-part="${part}">${btnLabel}</button>`;
-  const leanHtml = isResearch && lean ? '<p class="lean"></p>' : "";
-  const memHtml = isResearch && o.memory ? '<p class="memory"></p>' : "";
-  const livedHtml = isResearch && lived ? `<span>${lived}</span>` : "";
+  const leanHtml = lean ? '<p class="lean"></p>' : "";
+  const memHtml = o.memory ? '<p class="memory"></p>' : "";
+  const livedHtml = lived ? `<span>${lived}</span>` : "";
   const mainLine = o.text ? (o.text.charAt(0).toUpperCase() + o.text.slice(1)) : "";
   li.innerHTML = `<h3></h3>${leanHtml}${memHtml}${research}
     <div class="foot"><div class="meta">${livedHtml}</div>
     <div class="row">${btns}</div></div>`;
   li.querySelector("h3").textContent = mainLine;
-  if (isResearch && lean) li.querySelector(".lean").textContent = lean;
-  if (isResearch && o.memory) li.querySelector(".memory").textContent = o.memory;
+  if (lean) li.querySelector(".lean").textContent = lean;
+  if (o.memory) li.querySelector(".memory").textContent = o.memory;
   li.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => play(b.dataset.part, o.index)));
   return li;
 }
@@ -487,6 +493,7 @@ function resultCard(r) {
   if (r.explanation && RESEARCH) add("surprise", t("research") + r.explanation);
   if (r.remembers) add("learned", r.remembers);
   else if (!RESEARCH && r.learned) add("learned", r.learned);
+  if (r.newborn_line) add("learned newborn-compare", r.newborn_line);
   if (RESEARCH) add("learned", t("learnedR", r.learned));
 
   // Knowledge Expansion box (synthesized_principle or expanded_concepts)
@@ -744,6 +751,76 @@ async function sendQa(qText) {
   }
 }
 
+let quizOffset = 0;
+async function runQuiz(offset = 0) {
+  let box = $("quizBox");
+  if (!box && $("qaCard")) {
+    box = document.createElement("div");
+    box.id = "quizBox";
+    box.className = "banner";
+    const msgs = $("qaMessages");
+    if (msgs && msgs.parentNode) msgs.parentNode.insertBefore(box, msgs);
+    else $("qaCard").appendChild(box);
+  }
+  if (!box) return;
+  box.hidden = false;
+  box.replaceChildren(Object.assign(document.createElement("p"), { className: "memory", textContent: t("qaThinking") }));
+  try {
+    const data = await api(`/api/quiz?offset=${encodeURIComponent(offset)}`);
+    box.replaceChildren();
+    const h = document.createElement("h2");
+    h.textContent = data.title || "";
+    const sub = document.createElement("p");
+    sub.textContent = data.subtitle || "";
+    box.append(h, sub);
+    const ul = document.createElement("ul");
+    ul.className = "opts";
+    ul.style.marginTop = "10px";
+    for (const it of (data.items || [])) {
+      const li = document.createElement("li");
+      li.className = "opt";
+      const title = document.createElement("h3");
+      title.textContent = `${it.index}. ${it.situation}`;
+      li.appendChild(title);
+      for (const o of (it.options || [])) {
+        const p = document.createElement("p");
+        p.className = "memory";
+        const mark = (o.is_child_pick && o.is_newborn_pick) ? "🌱👶 " : o.is_child_pick ? "🌱 " : o.is_newborn_pick ? "👶 " : "• ";
+        p.textContent = `${mark}${o.text} [${o.feel_tag}]${o.memory ? ` — ${o.memory}` : ""}`;
+        li.appendChild(p);
+      }
+      if (it.comparison_line) {
+        const cmp = document.createElement("p");
+        cmp.className = "lean";
+        cmp.textContent = it.comparison_line;
+        li.appendChild(cmp);
+      }
+      if (it.happened) {
+        const hap = document.createElement("p");
+        hap.className = "memory";
+        hap.textContent = `→ ${it.happened}`;
+        li.appendChild(hap);
+      }
+      ul.appendChild(li);
+    }
+    box.appendChild(ul);
+    const row = document.createElement("div");
+    row.className = "row";
+    const moreBtn = document.createElement("button");
+    moreBtn.className = "primary";
+    moreBtn.textContent = t("quizMoreBtn");
+    moreBtn.addEventListener("click", () => { quizOffset += 1; runQuiz(quizOffset); });
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "quiet";
+    closeBtn.textContent = t("quizCloseBtn");
+    closeBtn.addEventListener("click", () => { box.hidden = true; });
+    row.append(moreBtn, closeBtn);
+    box.appendChild(row);
+  } catch (e) {
+    box.replaceChildren(Object.assign(document.createElement("p"), { className: "memory", textContent: t("errPlay") + e.message }));
+  }
+}
+
 function initEventHandlers() {
   if ($("leave")) $("leave").addEventListener("click", () => play("leave", null));
   if ($("next")) $("next").addEventListener("click", () => loadScene());
@@ -772,11 +849,13 @@ function initEventHandlers() {
         updateCognitiveBadge(null);
         if ($("qaMessages")) $("qaMessages").replaceChildren();
         if ($("qaCard")) $("qaCard").hidden = true;
+        if ($("quizBox")) $("quizBox").hidden = true;
         try { sessionStorage.removeItem("qaOpen"); } catch (_) {}
         loadScene();
       }
     });
   }
+  if ($("runQuizBtn")) $("runQuizBtn").addEventListener("click", () => { quizOffset = 0; runQuiz(0); });
   if ($("customActionBtn")) $("customActionBtn").addEventListener("click", () => doCustomAction());
   if ($("customActionInput")) {
     $("customActionInput").addEventListener("keydown", (e) => {
