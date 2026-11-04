@@ -1,0 +1,11 @@
+.venv
+saves/
+cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+.git/
+.env
+.env.local
+.claude/
+node_modules/
